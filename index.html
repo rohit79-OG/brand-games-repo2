@@ -56,15 +56,56 @@
             display: flex;
         }
 
+        /* Age Verification Screen */
+        #ageVerificationScreen .glass {
+           padding: 40px 30px !important;
+           max-width: 400px !important;
+           width: 85% !important;
+           text-align: center !important;
+           margin: 0 auto !important;
+        }
+
+        #ageVerificationScreen .btn {
+           padding: 12px 30px !important;
+           font-size: clamp(1rem, 4vw, 1.2rem) !important;
+           min-height: 48px !important;
+           max-height: 55px !important;
+        }
+
+       @media (max-width: 768px) {
+        #ageVerificationScreen .glass {
+           padding: 30px 25px 40px 25px !important;
+           max-width: 85vw !important;
+        }
+    
+       /* mobile-specific centering */
+        #ageVerificationScreen {
+           padding: 40px 20px !important;
+        }
+        }
+
         /* Start Screen Glass Panel */
         .start-panel {
-            padding: 40px;
-            max-width: 500px;
-            width: 90%;
+            padding: 40px 30px;
+            max-width: 400px;
+            width: 85%;
             text-align: center;
             display: flex;
             flex-direction: column;
             align-items: center;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 768px) {
+        .start-panel {
+            padding: 30px 25px 40px 25px;
+            max-width: 85vw;
+            margin-bottom: 60px;
+        }
+    
+        #startScreen {
+           padding-bottom: 80px;
+        }
         }
 
         /* Results Panel - Same size as start panel */
@@ -78,6 +119,48 @@
             align-items: center;
             max-height: 90vh;
             overflow-y: auto;
+        }
+
+        @media (max-width: 768px) {
+        .results-panel {
+            margin-bottom: 80px;
+            padding-bottom: 40px;
+            max-width: 85vw;
+            padding: 25px 20px 40px 20px;
+        }
+    
+        #resultsScreen {
+            padding-bottom: 100px;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        }
+
+        /* Results Screen Specific Fixes */
+        .results-panel h1 {
+           margin-top: 20px !important;
+           margin-bottom: 15px !important;
+        }
+
+        .results-panel .btn {
+          padding: 12px 30px !important;
+          font-size: clamp(0.9rem, 3.5vw, 1.1rem) !important;
+          min-height: 48px !important;
+          max-height: 55px !important;
+        }
+
+        .results-panel .btn-promo {
+          padding: 12px 25px !important;
+          font-size: clamp(0.85rem, 3vw, 1rem) !important;
+          min-height: 48px !important;
+          max-height: 55px !important;
+        }
+
+        @media (max-width: 768px) {
+        .results-panel h1 {
+          margin-top: 25px !important;
+          font-size: 2rem !important;
+        }
         }
 
         /* Logos */
@@ -430,12 +513,21 @@
             transform: translate(-50%, -50%) scale(0);
             background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
             color: #1a0000;
-            padding: 20px 30px;
-            border-radius: 20px;
+            padding: 15px 20px;
+            border-radius: 15px;
             text-align: center;
             z-index: 1000;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-            max-width: 80vw;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+            max-width: 70vw;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+        .achievement-popup {
+            padding: 12px 16px;
+            max-width: 75vw;
+            font-size: 0.85rem;
+            border-radius: 12px;
         }
 
         .achievement-popup.show {
@@ -444,38 +536,47 @@
 
         /* Round Complete Popup - Smaller and positioned below */
         .round-complete-popup {
-            position: fixed;
-            top: 60%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(0);
-            background: linear-gradient(135deg, #d5365a 0%, #a0243d 100%);
-            color: #fff;
-            padding: 15px 25px;
-            border-radius: 15px;
-            text-align: center;
-            z-index: 999;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
-            max-width: 70vw;
-            font-size: 0.9rem;
+           position: fixed;
+           top: 55%;
+           left: 50%;
+           transform: translate(-50%, -50%) scale(0);
+           background: linear-gradient(135deg, #d5365a 0%, #a0243d 100%);
+           color: #fff;
+           padding: 12px 20px;
+           border-radius: 12px;
+           text-align: center;
+           z-index: 999;
+           box-shadow: 0 6px 25px rgba(0, 0, 0, 0.4);
+           max-width: 60vw;
+           font-size: 0.85rem;
+       }
+
+        @media (max-width: 768px) {
+       .round-complete-popup {
+           padding: 10px 16px;
+           max-width: 65vw;
+           font-size: 0.8rem;
+           top: 50%;
         }
+       }
 
         .round-complete-popup.show {
             animation: achievementPop 0.6s ease-out forwards;
         }
 
         .achievement-icon {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
+            font-size: 2rem !important;
+            margin-bottom: 8px !important;
         }
 
         .achievement-title {
-            font-size: 1.3rem;
-            font-weight: bold;
-            margin-bottom: 5px;
+            font-size: 1.1rem !important;
+            margin-bottom: 4px !important;
         }
 
         .achievement-desc {
-            font-size: 0.9rem;
+            font-size: 0.8rem !important;
+        }
         }
 
         /* Loading Tips - Fixed positioning */
@@ -507,27 +608,30 @@
 
         /* Custom loading tip with forced height */
        .loading-tip.loading-tip-custom {
-           padding: 3px 20px !important;
-           line-height: 1.2 !important;  
-           background: rgba(0, 0, 0, 0.4) !important;
-           backdrop-filter: blur(10px) !important;
-           -webkit-backdrop-filter: blur(10px) !important;
-           border: 1px solid rgba(255, 255, 255, 0.1) !important;
-           border-radius: 10px !important;
-           position: absolute !important;
-           bottom: 40px !important;
-           left: 50% !important;
-           transform: translateX(-50%) !important;
-           text-align: center !important;
-           max-width: 80vw !important;
-           z-index: 1 !important;
-           display: flex !important;
-           align-items: center !important;
-           justify-content: center !important;
-           min-height: 35px !important; 
+          padding: 8px 15px !important;
+          line-height: 1.3 !important;
+          background: rgba(0, 0, 0, 0.4) !important;
+          backdrop-filter: blur(10px) !important;
+          -webkit-backdrop-filter: blur(10px) !important;
+          border: 1px solid rgba(255, 255, 255, 0.1) !important;
+          border-radius: 10px !important;
+          position: absolute !important;
+          bottom: 40px !important;
+          left: 50% !important;
+          transform: translateX(-50%) !important;
+          text-align: center !important;
+          max-width: 85vw !important;
+          width: auto !important;
+          white-space: nowrap !important;
+          z-index: 1 !important;
+          display: flex !important;
+          align-items: center !important;
+          justify-content: center !important;
+          min-height: 35px !important;
+          font-size: 0.85rem !important;
         }
 
-        /* Fix the paragraph inside */
+        /* With paragraph inside */
         .loading-tip.loading-tip-custom p {
            margin: 0 !important;
            padding: 0 !important;
@@ -537,14 +641,14 @@
 
        @media (max-width: 768px) {
         .loading-tip.loading-tip-custom {
-           padding: 2px 15px !important;
+           padding: 6px 12px !important;
            max-width: 90vw !important;
-           font-size: 0.9rem !important;
+           font-size: 0.75rem !important;
            bottom: 30px !important;
            min-height: 30px !important;
+           white-space: normal !important;
         }
         }
-       
 
         /* Product Display */
         .product-display {
@@ -559,7 +663,7 @@
             width: 150px;
             height: 150px;
             background: #fff;
-            padding: 3px;
+            padding: 2px;
             border-radius: 10px;
             margin: 10px;
         }
@@ -724,6 +828,22 @@
             transition: width 0.3s ease;
         }
 
+        .loading-screen .glass {
+            padding: 40px 30px;
+            max-width: 400px;
+            width: 85%;
+            text-align: center;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 768px) {
+        .loading-screen .glass {
+            padding: 30px 25px;
+            max-width: 85vw;
+            width: 90%;
+        }
+        }
+
         /* Audio Toggle - Bottom Left */
         .audio-toggle {
             position: absolute;
@@ -839,7 +959,7 @@
         }
 
         .achievement-board:hover {
-    opacity: 1;
+            opacity: 1;
         }
 
         .achievement-board h4 {
@@ -1121,7 +1241,7 @@
         }
        
     /* =============================================================
-   SILHOUETTE ANIMATIONS - ADD AFTER EXISTING KEYFRAMES
+   SILHOUETTE ANIMATIONS
    ============================================================= */
 
 @keyframes gentleSway {
@@ -1237,6 +1357,52 @@
         transform: translate(-50%, -50%) scale(1.02) rotate(-0.5deg);
         filter: drop-shadow(0 0 45px rgba(213, 54, 90, 0.95)) 
                 drop-shadow(0 0 90px rgba(255, 215, 0, 0.7));
+    }
+}
+
+        /* Mobile Achievement Notification System */
+     @media (max-width: 768px) {
+    .achievement-board {
+        display: none !important;
+    }
+    
+    .mobile-achievement-notification {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+        color: #1a0000;
+        padding: 8px 12px;
+        border-radius: 20px;
+        font-size: 0.7rem;
+        font-weight: bold;
+        z-index: 1001;
+        animation: slideInRight 0.5s ease-out;
+        max-width: 150px;
+        text-align: center;
+        box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+    }
+}
+
+@keyframes slideInRight {
+    0% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOutRight {
+    0% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(100%);
+        opacity: 0;
     }
 }
 
@@ -1392,7 +1558,7 @@
     /* 12. SPECIFIC MOBILE BREAKPOINTS */
     @media (max-width: 480px) {
     /* Small mobile phones */
-       .game-hud {
+    .game-hud {
         padding: 8px;
     }
     
@@ -1403,7 +1569,7 @@
     }
     
     .achievement-board {
-        display: none; /* Hide on very small screens */
+        display: none !important; /* Hide on mobile screens */
     }
     
     .couple-silhouette {
@@ -1693,7 +1859,7 @@
     
    <script>
 // ============================================================================
-// KAMASUTRA ENDLESS EMBRACE GAME - ROHIT's VERSION - COMPLETE FIXED VERSION
+// KAMASUTRA ENDLESS EMBRACE GAME - ROHIT's VERSION 
 // ============================================================================
 
 // Game State - Centralized state management
@@ -2877,18 +3043,20 @@ function showRoundIntro(round) {
     const intro = document.createElement('div');
     intro.className = 'round-intro';
     intro.style.cssText = `
-        position: fixed;
-        top: 55%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        font-size: 1.5rem;
-        padding: 20px 30px;
-        background: linear-gradient(135deg, #d5365a 0%, #a0243d 100%);
-        border: 2px solid #FFD700;
-        border-radius: 15px;
-        z-index: 1000;
-        text-align: center;
-        color: white;
+         position: fixed;
+         top: 50%;
+         left: 50%;
+         transform: translate(-50%, -50%);
+         font-size: clamp(1rem, 4vw, 1.3rem);
+         padding: 15px 20px;
+         background: linear-gradient(135deg, #d5365a 0%, #a0243d 100%);
+         border: 2px solid #FFD700;
+         border-radius: 12px;
+         z-index: 1000;
+         text-align: center;
+         color: white;
+         max-width: 280px;
+         width: 80vw;
     `;
     intro.innerHTML = `
         <div style="color: #FFD700; font-weight: bold;">Round ${gameState.currentRound}</div>
@@ -3312,6 +3480,9 @@ function showAchievement(achievement) {
         // Update the achievement board with animation
         updateAchievementBoard(achievement.id);
         
+        // Mobile achievement notification
+        showMobileAchievementNotification(achievement);
+        
         setTimeout(() => {
             popup.classList.remove('show');
         }, 3000);
@@ -3363,6 +3534,28 @@ function updateAchievementBoard(achievementId) {
     });
 }
 
+ function showMobileAchievementNotification(achievement) {
+    // Only show on mobile
+    if (window.innerWidth > 768) return;
+    
+    const notification = document.createElement('div');
+    notification.className = 'mobile-achievement-notification';
+    notification.innerHTML = `${achievement.icon} ${achievement.name}`;
+    
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+        if (notification.parentNode) {
+            notification.style.animation = 'slideOutRight 0.5s ease-out forwards';
+            setTimeout(() => {
+                if (notification.parentNode) {
+                    notification.remove();
+                }
+            }, 500);
+        }
+    }, 3000);
+}
+  
 // Optional: Add sparkle effect for extra visual impact
 function createSparkleEffect(element) {
     for (let i = 0; i < 3; i++) {
@@ -3826,7 +4019,7 @@ window.shareWhatsApp = shareWhatsApp;
 window.toggleAudio = toggleAudio;
 
 // ============================================================================
-// MOBILE OPTIMIZATION ENHANCEMENTS - ADD AT END OF JAVASCRIPT
+// MOBILE OPTIMIZATION ENHANCEMENTS
 // ============================================================================
 
 // Prevent iOS Safari bouncing
