@@ -6,8 +6,6 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
     <title>KS Endless Embrace - Embrace Up 3X</title>
-    <script src="https://cdn.jsdelivr.net/npm/eruda"></script>
-    <script>eruda.init();</script>
     
     <style>
         /* Base Styles */
@@ -56,7 +54,7 @@
             display: flex;
         }
 
-        /* Age Verification Screen */
+        /* Age Verification Screen - FIXED */
         #ageVerificationScreen .glass {
            padding: 40px 30px !important;
            max-width: 400px !important;
@@ -72,19 +70,42 @@
            max-height: 55px !important;
         }
 
-       @media (max-width: 768px) {
-        #ageVerificationScreen .glass {
-           padding: 30px 25px 40px 25px !important;
-           max-width: 85vw !important;
-        }
-    
-       /* mobile-specific centering */
-        #ageVerificationScreen {
-           padding: 40px 20px !important;
-        }
+        /* FIXED: Mobile Age Verification - Smaller buttons and better fit */
+        @media (max-width: 768px) {
+            #ageVerificationScreen .glass {
+                padding: 30px 20px 35px 20px !important;
+                max-width: 85vw !important;
+                width: 90% !important;
+            }
+
+            #ageVerificationScreen .btn {
+                padding: 10px 20px !important;
+                font-size: 0.9rem !important;
+                min-height: 44px !important;
+                max-height: 48px !important;
+                min-width: 120px !important;
+                max-width: 140px !important;
+            }
+
+            #ageVerificationScreen h2 {
+                font-size: 1.5rem !important;
+                margin-bottom: 15px !important;
+            }
+
+            #ageVerificationScreen p {
+                font-size: 0.95rem !important;
+                margin: 20px 0 25px 0 !important;
+            }
+
+            #ageVerificationScreen > div {
+                display: flex !important;
+                gap: 15px !important;
+                justify-content: center !important;
+                flex-wrap: wrap !important;
+            }
         }
 
-        /* Start Screen Glass Panel */
+        /* Start Screen Glass Panel - FIXED */
         .start-panel {
             padding: 40px 30px;
             max-width: 400px;
@@ -96,19 +117,38 @@
             margin: 0 auto;
         }
 
+        /* FIXED: Mobile Start Screen - Better centering */
         @media (max-width: 768px) {
-        .start-panel {
-            padding: 30px 25px 40px 25px;
-            max-width: 85vw;
-            margin-bottom: 60px;
-        }
+            .start-panel {
+                padding: 30px 25px 35px 25px;
+                max-width: 85vw;
+                width: 90%;
+                margin: 0 auto;
+            }
     
-        #startScreen {
-           padding-bottom: 80px;
-        }
+            #startScreen {
+                padding: 0 !important;
+                margin: 0 !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                min-height: 100vh !important;
+            }
+
+            .start-panel h1 {
+                font-size: 2rem !important;
+            }
+
+            .start-panel .brand-logo {
+                margin-bottom: 15px !important;
+            }
+
+            .start-panel .game-logo {
+                margin-bottom: 8px !important;
+            }
         }
 
-        /* Results Panel - Same size as start panel */
+        /* Results Panel */
         .results-panel {
             padding: 30px;
             max-width: 500px;
@@ -136,7 +176,6 @@
         }
         }
 
-        /* Results Screen Specific Fixes */
         .results-panel h1 {
            margin-top: 20px !important;
            margin-bottom: 15px !important;
@@ -268,7 +307,6 @@
             font-size: 0.9rem;
         }
 
-        /* PROMO BUTTON */
         .btn-promo {
             background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
             color: #1a0000;
@@ -287,7 +325,6 @@
             50% { box-shadow: 0 8px 32px rgba(255, 215, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.3); }
         }
 
-        /* Game Container */
         #gameCanvas {
             position: absolute;
             width: 100%;
@@ -295,7 +332,6 @@
             z-index: 1;
         }
 
-        /* Game HUD */
         .game-hud {
             position: absolute;
             top: 0;
@@ -316,7 +352,7 @@
             align-items: center;
         }
 
-        /* Game Screen Heart Meter - High Specificity Fix */
+        /* Game Screen Heart Meter */
         .game-hud .intimacy-meter .heart {
             font-size: 1.5rem !important;
             color: #d5365a !important;
@@ -374,9 +410,9 @@
             position: relative;
             display: inline-block;
             cursor: default;
-            color: #d5365a; /* Base color for hearts */
+            color: #d5365a;
             text-shadow: 0 0 10px rgba(213, 54, 90, 0.5);
-            margin: 0 2px; /* Add spacing between hearts */
+            margin: 0 2px;
         }
 
         .heart.active {
@@ -478,7 +514,6 @@
             color: #fff;
         }
 
-        /* Sticky Note Distraction */
         .sticky-note {
             width: 100px;
             height: 80px;
@@ -505,7 +540,9 @@
             clip-path: polygon(0 0, 100% 0, 50% 100%);
         }
 
-        /* Achievement Popup */
+        /* FIXED: Desktop vs Mobile Popup System */
+        
+        /* Desktop Achievement Popup - Center */
         .achievement-popup {
             position: fixed;
             top: 40%;
@@ -520,47 +557,101 @@
             box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
             max-width: 70vw;
             font-size: 0.9rem;
+            display: block;
         }
 
+        /* Mobile Achievement Notification - Top Left Slide */
+        .mobile-achievement-notification {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            color: #1a0000;
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            z-index: 1001;
+            animation: slideInLeft 0.5s ease-out;
+            max-width: 200px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+            display: none;
+        }
+
+        /* Mobile Rules - Hide desktop popups, show mobile notifications */
         @media (max-width: 768px) {
-        .achievement-popup {
-            padding: 12px 16px;
-            max-width: 75vw;
-            font-size: 0.85rem;
-            border-radius: 12px;
+            .achievement-popup {
+                display: none !important;
+            }
+            
+            .mobile-achievement-notification {
+                display: block !important;
+            }
+            
+            .round-complete-popup {
+                display: none !important;
+            }
+            
+            .mobile-round-notification {
+                position: fixed;
+                top: 20px;
+                left: 20px;
+                background: linear-gradient(135deg, #d5365a 0%, #a0243d 100%);
+                color: #fff;
+                padding: 8px 12px;
+                border-radius: 15px;
+                font-size: 0.75rem;
+                font-weight: bold;
+                z-index: 1002;
+                animation: slideInLeft 0.5s ease-out;
+                max-width: 180px;
+                text-align: center;
+                box-shadow: 0 4px 15px rgba(213, 54, 90, 0.4);
+                border: 1px solid #FFD700;
+            }
         }
 
-        .achievement-popup.show {
-            animation: achievementPop 0.6s ease-out forwards;
+        /* Desktop Rules - Show desktop popups, hide mobile notifications */
+        @media (min-width: 769px) {
+            .mobile-achievement-notification {
+                display: none !important;
+            }
+            
+            .mobile-round-notification {
+                display: none !important;
+            }
+            
+            .achievement-popup {
+                display: block !important;
+            }
         }
 
-        /* Round Complete Popup - Smaller and positioned below */
+        /* Round Complete Popup - Desktop Only */
         .round-complete-popup {
-           position: fixed;
-           top: 55%;
-           left: 50%;
-           transform: translate(-50%, -50%) scale(0);
-           background: linear-gradient(135deg, #d5365a 0%, #a0243d 100%);
-           color: #fff;
-           padding: 12px 20px;
-           border-radius: 12px;
-           text-align: center;
-           z-index: 999;
-           box-shadow: 0 6px 25px rgba(0, 0, 0, 0.4);
-           max-width: 60vw;
-           font-size: 0.85rem;
-       }
-
-        @media (max-width: 768px) {
-       .round-complete-popup {
-           padding: 10px 16px;
-           max-width: 65vw;
-           font-size: 0.8rem;
-           top: 50%;
-        }
+           position: fixed !important;
+           top: 50% !important;
+           left: 50% !important;
+           transform: translate(-50%, -50%) scale(0) !important;
+           background: linear-gradient(135deg, #d5365a 0%, #a0243d 100%) !important;
+           color: #fff !important;
+           padding: 15px 25px !important;
+           border-radius: 15px !important;
+           text-align: center !important;
+           z-index: 999 !important;
+           box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5) !important;
+           max-width: 250px !important;
+           font-size: 0.9rem !important;
+           border: 2px solid #FFD700 !important;
+           backdrop-filter: blur(10px) !important;
+           -webkit-backdrop-filter: blur(10px) !important;
        }
 
         .round-complete-popup.show {
+            animation: achievementPop 0.6s ease-out forwards !important;
+        }
+
+        .achievement-popup.show {
             animation: achievementPop 0.6s ease-out forwards;
         }
 
@@ -577,9 +668,105 @@
         .achievement-desc {
             font-size: 0.8rem !important;
         }
+
+        /* FIXED: Mobile Achievement Board - Show at start, hide during gameplay */
+        .achievement-board {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            padding: 10px;
+            z-index: 50;
+            max-width: 200px;
+            font-size: 0.7rem;
+            transition: opacity 0.3s ease;
+            opacity: 0.8;
+            margin-top: 10px;
         }
 
-        /* Loading Tips - Fixed positioning */
+        .achievement-board:hover {
+            opacity: 1;
+        }
+
+        .achievement-board h4 {
+            color: #FFD700;
+            font-size: 0.8rem; 
+            margin-bottom: 5px;
+            text-align: center;
+        }
+
+        .achievement-board ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        /* FIXED: Mobile Achievement Board Rules */
+        @media (max-width: 768px) {
+            .achievement-board {
+                font-size: 0.6rem !important;
+                max-width: 160px !important;
+                padding: 8px !important;
+                opacity: 0.9 !important;
+            }
+            
+            .achievement-board h4 {
+                font-size: 0.7rem !important;
+                margin-bottom: 4px !important;
+            }
+            
+            .achievement-board li {
+                font-size: 0.55rem !important;
+                margin: 2px 0 !important;
+            }
+            
+            .achievement-board .icon {
+                font-size: 0.8rem !important;
+            }
+            
+            /* Hide achievement board during gameplay (round 1+) */
+            .achievement-board.gameplay-hidden {
+                display: none !important;
+            }
+        }
+
+        /* Achievement Board Items */
+        .achievement-board li {
+            color: #fff;
+            margin: 3px 0;
+            font-size: 0.65rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.5s ease;
+            opacity: 0.4;
+            transform: scale(1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .achievement-board li.unlocked {
+            opacity: 1 !important;
+            color: #FFD700 !important;
+            font-weight: bold;
+            text-shadow: 0 0 8px rgba(255, 215, 0, 0.6);
+        }
+
+        .achievement-board li.just-unlocked {
+            animation: achievementUnlock 1.5s ease-out forwards;
+        }
+
+        .achievement-board .icon {
+           font-size: 0.9rem;
+           transition: all 0.3s ease;
+        }
+
+        .achievement-board li.unlocked .icon {
+           filter: drop-shadow(0 0 5px #FFD700);
+        }
+
+        /* Loading Tips */
         .loading-tip {
             position: absolute;
             bottom: 40px;
@@ -596,7 +783,6 @@
             z-index: 1;
         }
 
-        * Mobile responsive loading tip */
         @media (max-width: 768px) {
         .loading-tip {
            padding: 6px 15px;
@@ -606,7 +792,6 @@
         } 
        }
 
-        /* Custom loading tip with forced height */
        .loading-tip.loading-tip-custom {
           padding: 8px 15px !important;
           line-height: 1.3 !important;
@@ -631,7 +816,6 @@
           font-size: 0.85rem !important;
         }
 
-        /* With paragraph inside */
         .loading-tip.loading-tip-custom p {
            margin: 0 !important;
            padding: 0 !important;
@@ -650,7 +834,7 @@
         }
         }
 
-        /* Product Display */
+        /* Rest of styles remain the same... */
         .product-display {
             width: 150px;
             height: auto;
@@ -658,7 +842,6 @@
             filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.3));
         }
 
-        /* QR Code */
         .qr-code {
             width: 150px;
             height: 150px;
@@ -668,7 +851,6 @@
             margin: 10px;
         }
 
-        /* Image Row */
         .image-row {
             display: flex;
             justify-content: center;
@@ -677,7 +859,6 @@
             margin: 20px 0;
         }
 
-        /* Button Row */
         .button-row {
             display: flex;
             justify-content: center;
@@ -685,7 +866,6 @@
             margin: 15px 0;
         }
 
-        /* Share Buttons */
         .share-buttons {
             display: flex;
             gap: 15px;
@@ -710,7 +890,6 @@
             transform: translateY(-2px);
         }
 
-        /* Challenge Section */
         .challenge-section {
             background: rgba(255, 255, 255, 0.05);
             padding: 15px;
@@ -746,7 +925,28 @@
             100% { transform: translate(-50%, -50%) scale(1); }
         }
 
-        /* Particle Effect */
+        @keyframes slideInLeft {
+            0% {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+            100% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideOutLeft {
+            0% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+        }
+
         .particle {
             position: absolute;
             width: 4px;
@@ -768,7 +968,6 @@
             }
         }
 
-        /* Modal */
         .modal {
             position: fixed;
             top: 0;
@@ -796,7 +995,6 @@
             text-align: center;
         }
 
-        /* Loading Screen */
         .loading-screen {
             position: fixed;
             top: 0;
@@ -844,7 +1042,6 @@
         }
         }
 
-        /* Audio Toggle - Bottom Left */
         .audio-toggle {
             position: absolute;
             bottom: 20px;
@@ -870,7 +1067,6 @@
             opacity: 0.5;
         }
 
-        /* Couple Silhouette */
         .couple-silhouette {
             position: absolute;
             top: 50%;
@@ -891,7 +1087,6 @@
             transition: all 0.3s ease;
         }
 
-       /* Round-specific animation classes */
        .silhouette-gentle-sway {
             animation: gentleSway 6s ease-in-out infinite;
         }
@@ -924,7 +1119,6 @@
          animation: ultimateUnity 6s ease-in-out infinite;
         }
 
-        /* Hint Screen Smaller */
         .hint-popup {
             position: fixed;
             top: 50%;
@@ -942,149 +1136,6 @@
             border: 2px solid #FFD700;
         }
 
-        /* Achievement Board - Fixed positioning */
-        .achievement-board {
-            background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 15px;
-            padding: 10px;
-            z-index: 50;
-            max-width: 200px;
-            font-size: 0.7rem;
-            transition: opacity 0.3s ease;
-            opacity: 0.8;
-            margin-top: 10px;
-        }
-
-        .achievement-board:hover {
-            opacity: 1;
-        }
-
-        .achievement-board h4 {
-            color: #FFD700;
-            font-size: 0.8rem; 
-            margin-bottom: 5px;
-            text-align: center;
-        }
-
-        .achievement-board ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-    /* Achievement Board Items */
-        .achievement-board li {
-            color: #fff;
-            margin: 3px 0;
-            font-size: 0.65rem;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            transition: all 0.5s ease;
-            opacity: 0.4; /* Default dimmed state */
-            transform: scale(1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .achievement-board li.unlocked {
-            opacity: 1 !important;
-            color: #FFD700 !important;
-            font-weight: bold;
-            text-shadow: 0 0 8px rgba(255, 215, 0, 0.6);
-        }
-
-        .achievement-board li.just-unlocked {
-            animation: achievementUnlock 1.5s ease-out forwards;
-        }
-
-        .achievement-board .icon {
-           font-size: 0.9rem;
-           transition: all 0.3s ease;
-        }
-
-        .achievement-board li.unlocked .icon {
-           filter: drop-shadow(0 0 5px #FFD700);
-        }
-
-        /* Achievement Unlock Animations */
-        @keyframes achievementUnlock {
-            0% { 
-            transform: scale(0.9); 
-            opacity: 0.4; 
-            color: #fff;
-            background: transparent;
-        }
-            25% { 
-            transform: scale(1.1); 
-            opacity: 0.8; 
-            color: #FFD700;
-            background: rgba(255, 215, 0, 0.1);
-            text-shadow: 0 0 10px #FFD700;
-        }
-            50% { 
-            transform: scale(1.15); 
-            opacity: 1; 
-            color: #FFD700;
-            background: rgba(255, 215, 0, 0.2);
-            text-shadow: 0 0 15px #FFD700;
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
-        }
-            75% { 
-            transform: scale(1.05); 
-            opacity: 1; 
-            color: #FFD700;
-            background: rgba(255, 215, 0, 0.1);
-            text-shadow: 0 0 12px #FFD700;
-        }
-            100% { 
-            transform: scale(1); 
-            opacity: 1; 
-            color: #FFD700;
-            background: transparent;
-            text-shadow: 0 0 8px rgba(255, 215, 0, 0.6);
-        }
-        }
-
-       @keyframes achievementPulse {
-            0%, 100% { 
-            transform: scale(1); 
-            text-shadow: 0 0 5px #FFD700;
-        }
-            50% { 
-            transform: scale(1.03); 
-            text-shadow: 0 0 12px #FFD700;
-        }
-        }
-
-        /* Subtle continuous pulse for unlocked achievements */
-       .achievement-board li.unlocked {
-            animation: achievementPulse 3s ease-in-out infinite;
-        }
-
-       .achievement-board li.just-unlocked {
-            animation: achievementUnlock 1.5s ease-out forwards !important;
-        }
-
-        @keyframes sparkleFloat {
-             0% {
-             transform: translateY(0) scale(0);
-             opacity: 1;
-        }
-             50% {
-            transform: translateY(-15px) scale(1);
-            opacity: 1;
-        }
-             100% {
-             transform: translateY(-25px) scale(0);
-             opacity: 0;
-        }
-        }
-
-        /* Couple Results Section */
         .couple-results {
             width: 100%;
             margin-top: 15px;
@@ -1140,7 +1191,6 @@
             100% { opacity: 1; transform: translateY(0); }
         }
 
-        /* Heart Beat Animation */
         @keyframes heartBeat {
             0%, 100% { 
             transform: scale(1);
@@ -1159,7 +1209,6 @@
         }
         }
      
-        /* Heart Breaking Animation */
         @keyframes heartBreak {
             0% { 
             transform: scale(1); 
@@ -1190,14 +1239,12 @@
         }
         }
 
-        /* shake animation */
         @keyframes shake {
             0%, 100% { transform: translateX(0); }
             25% { transform: translateX(-5px); }
             75% { transform: translateX(5px); }
         }
         
-        /* Heart Gain Animation */
         @keyframes heartGain {
             0% { 
               transform: scale(0.8); 
@@ -1226,7 +1273,6 @@
         }
         }
 
-        /* Heart Glow Animation */
         @keyframes heartGlow {
            0%, 100% { 
            transform: translate(-50%, -50%) scale(1);
@@ -1239,10 +1285,78 @@
             background: radial-gradient(circle, rgba(213, 54, 90, 0.8) 0%, transparent 70%);
         }
         }
-       
-    /* =============================================================
-   SILHOUETTE ANIMATIONS
-   ============================================================= */
+
+        @keyframes achievementUnlock {
+            0% { 
+            transform: scale(0.9); 
+            opacity: 0.4; 
+            color: #fff;
+            background: transparent;
+        }
+            25% { 
+            transform: scale(1.1); 
+            opacity: 0.8; 
+            color: #FFD700;
+            background: rgba(255, 215, 0, 0.1);
+            text-shadow: 0 0 10px #FFD700;
+        }
+            50% { 
+            transform: scale(1.15); 
+            opacity: 1; 
+            color: #FFD700;
+            background: rgba(255, 215, 0, 0.2);
+            text-shadow: 0 0 15px #FFD700;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+        }
+            75% { 
+            transform: scale(1.05); 
+            opacity: 1; 
+            color: #FFD700;
+            background: rgba(255, 215, 0, 0.1);
+            text-shadow: 0 0 12px #FFD700;
+        }
+            100% { 
+            transform: scale(1); 
+            opacity: 1; 
+            color: #FFD700;
+            background: transparent;
+            text-shadow: 0 0 8px rgba(255, 215, 0, 0.6);
+        }
+        }
+
+       @keyframes achievementPulse {
+            0%, 100% { 
+            transform: scale(1); 
+            text-shadow: 0 0 5px #FFD700;
+        }
+            50% { 
+            transform: scale(1.03); 
+            text-shadow: 0 0 12px #FFD700;
+        }
+        }
+
+       .achievement-board li.unlocked {
+            animation: achievementPulse 3s ease-in-out infinite;
+        }
+
+       .achievement-board li.just-unlocked {
+            animation: achievementUnlock 1.5s ease-out forwards !important;
+        }
+
+        @keyframes sparkleFloat {
+             0% {
+             transform: translateY(0) scale(0);
+             opacity: 1;
+        }
+             50% {
+            transform: translateY(-15px) scale(1);
+            opacity: 1;
+        }
+             100% {
+             transform: translateY(-25px) scale(0);
+             opacity: 0;
+        }
+        }
 
 @keyframes gentleSway {
     0%, 100% { 
@@ -1360,303 +1474,12 @@
     }
 }
 
-        /* Mobile Achievement Notification System */
-     @media (max-width: 768px) {
-    .achievement-board {
-        display: none !important;
-    }
-    
-    .mobile-achievement-notification {
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
-        color: #1a0000;
-        padding: 8px 12px;
-        border-radius: 20px;
-        font-size: 0.7rem;
-        font-weight: bold;
-        z-index: 1001;
-        animation: slideInRight 0.5s ease-out;
-        max-width: 150px;
-        text-align: center;
-        box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
-    }
-}
-
-@keyframes slideInRight {
-    0% {
-        transform: translateX(100%);
-        opacity: 0;
-    }
-    100% {
-        transform: translateX(0);
-        opacity: 1;
-    }
-}
-
-@keyframes slideOutRight {
-    0% {
-        transform: translateX(0);
-        opacity: 1;
-    }
-    100% {
-        transform: translateX(100%);
-        opacity: 0;
-    }
-}
-
-        /* ============================================================================
-           MOBILE-FIRST OPTIMIZATION 
-           ============================================================================ */
-
-         /* 1. VIEWPORT AND SAFE AREAS */
-        body {
-        /* Add viewport support for notched devices */
-        padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
-  
+        /* FIXED: Hide problematic round intro elements */
+        .round-intro {
+            display: none !important;
+            visibility: hidden !important;
+            opacity: 0 !important;
         }
-
-        /* 2. ENHANCED TOUCH TARGETS */
-       .distraction {
-        /* Minimum 44px touch target */
-           min-width: 44px !important;
-           min-height: 44px !important;
-       /* Better touch response */
-           touch-action: manipulation;
-        }
-
-       .distraction-icon {
-       /* Larger on small screens */
-          width: clamp(50px, 15vw, 80px);
-          height: clamp(50px, 15vw, 80px);
-       /* Better touch feedback */
-          transition: all 0.1s ease;
-        }
-
-       .distraction-icon:active {
-          transform: scale(0.95);
-          filter: brightness(1.2);
-        }
-
-      /* 3. RESPONSIVE BUTTON SIZING */
-      .btn {
-     /* Better mobile touch targets */
-         min-height: 48px;
-         min-width: 120px;
-     /* Responsive padding */
-         padding: clamp(8px, 3vw, 12px) clamp(16px, 6vw, 24px);  /* ← SMALLER RESPONSIVE PADDING */
-    /* Better touch response */
-         touch-action: manipulation;
-        }
-
-    /* 4. HUD RESPONSIVE IMPROVEMENTS */
-     .game-hud {
-    /* Better mobile positioning */
-       padding: clamp(10px, 3vw, 20px);
-    /* Prevent interference with game canvas */
-       pointer-events: none;
-    }
-
-    .game-hud > * {
-       pointer-events: auto;
-    }
-
-    .score-display, .intimacy-meter {
-    /* Responsive HUD elements */
-       padding: clamp(8px, 2vw, 15px) clamp(15px, 4vw, 25px);
-       font-size: clamp(0.9rem, 3vw, 1.3rem);
-    /* Better mobile backdrop */
-       backdrop-filter: blur(8px);
-       background: rgba(0, 0, 0, 0.7);
-    }
-
-    .heart {
-    /* Responsive heart sizing */
-       font-size: clamp(1.2rem, 4vw, 1.8rem) !important;
-    /* Better mobile spacing */
-       margin: 0 clamp(1px, 0.5vw, 3px) !important;
-    }
-
-   /* 5. ACHIEVEMENT AND POPUP RESPONSIVE */
-   .achievement-popup {
-    /* Better mobile sizing */
-      max-width: 90vw;
-      max-height: 80vh;
-      padding: clamp(15px, 4vw, 25px) clamp(20px, 5vw, 35px);
-    /* Better mobile positioning */
-      top: 50%;
-      transform: translate(-50%, -50%) scale(0);
-    }
-
-   .round-complete-popup {
-      max-width: 85vw;
-      padding: clamp(12px, 3vw, 20px) clamp(18px, 4vw, 30px);
-    }
-
-  /* 6. MODAL IMPROVEMENTS */
-   .modal-content {
-    /* Better mobile modal sizing */
-      max-width: 95vw;
-      max-height: 90vh;
-      padding: clamp(20px, 5vw, 40px);
-    /* Better mobile scrolling */
-      overflow-y: auto;
-      -webkit-overflow-scrolling: touch;
-    }
-
-   /* 7. RESULTS PANEL MOBILE */
-    .results-panel {
-    /* Better mobile results display */
-      max-height: 95vh;
-      padding: clamp(20px, 4vw, 35px);
-    /* Better mobile scrolling */
-      overflow-y: auto;
-      -webkit-overflow-scrolling: touch;
-    }
-
-   /* 8. COUPLE SILHOUETTE RESPONSIVE */
-    .couple-silhouette {
-    /* Responsive silhouette sizing */
-    width: clamp(200px, 40vw, 350px);
-    height: clamp(200px, 40vw, 350px);
-    /* Better mobile positioning - preserve animations */
-    top: 50%;
-    left: 50%;
-    /* Don't override transform in responsive-animate */
-   }
-
-   /* 9. STICKY NOTE RESPONSIVE */
-    .sticky-note {
-    /* Responsive sticky notes */
-       width: clamp(80px, 20vw, 120px);
-       height: clamp(60px, 15vw, 90px);
-       font-size: clamp(10px, 2.5vw, 16px);
-       padding: clamp(6px, 2vw, 12px);
-    }
-
-   /* 10. AUDIO TOGGLE MOBILE */
-    .audio-toggle {
-    /* Better mobile audio toggle */
-       width: clamp(35px, 8vw, 50px);
-       height: clamp(35px, 8vw, 50px);
-       bottom: clamp(15px, 3vh, 25px);
-       left: clamp(15px, 3vw, 25px);
-       font-size: clamp(1rem, 4vw, 1.5rem);
-    }
-
-   /* 11. ACHIEVEMENT BOARD MOBILE */
-    .achievement-board {
-    /* Better mobile achievement display */
-       max-width: clamp(150px, 35vw, 220px);
-       padding: clamp(8px, 2vw, 12px);
-       font-size: clamp(0.6rem, 1.8vw, 0.8rem);
-     /* Better mobile positioning */
-       margin-top: clamp(8px, 2vw, 15px);
-    }
-
-    /* 12. SPECIFIC MOBILE BREAKPOINTS */
-    @media (max-width: 480px) {
-    /* Small mobile phones */
-    .game-hud {
-        padding: 8px;
-    }
-    
-    .distraction-icon {
-        width: 55px;
-        height: 55px;
-        font-size: 1.5rem;
-    }
-    
-    .achievement-board {
-        display: none !important; /* Hide on mobile screens */
-    }
-    
-    .couple-silhouette {
-        width: 180px;
-        height: 180px;
-    }
-}
-
-@media (max-width: 360px) {
-    /* Very small mobile phones */
-    .hud-top {
-        flex-direction: column;
-        gap: 5px;
-        align-items: flex-start;
-    }
-    
-    .intimacy-meter {
-        align-self: flex-end;
-    }
-}
-
-@media (min-width: 768px) {
-    /* Tablets and larger */
-    .distraction-icon {
-        width: 70px;
-        height: 70px;
-        font-size: 2.2rem;
-    }
-    
-    .couple-silhouette {
-        width: 400px;
-        height: 400px;
-    }
-}
-
-@media (min-width: 1024px) {
-    /* Desktop */
-    .game-hud {
-        padding: 25px;
-    }
-    
-    .distraction-icon {
-        width: 80px;
-        height: 80px;
-        font-size: 2.5rem;
-    }
-}
-
-/* 14. ORIENTATION HANDLING */
-@media (orientation: landscape) and (max-height: 500px) {
-    /* Landscape mobile phones */
-    .game-hud {
-        padding: 10px;
-    }
-    
-    .score-display, .intimacy-meter {
-        padding: 6px 12px;
-        font-size: 0.9rem;
-    }
-    
-    .heart {
-        font-size: 1.1rem !important;
-    }
-    
-    .couple-silhouette {
-        width: 200px;
-        height: 200px;
-    }
-    
-    .achievement-popup {
-        max-height: 70vh;
-        font-size: 0.9rem;
-    }
-}
-
-/* 15. HIGH DPI SCREENS */
-@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-    .distraction-icon {
-        /* Crisp rendering on high DPI */
-        image-rendering: -webkit-optimize-contrast;
-    }
-    
-    .heart {
-        /* Better emoji rendering */
-        font-rendering: optimizeLegibility;
-    }
-}
     </style>
 </head>
 <body>
@@ -1838,14 +1661,14 @@
         </div>
     </div>
 
-    <!-- Achievement Popup -->
+    <!-- Achievement Popup - Desktop Only -->
     <div id="achievementPopup" class="achievement-popup">
         <div class="achievement-icon" id="achievementIcon">🏆</div>
         <div class="achievement-title" id="achievementTitle">Achievement Unlocked!</div>
         <div class="achievement-desc" id="achievementDesc">Description</div>
     </div>
 
-    <!-- Round Complete Popup -->
+    <!-- Round Complete Popup - Desktop Only -->
     <div id="roundCompletePopup" class="round-complete-popup">
         <div style="font-size: 1.5rem;">✨</div>
         <div style="font-weight: bold; margin: 5px 0;">Round <span id="roundNumber"></span> Complete!</div>
@@ -1858,11 +1681,100 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
     
    <script>
-// ============================================================================
-// KAMASUTRA ENDLESS EMBRACE GAME - ROHIT's VERSION 
-// ============================================================================
 
-// Game State - Centralized state management
+// Performance monitoring
+const performanceMonitor = {
+    fps: 0,
+    frameCount: 0,
+    lastTime: performance.now(),
+    memoryWarning: false,
+    
+    update() {
+        this.frameCount++;
+        const now = performance.now();
+        if (now - this.lastTime >= 1000) {
+            this.fps = Math.round((this.frameCount * 1000) / (now - this.lastTime));
+            this.frameCount = 0;
+            this.lastTime = now;
+            
+            // Performance warnings
+            if (this.fps < 30 && !this.memoryWarning) {
+                console.warn('⚠️ Low FPS detected:', this.fps);
+                this.optimizePerformance();
+            }
+        }
+    },
+    
+    optimizePerformance() {
+        // Reduce particle count on low-performance devices
+        if (particleSystem && this.fps < 20) {
+            const positions = particleSystem.geometry.attributes.position.array;
+            particleSystem.geometry.attributes.position.count = Math.floor(positions.length / 6);
+            console.log('🔧 Reduced particle count for better performance');
+        }
+        this.memoryWarning = true;
+    }
+};
+
+// Global error handler
+window.addEventListener('error', (event) => {
+    console.error('🚨 Global Error:', event.error);
+    emergencySave();
+    gracefulRecover();
+});
+
+window.addEventListener('unhandledrejection', (event) => {
+    console.error('🚨 Unhandled Promise Rejection:', event.reason);
+    event.preventDefault();
+    gracefulRecover();
+});
+
+// Emergency save functionality
+function emergencySave() {
+    try {
+        const emergencyData = {
+            score: gameState.score,
+            round: gameState.currentRound,
+            hearts: gameState.intimacyHearts,
+            achievements: Array.from(gameState.achievements),
+            timestamp: Date.now()
+        };
+        localStorage.setItem('emergency_save', JSON.stringify(emergencyData));
+        console.log('💾 Emergency save completed');
+    } catch (error) {
+        console.error('Emergency save failed:', error);
+    }
+}
+
+// Graceful error recovery
+function gracefulRecover() {
+    try {
+        // Stop all active processes
+        if (gameState.spawnTimeout) clearTimeout(gameState.spawnTimeout);
+        if (gameState.multiKillTimer) clearTimeout(gameState.multiKillTimer);
+        
+        // Clean up distractions
+        gameState.distractions.forEach(d => {
+            if (d.timerInterval) clearInterval(d.timerInterval);
+            if (d.parentNode) d.remove();
+        });
+        
+        // Reset critical states
+        gameState.gameRunning = false;
+        gameState.roundInProgress = false;
+        
+        // Show recovery message
+        showHint("Game recovered from error. Continue playing! 🛡️");
+        
+        console.log('🔧 Graceful recovery completed');
+    } catch (error) {
+        console.error('Recovery failed:', error);
+        // Last resort - reload page
+        setTimeout(() => location.reload(), 2000);
+    }
+}
+
+// Enhanced Game State with better management
 const gameState = {
     currentScreen: 'loading',
     currentRound: 1,
@@ -1893,10 +1805,50 @@ const gameState = {
     distractionsSpawned: 0,
     distractionsRequired: 5,
     roundStartTime: 0,
-    spawnTimeout: null
+    spawnTimeout: null,
+    roundInProgress: false,
+    achievementShown: new Set(),
+    heartUpdateInProgress: false,
+    isMobile: window.innerWidth <= 768,
+    gameplayStarted: false,
+    
+    // State management
+    cleanup() {
+        if (this.spawnTimeout) clearTimeout(this.spawnTimeout);
+        if (this.multiKillTimer) clearTimeout(this.multiKillTimer);
+        this.distractions.forEach(d => {
+            if (d.timerInterval) clearInterval(d.timerInterval);
+            if (d.parentNode) d.remove();
+        });
+        this.distractions = [];
+        this.gameRunning = false;
+        this.roundInProgress = false;
+    },
+    
+    reset() {
+        this.cleanup();
+        Object.assign(this, {
+            currentRound: 1,
+            score: 0,
+            lives: 5,
+            intimacyHearts: 5,
+            consecutiveMisses: 0,
+            streak: 0,
+            roundScore: 0,
+            totalEliminations: 0,
+            perfectRounds: 0,
+            roundMissed: 0,
+            multiKillCount: 0,
+            distractionsSpawned: 0,
+            gameplayStarted: false,
+            heartUpdateInProgress: false
+        });
+        this.achievements.clear();
+        this.achievementShown.clear();
+    }
 };
 
-// Static Data Arrays
+// Static Data Arrays (keeping existing arrays as they are good)
 const loadingTips = [
     "💡 Pro tip: Lasting longer starts with the right preparation... 😉",
     "🎯 Focus is everything - in games and in life! #LongLast3X",
@@ -2002,6 +1954,7 @@ const achievements = {
     }
 };
 
+// Rounds data 
 const rounds = [
     {
         name: "The First Spark",
@@ -2322,15 +2275,116 @@ let audioContext, audioBuffers = {};
 let backgroundMusic = null;
 let currentBgMusic = null;
 
+// Memory cleanup tracker
+const cleanupTracker = {
+    timeouts: new Set(),
+    intervals: new Set(),
+    audioSources: new Set(),
+    
+    addTimeout(id) { this.timeouts.add(id); },
+    addInterval(id) { this.intervals.add(id); },
+    addAudioSource(source) { this.audioSources.add(source); },
+    
+    cleanup() {
+        this.timeouts.forEach(id => clearTimeout(id));
+        this.intervals.forEach(id => clearInterval(id));
+        this.audioSources.forEach(source => {
+            try { source.stop(); } catch (e) {}
+        });
+        this.timeouts.clear();
+        this.intervals.clear();
+        this.audioSources.clear();
+    }
+};
+
 // ============================================================================
 // INITIALIZATION FUNCTIONS
 // ============================================================================
+
+// ============================================================================
+// ENHANCED EVENT HANDLERS AND STORAGE
+// ============================================================================
+
+window.addEventListener('beforeunload', () => {
+    try {
+        const currentBest = localStorage.getItem('bestScore') || 0;
+        if (gameState.score > currentBest) {
+            localStorage.setItem('bestScore', gameState.score);
+        }
+        
+        const currentBestStreak = localStorage.getItem('bestStreak') || 0;
+        if (gameState.bestStreak > currentBestStreak) {
+            localStorage.setItem('bestStreak', gameState.bestStreak);
+        }
+        
+    } catch (error) {
+        console.error('Storage save failed:', error);
+    }
+});
+
+// MISSING FUNCTIONS 
+function checkEmergencySave() {
+    try {
+        const emergencyData = localStorage.getItem('emergency_save');
+        if (emergencyData) {
+            const data = JSON.parse(emergencyData);
+            const timeSince = Date.now() - data.timestamp;
+            
+            if (timeSince < 3600000) {
+                const restore = confirm(`Found a recent game session (Score: ${data.score}, Round: ${data.round}). Would you like to continue?`);
+                if (restore) {
+                    restoreFromEmergencySave(data);
+                }
+            }
+            
+            localStorage.removeItem('emergency_save');
+        }
+    } catch (error) {
+        console.error('Emergency save check failed:', error);
+    }
+}
+
+function restoreFromEmergencySave(data) {
+    try {
+        gameState.score = data.score;
+        gameState.currentRound = data.round;
+        gameState.intimacyHearts = data.hearts;
+        gameState.achievements = new Set(data.achievements);
+        
+        showHint("Game restored from emergency save! 🛡️");
+        console.log('🔄 Game restored from emergency save');
+    } catch (error) {
+        console.error('Emergency restore failed:', error);
+    }
+}
+
+function gracefulRecover() {
+    try {
+        if (gameState.spawnTimeout) clearTimeout(gameState.spawnTimeout);
+        if (gameState.multiKillTimer) clearTimeout(gameState.multiKillTimer);
+        
+        gameState.distractions.forEach(d => {
+            if (d.timerInterval) clearInterval(d.timerInterval);
+            if (d.parentNode) d.remove();
+        });
+        
+        gameState.gameRunning = false;
+        gameState.roundInProgress = false;
+        
+        showHint("Game recovered from error. Continue playing! 🛡️");
+        console.log('🔧 Graceful recovery completed');
+    } catch (error) {
+        console.error('Recovery failed:', error);
+        setTimeout(() => location.reload(), 2000);
+    }
+}
 
 window.addEventListener('load', init);
 
 async function init() {
     try {
         gameState.lastScore = parseInt(localStorage.getItem('lastScore') || '0');
+        gameState.isMobile = window.innerWidth <= 768;
         
         updateLoadingProgress(10);
         updateLoadingTip();
@@ -2343,6 +2397,9 @@ async function init() {
         
         await initAudio();
         updateLoadingProgress(90);
+        
+        // Check for emergency save
+        checkEmergencySave();
         
         setTimeout(() => {
             updateLoadingProgress(100);
@@ -2357,8 +2414,48 @@ async function init() {
 
         setInterval(updateLoadingTip, 4000);
         setupEventListeners();
+        
+        console.log('🎮 Game initialized successfully');
     } catch (error) {
         console.error('Initialization failed:', error);
+        gracefulRecover();
+    }
+}
+
+function checkEmergencySave() {
+    try {
+        const emergencyData = localStorage.getItem('emergency_save');
+        if (emergencyData) {
+            const data = JSON.parse(emergencyData);
+            const timeSince = Date.now() - data.timestamp;
+            
+            // If save is less than 1 hour old, offer to restore
+            if (timeSince < 3600000) {
+                const restore = confirm(`Found a recent game session (Score: ${data.score}, Round: ${data.round}). Would you like to continue?`);
+                if (restore) {
+                    restoreFromEmergencySave(data);
+                }
+            }
+            
+            // Clean up old emergency save
+            localStorage.removeItem('emergency_save');
+        }
+    } catch (error) {
+        console.error('Emergency save check failed:', error);
+    }
+}
+
+function restoreFromEmergencySave(data) {
+    try {
+        gameState.score = data.score;
+        gameState.currentRound = data.round;
+        gameState.intimacyHearts = data.hearts;
+        gameState.achievements = new Set(data.achievements);
+        
+        showHint("Game restored from emergency save! 🛡️");
+        console.log('🔄 Game restored from emergency save');
+    } catch (error) {
+        console.error('Emergency restore failed:', error);
     }
 }
 
@@ -2378,7 +2475,7 @@ function updateLoadingTip() {
 }
 
 // ============================================================================
-// THREE.JS SETUP
+// ENHANCED THREE.JS SETUP
 // ============================================================================
 
 function setupThreeJS() {
@@ -2386,13 +2483,21 @@ function setupThreeJS() {
         scene = new THREE.Scene();
         camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
         
+        const canvas = document.getElementById('gameCanvas');
+        if (!canvas) {
+            console.warn('Game canvas not found, creating fallback');
+            return;
+        }
+        
         renderer = new THREE.WebGLRenderer({ 
-            canvas: document.getElementById('gameCanvas'),
+            canvas: canvas,
             alpha: true,
-            antialias: true 
+            antialias: !gameState.isMobile, // Disable antialiasing on mobile for performance
+            powerPreference: gameState.isMobile ? 'low-power' : 'high-performance'
         });
+        
         renderer.setSize(window.innerWidth, window.innerHeight);
-        renderer.setPixelRatio(window.devicePixelRatio);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, gameState.isMobile ? 1.5 : 2));
         
         const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
         scene.add(ambientLight);
@@ -2403,46 +2508,52 @@ function setupThreeJS() {
         
         camera.position.z = 5;
         createParticleSystem();
+        
+        console.log('🎨 Three.js setup completed');
     } catch (error) {
         console.error('Three.js setup failed:', error);
     }
 }
 
 function createParticleSystem() {
-    const particleGeometry = new THREE.BufferGeometry();
-    const particleCount = 100;
-    const positions = new Float32Array(particleCount * 3);
-    const colors = new Float32Array(particleCount * 3);
-    
-    for (let i = 0; i < particleCount; i++) {
-        positions[i * 3] = (Math.random() - 0.5) * 10;
-        positions[i * 3 + 1] = (Math.random() - 0.5) * 10;
-        positions[i * 3 + 2] = (Math.random() - 0.5) * 10;
+    try {
+        const particleGeometry = new THREE.BufferGeometry();
+        const particleCount = gameState.isMobile ? 50 : 100; // Reduce particles on mobile
+        const positions = new Float32Array(particleCount * 3);
+        const colors = new Float32Array(particleCount * 3);
         
-        if (Math.random() > 0.5) {
-            colors[i * 3] = 1.0;
-            colors[i * 3 + 1] = 0.84;
-            colors[i * 3 + 2] = 0.0;
-        } else {
-            colors[i * 3] = 0.83;
-            colors[i * 3 + 1] = 0.21;
-            colors[i * 3 + 2] = 0.35;
+        for (let i = 0; i < particleCount; i++) {
+            positions[i * 3] = (Math.random() - 0.5) * 10;
+            positions[i * 3 + 1] = (Math.random() - 0.5) * 10;
+            positions[i * 3 + 2] = (Math.random() - 0.5) * 10;
+            
+            if (Math.random() > 0.5) {
+                colors[i * 3] = 1.0;
+                colors[i * 3 + 1] = 0.84;
+                colors[i * 3 + 2] = 0.0;
+            } else {
+                colors[i * 3] = 0.83;
+                colors[i * 3 + 1] = 0.21;
+                colors[i * 3 + 2] = 0.35;
+            }
         }
+        
+        particleGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        particleGeometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+        
+        const particleMaterial = new THREE.PointsMaterial({
+            size: gameState.isMobile ? 0.08 : 0.1,
+            transparent: true,
+            opacity: 0.8,
+            vertexColors: true,
+            blending: THREE.AdditiveBlending
+        });
+        
+        particleSystem = new THREE.Points(particleGeometry, particleMaterial);
+        scene.add(particleSystem);
+    } catch (error) {
+        console.error('Particle system creation failed:', error);
     }
-    
-    particleGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-    particleGeometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
-    
-    const particleMaterial = new THREE.PointsMaterial({
-        size: 0.1,
-        transparent: true,
-        opacity: 0.8,
-        vertexColors: true,
-        blending: THREE.AdditiveBlending
-    });
-    
-    particleSystem = new THREE.Points(particleGeometry, particleMaterial);
-    scene.add(particleSystem);
 }
 
 // ============================================================================
@@ -2454,8 +2565,16 @@ async function preloadAssets() {
         const imagePromises = rounds.map(round => {
             return new Promise((resolve) => {
                 const img = new Image();
-                img.onload = resolve;
-                img.onerror = resolve;
+                const timeoutId = setTimeout(() => resolve(), 5000); // 5s timeout
+                img.onload = () => {
+                    clearTimeout(timeoutId);
+                    resolve();
+                };
+                img.onerror = () => {
+                    clearTimeout(timeoutId);
+                    console.warn('Failed to load image:', round.silhouette);
+                    resolve();
+                };
                 img.src = round.silhouette;
             });
         });
@@ -2469,37 +2588,61 @@ async function preloadAssets() {
         otherImages.forEach(src => {
             imagePromises.push(new Promise((resolve) => {
                 const img = new Image();
-                img.onload = resolve;
-                img.onerror = resolve;
+                const timeoutId = setTimeout(() => resolve(), 3000);
+                img.onload = () => {
+                    clearTimeout(timeoutId);
+                    resolve();
+                };
+                img.onerror = () => {
+                    clearTimeout(timeoutId);
+                    resolve();
+                };
                 img.src = src;
             }));
         });
         
-        await Promise.all(imagePromises);
+        await Promise.allSettled(imagePromises); // Use allSettled to continue even if some fail
+        console.log('📸 Assets preloaded successfully');
     } catch (error) {
         console.error('Asset preloading failed:', error);
     }
 }
 
 // ============================================================================
-// AUDIO SYSTEM
+// ENHANCED AUDIO SYSTEM WITH FALLBACKS
 // ============================================================================
 
 async function initAudio() {
     try {
+        const savedAudioState = localStorage.getItem('audioEnabled');
+        if (savedAudioState !== null) {
+            gameState.audioEnabled = savedAudioState === 'true';
+        }
+        
         audioContext = new (window.AudioContext || window.webkitAudioContext)();
         
-        audioBuffers.success = createTone(880, 0.1);
-        audioBuffers.fail = createTone(220, 0.2);
-        audioBuffers.achievement = createTone(1320, 0.3);
-        audioBuffers.ring = createTone(440, 0.3);
-        audioBuffers.ding = createTone(660, 0.1);
-        audioBuffers.pop = createTone(550, 0.05);
-        audioBuffers.buzz = createNoise(0.1);
+        try {
+            audioBuffers.success = createTone(880, 0.1);
+            audioBuffers.fail = createTone(220, 0.2);
+            audioBuffers.achievement = createTone(1320, 0.3);
+            audioBuffers.ring = createTone(440, 0.3);
+            audioBuffers.ding = createTone(660, 0.1);
+            audioBuffers.pop = createTone(550, 0.05);
+            audioBuffers.buzz = createNoise(0.1);
+        } catch (error) {
+            console.warn('Basic audio creation failed:', error);
+        }
         
-        createBackgroundMusic();
+        try {
+            createBackgroundMusic();
+        } catch (error) {
+            console.warn('Background music creation failed:', error);
+        }
+        
+        console.log('🔊 Audio system initialized');
     } catch (error) {
-        console.log('Audio initialization failed:', error);
+        console.warn('Audio initialization failed, continuing without audio:', error);
+        gameState.audioEnabled = false;
     }
 }
 
@@ -2516,7 +2659,11 @@ function createBackgroundMusic() {
     };
 
     Object.entries(musicTracks).forEach(([name, config]) => {
-        audioBuffers[name] = createMusicTrack(config.freq, config.vol, config.style);
+        try {
+            audioBuffers[name] = createMusicTrack(config.freq, config.vol, config.style);
+        } catch (error) {
+            console.warn(`Failed to create ${name} track:`, error);
+        }
     });
 }
 
@@ -2603,6 +2750,7 @@ function createNoise(duration) {
     return buffer;
 }
 
+// Enhanced audio playback with error handling
 function playSound(soundName, volume = 0.5) {
     if (!gameState.audioEnabled || !audioContext || !audioBuffers[soundName]) return;
     
@@ -2615,9 +2763,17 @@ function playSound(soundName, volume = 0.5) {
         gainNode.connect(audioContext.destination);
         gainNode.gain.value = volume;
         
+        cleanupTracker.addAudioSource(source);
         source.start();
+        
+        // Auto-cleanup after sound ends
+        const timeoutId = setTimeout(() => {
+            cleanupTracker.audioSources.delete(source);
+        }, (audioBuffers[soundName].duration * 1000) + 100);
+        cleanupTracker.addTimeout(timeoutId);
+        
     } catch (error) {
-        console.log('Sound playback failed:', error);
+        console.warn('Sound playback failed:', error);
     }
 }
 
@@ -2638,8 +2794,9 @@ function playBackgroundMusic(trackName) {
         
         backgroundMusic.start();
         currentBgMusic = backgroundMusic;
+        cleanupTracker.addAudioSource(backgroundMusic);
     } catch (error) {
-        console.log('Background music playback failed:', error);
+        console.warn('Background music playback failed:', error);
     }
 }
 
@@ -2647,6 +2804,7 @@ function stopBackgroundMusic() {
     if (currentBgMusic) {
         try {
             currentBgMusic.stop();
+            cleanupTracker.audioSources.delete(currentBgMusic);
         } catch (error) {
             // Already stopped
         }
@@ -2655,36 +2813,48 @@ function stopBackgroundMusic() {
 }
 
 // ============================================================================
-// HEART METER SYSTEM
+// ENHANCED HEART METER SYSTEM WITH SAFETY GUARDS
 // ============================================================================
 
 function updateHeartMeter() {
-    const hearts = document.querySelectorAll('.game-hud .intimacy-meter .heart');
-    console.log('🔍 DEBUG - Updating hearts:', hearts.length, 'Current hearts:', gameState.intimacyHearts);
+    if (gameState.heartUpdateInProgress) return;
+    gameState.heartUpdateInProgress = true;
     
-    hearts.forEach((heart, index) => {
-        heart.classList.remove('breaking', 'gaining');
+    try {
+        const hearts = document.querySelectorAll('.game-hud .intimacy-meter .heart');
+        console.log('🔍 DEBUG - Updating hearts:', hearts.length, 'Current hearts:', gameState.intimacyHearts);
         
-        if (index < gameState.intimacyHearts) {
-            heart.classList.add('active');
-            heart.classList.remove('inactive');
-            console.log(`❤️ Heart ${index}: ACTIVE - Classes:`, heart.className);
-        } else {
-            heart.classList.remove('active');
-            heart.classList.add('inactive');
-            console.log(`🖤 Heart ${index}: INACTIVE - Classes:`, heart.className);
-        }
-    });
-    
-    // Additional debug info
-    console.log('🎯 Game state:', {
-        currentRound: gameState.currentRound,
-        intimacyHearts: gameState.intimacyHearts,
-        gameRunning: gameState.gameRunning
-    });
+        hearts.forEach((heart, index) => {
+            heart.classList.remove('breaking', 'gaining');
+            
+            if (index < gameState.intimacyHearts) {
+                heart.classList.add('active');
+                heart.classList.remove('inactive');
+                console.log(`❤️ Heart ${index}: ACTIVE - Classes:`, heart.className);
+            } else {
+                heart.classList.remove('active');
+                heart.classList.add('inactive');
+                console.log(`🖤 Heart ${index}: INACTIVE - Classes:`, heart.className);
+            }
+        });
+        
+        console.log('🎯 Game state:', {
+            currentRound: gameState.currentRound,
+            intimacyHearts: gameState.intimacyHearts,
+            gameRunning: gameState.gameRunning
+        });
+    } catch (error) {
+        console.error('Heart meter update failed:', error);
+    } finally {
+        const timeoutId = setTimeout(() => {
+            gameState.heartUpdateInProgress = false;
+        }, 100);
+        cleanupTracker.addTimeout(timeoutId);
+    }
 }
+
 function loseHeart(reason = 'missed') {
-    if (gameState.intimacyHearts <= 0) return;
+    if (gameState.intimacyHearts <= 0 || gameState.heartUpdateInProgress) return;
     
     let heartsToLose = 1;
     
@@ -2702,21 +2872,28 @@ function loseHeart(reason = 'missed') {
     playHeartLossEffect(previousHearts, heartsToLose);
     updateHeartMeter();
     
+    // Enhanced vibration feedback
+    vibrate([100, 50, 100]);
+    
     if (gameState.intimacyHearts <= 0) {
-        setTimeout(() => {
+        const timeoutId = setTimeout(() => {
             endGame();
         }, 1000);
+        cleanupTracker.addTimeout(timeoutId);
     }
 }
 
 function gainHeart(reason = 'bonus') {
-    if (gameState.intimacyHearts >= gameState.maxHearts) return;
+    if (gameState.intimacyHearts >= gameState.maxHearts || gameState.heartUpdateInProgress) return;
     
     const previousHearts = gameState.intimacyHearts;
     gameState.intimacyHearts = Math.min(gameState.maxHearts, gameState.intimacyHearts + 1);
     
     playHeartGainEffect(previousHearts);
     updateHeartMeter();
+    
+    // Enhanced vibration feedback
+    vibrate([50, 30, 50]);
     
     if (reason === 'perfectCombo') {
         showHint("Perfect combo! Heart restored! 💕");
@@ -2727,29 +2904,32 @@ function gainHeart(reason = 'bonus') {
 
 function playHeartLossEffect(previousHearts, heartsLost) {
     playSound('fail', 0.3);
-    shakeScreen();
+    enhancedShakeScreen();
     
     const hearts = document.querySelectorAll('.heart');
     
     for (let i = 0; i < heartsLost; i++) {
         const heartIndex = previousHearts - 1 - i;
         if (hearts[heartIndex] && heartIndex >= 0) {
-            setTimeout(() => {
+            const timeoutId = setTimeout(() => {
                 hearts[heartIndex].classList.add('breaking');
                 hearts[heartIndex].style.animation = 'heartBreak 0.8s ease-out';
-                setTimeout(() => {
+                const innerTimeoutId = setTimeout(() => {
                     hearts[heartIndex].style.animation = '';
                     hearts[heartIndex].classList.remove('breaking');
                     updateHeartMeter();
                 }, 800);
+                cleanupTracker.addTimeout(innerTimeoutId);
             }, i * 200);
+            cleanupTracker.addTimeout(timeoutId);
         }
     }
     
     if (heartsLost > 1) {
-        setTimeout(() => {
+        const timeoutId = setTimeout(() => {
             showHint("Multiple hearts lost! 💔");
         }, 500);
+        cleanupTracker.addTimeout(timeoutId);
     }
 }
 
@@ -2764,30 +2944,51 @@ function playHeartGainEffect(previousHearts) {
         hearts[newHeartIndex].style.animation = 'pulse 0.6s ease-out';
         hearts[newHeartIndex].style.filter = 'drop-shadow(0 0 10px #d5365a)';
         
-        setTimeout(() => {
+        const timeoutId = setTimeout(() => {
             hearts[newHeartIndex].style.animation = '';
             hearts[newHeartIndex].style.filter = '';
             hearts[newHeartIndex].classList.remove('gaining');
             updateHeartMeter();
         }, 1000);
+        cleanupTracker.addTimeout(timeoutId);
     }
 }
 
 // ============================================================================
-// EVENT LISTENERS
+// ENHANCED EVENT LISTENERS
 // ============================================================================
 
 function setupEventListeners() {
-    window.addEventListener('resize', () => {
-        if (camera && renderer) {
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth, window.innerHeight);
-        }
-    });
-    
+    window.addEventListener('resize', handleResize);
     document.addEventListener('click', handleInteraction);
     document.addEventListener('touchstart', handleInteraction);
+    
+    // Enhanced mobile handling
+    document.addEventListener('touchend', handleTouchEnd, false);
+    document.addEventListener('touchmove', handleTouchMove, { passive: false });
+    
+    // Orientation change with delay
+    window.addEventListener('orientationchange', handleOrientationChange);
+    
+    // Page visibility API for better resource management
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+}
+
+function handleResize() {
+    if (camera && renderer) {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+    }
+    
+    // Update mobile detection on resize
+    const wasMobile = gameState.isMobile;
+    gameState.isMobile = window.innerWidth <= 768;
+    
+    // Update achievement board visibility if mobile state changed
+    if (wasMobile !== gameState.isMobile && gameState.gameRunning) {
+        updateAchievementBoardVisibility();
+    }
 }
 
 function handleInteraction(event) {
@@ -2805,25 +3006,84 @@ function handleInteraction(event) {
     });
 }
 
+// Enhanced touch handling
+let lastTouchEnd = 0;
+function handleTouchEnd(e) {
+    const now = Date.now();
+    if (now - lastTouchEnd <= 300) {
+        e.preventDefault(); // Prevent zoom on double tap
+    }
+    lastTouchEnd = now;
+}
+
+function handleTouchMove(e) {
+    // Prevent iOS Safari bouncing, but allow scrolling in modals
+    if (e.target.closest('.modal-content, .results-panel')) return;
+    e.preventDefault();
+}
+
+function handleOrientationChange() {
+    const timeoutId = setTimeout(() => {
+        if (camera && renderer) {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+        
+        // Update mobile detection
+        gameState.isMobile = window.innerWidth <= 768;
+        updateAchievementBoardVisibility();
+    }, 100);
+    cleanupTracker.addTimeout(timeoutId);
+}
+
+function handleVisibilityChange() {
+    if (document.hidden) {
+        // Pause game when tab is hidden
+        if (gameState.gameRunning) {
+            emergencySave();
+        }
+        // Pause background music
+        if (currentBgMusic) {
+            try {
+                currentBgMusic.suspend?.();
+            } catch (e) {}
+        }
+    } else {
+        // Resume when tab is visible
+        if (currentBgMusic && gameState.audioEnabled) {
+            try {
+                currentBgMusic.resume?.();
+            } catch (e) {}
+        }
+    }
+}
+
 // ============================================================================
-// SCREEN MANAGEMENT
+// ENHANCED SCREEN MANAGEMENT
 // ============================================================================
 
 function showScreen(screenId) {
-    document.querySelectorAll('.screen').forEach(screen => {
-        screen.classList.remove('active');
-    });
-    
-    const screen = document.getElementById(screenId);
-    if (screen) {
-        screen.classList.add('active');
-        gameState.currentScreen = screenId;
-    }
-    
-    if (screenId === 'gameScreen') {
-        startGame();
-    } else {
-        gameState.gameRunning = false;
+    try {
+        document.querySelectorAll('.screen').forEach(screen => {
+            screen.classList.remove('active');
+        });
+        
+        const screen = document.getElementById(screenId);
+        if (screen) {
+            screen.classList.add('active');
+            gameState.currentScreen = screenId;
+        }
+        
+        if (screenId === 'gameScreen') {
+            startGame();
+        } else {
+            gameState.cleanup(); // Clean up when leaving game screen
+        }
+        
+        console.log('📺 Screen changed to:', screenId);
+    } catch (error) {
+        console.error('Screen change failed:', error);
     }
 }
 
@@ -2846,7 +3106,7 @@ function verifyAge(isAdult) {
 }
 
 // ============================================================================
-// INSTRUCTIONS SYSTEM
+// ENHANCED INSTRUCTIONS SYSTEM
 // ============================================================================
 
 function showInstructions() {
@@ -2920,752 +3180,1014 @@ function updateInstruction() {
 }
 
 // ============================================================================
-// GAME LOGIC - MAIN GAME FUNCTIONS
+// ENHANCED GAME LOGIC - MAIN GAME FUNCTIONS
 // ============================================================================
 
 function startGame() {
-    Object.assign(gameState, {
-        currentRound: 1,
-        score: 0,
-        lives: 5,
-        intimacyHearts: 5,
-        consecutiveMisses: 0,
-        streak: 0,
-        bestStreak: 0,
-        roundScore: 0,
-        totalEliminations: 0,
-        perfectRounds: 0,
-        roundMissed: 0,
-        gameStartTime: Date.now(),
-        gameRunning: true,
-        distractionsSpawned: 0,
-        multiKillCount: 0
-    });
-    
-    gameState.achievements.clear();
-    gameState.distractions = [];
-    
-    const achievementBoard = document.getElementById('achievementBoard');
-    if (achievementBoard) {
-        achievementBoard.style.display = 'block';
-    }
-    
-    updateHUD();
-    updateHeartMeter();
-    setTimeout(() => {
+    try {
+        // Clean up any existing game state
+        gameState.reset();
+        
+        Object.assign(gameState, {
+            currentRound: 1,
+            score: 0,
+            lives: 5,
+            intimacyHearts: 5,
+            gameStartTime: Date.now(),
+            gameRunning: true,
+            gameplayStarted: false
+        });
+        
+        const achievementBoard = document.getElementById('achievementBoard');
+        if (achievementBoard) {
+            achievementBoard.style.display = 'block';
+            achievementBoard.classList.remove('gameplay-hidden');
+        }
+        
+        updateHUD();
         updateHeartMeter();
-    }, 100);
-    startRound(gameState.currentRound);
-    animate();
+        
+        const timeoutId = setTimeout(() => {
+            updateHeartMeter();
+        }, 100);
+        cleanupTracker.addTimeout(timeoutId);
+        
+        startRound(gameState.currentRound);
+        animate();
+        
+        console.log('🎮 Game started successfully');
+    } catch (error) {
+        console.error('Game start failed:', error);
+        gracefulRecover();
+    }
 }
 
 function startRound(roundNumber) {
     if (roundNumber > rounds.length) {
+        console.log('🏁 All rounds completed! Ending game...');
         endGame();
         return;
     }
     
-    const round = rounds[roundNumber - 1];
-    gameState.roundScore = 0;
-    gameState.roundMissed = 0;
-    gameState.distractionsSpawned = 0;
-    gameState.distractionsRequired = round.distractionsRequired;
-    gameState.roundStartTime = Date.now();
-    
-    if (gameState.spawnTimeout) {
-        clearTimeout(gameState.spawnTimeout);
+    try {
+        // Hide achievement board on mobile during gameplay
+        if (!gameState.gameplayStarted) {
+            gameState.gameplayStarted = true;
+        }
+        updateAchievementBoardVisibility();
+        
+        gameState.roundInProgress = true;
+        const round = rounds[roundNumber - 1];
+        gameState.roundScore = 0;
+        gameState.roundMissed = 0;
+        gameState.distractionsSpawned = 0;
+        gameState.distractionsRequired = round.distractionsRequired;
+        gameState.roundStartTime = Date.now();
+        
+        console.log(`🚀 Starting Round ${roundNumber}: ${round.name} - Need ${round.distractionsRequired} distractions`);
+        
+        if (gameState.spawnTimeout) {
+            clearTimeout(gameState.spawnTimeout);
+        }
+        
+        updateCoupleSilhouette(round.silhouette);
+        playBackgroundMusic(round.bgMusic);
+        
+        // Show round intro popup
+        showRoundIntroPopup(round);
+        
+        gameState.spawnTimeout = setTimeout(() => {
+            spawnDistractions();
+        }, 3000);
+        cleanupTracker.addTimeout(gameState.spawnTimeout);
+        
+    } catch (error) {
+        console.error('Round start failed:', error);
+        gracefulRecover();
     }
+}
+
+// Enhanced Achievement Board Visibility Management
+function updateAchievementBoardVisibility() {
+    const achievementBoard = document.getElementById('achievementBoard');
+    if (!achievementBoard) return;
     
-    updateCoupleSilhouette(round.silhouette);
-    playBackgroundMusic(round.bgMusic);
-    showRoundIntro(round);
-    
-    gameState.spawnTimeout = setTimeout(() => {
-        spawnDistractions();
-    }, 3000);
+    if (gameState.isMobile && gameState.gameplayStarted) {
+        // Hide on mobile during gameplay
+        achievementBoard.classList.add('gameplay-hidden');
+    } else {
+        // Show on desktop or mobile before gameplay starts
+        achievementBoard.classList.remove('gameplay-hidden');
+    }
 }
 
 function updateCoupleSilhouette(imageSrc) {
-    const silhouetteDiv = document.getElementById('coupleSilhouette');
-    const silhouetteImg = document.getElementById('silhouetteImage');
-    
-    if (silhouetteDiv && silhouetteImg) {
-        // Remove existing animation classes
-        silhouetteDiv.className = 'couple-silhouette';
+    try {
+        const silhouetteDiv = document.getElementById('coupleSilhouette');
+        const silhouetteImg = document.getElementById('silhouetteImage');
         
-        // Add fade-out effect before changing image
-        silhouetteDiv.style.opacity = '0';
-        silhouetteDiv.style.transform = 'translate(-50%, -50%) scale(0.8)';
-        
-        setTimeout(() => {
-            silhouetteImg.src = imageSrc;
+        if (silhouetteDiv && silhouetteImg) {
+            silhouetteDiv.className = 'couple-silhouette';
             
-            // Add appropriate animation class based on current round
-            const animationClass = getSilhouetteAnimationClass(gameState.currentRound);
-            silhouetteDiv.classList.add(animationClass);
+            silhouetteDiv.style.opacity = '0';
+            silhouetteDiv.style.transform = 'translate(-50%, -50%) scale(0.8)';
             
-            // Fade back in with new animation
-            silhouetteDiv.style.opacity = '0.8';
-            silhouetteDiv.style.transform = 'translate(-50%, -50%) scale(1)';
-            silhouetteDiv.style.display = 'block';
-            
-            // Add entrance effect
-            setTimeout(() => {
-                silhouetteDiv.style.transition = 'all 0.8s ease';
-                silhouetteDiv.style.opacity = '0.9';
-                silhouetteDiv.style.transform = 'translate(-50%, -50%) scale(1.05)';
+            const timeoutId = setTimeout(() => {
+                silhouetteImg.src = imageSrc;
                 
-                setTimeout(() => {
-                    silhouetteDiv.style.transform = 'translate(-50%, -50%) scale(1)';
-                }, 300);
-            }, 100);
-            
-        }, 300);
+                const animationClass = getSilhouetteAnimationClass(gameState.currentRound);
+                silhouetteDiv.classList.add(animationClass);
+                
+                silhouetteDiv.style.opacity = '0.8';
+                silhouetteDiv.style.transform = 'translate(-50%, -50%) scale(1)';
+                silhouetteDiv.style.display = 'block';
+                
+                const innerTimeoutId = setTimeout(() => {
+                    silhouetteDiv.style.transition = 'all 0.8s ease';
+                    silhouetteDiv.style.opacity = '0.9';
+                    silhouetteDiv.style.transform = 'translate(-50%, -50%) scale(1.05)';
+                    
+                    const finalTimeoutId = setTimeout(() => {
+                        silhouetteDiv.style.transform = 'translate(-50%, -50%) scale(1)';
+                    }, 300);
+                    cleanupTracker.addTimeout(finalTimeoutId);
+                }, 100);
+                cleanupTracker.addTimeout(innerTimeoutId);
+                
+            }, 300);
+            cleanupTracker.addTimeout(timeoutId);
+        }
+    } catch (error) {
+        console.error('Silhouette update failed:', error);
     }
 }
 
 function getSilhouetteAnimationClass(roundNumber) {
     const animations = [
-        'silhouette-gentle-sway',        // Round 1: First Spark
-        'silhouette-intimate-pulse',     // Round 2: Sneaking Moments  
-        'silhouette-passionate-breathe', // Round 3: Hidden Desires
-        'silhouette-tender-rock',        // Round 4: Quick Escape
-        'silhouette-loving-embrace',     // Round 5: Lunchtime Rendezvous
-        'silhouette-romantic-glow',      // Round 6: Evening Delight
-        'silhouette-intense-connection', // Round 7: Anticipation
-        'silhouette-ultimate-unity'      // Round 8: Ultimate Intimacy
+        'silhouette-gentle-sway',
+        'silhouette-intimate-pulse',
+        'silhouette-passionate-breathe',
+        'silhouette-tender-rock',
+        'silhouette-loving-embrace',
+        'silhouette-romantic-glow',
+        'silhouette-intense-connection',
+        'silhouette-ultimate-unity'
     ];
     
     return animations[roundNumber - 1] || 'silhouette-gentle-sway';
 }
 
-function showRoundIntro(round) {
-    const intro = document.createElement('div');
-    intro.className = 'round-intro';
-    intro.style.cssText = `
-         position: fixed;
-         top: 50%;
-         left: 50%;
-         transform: translate(-50%, -50%);
-         font-size: clamp(1rem, 4vw, 1.3rem);
-         padding: 15px 20px;
-         background: linear-gradient(135deg, #d5365a 0%, #a0243d 100%);
-         border: 2px solid #FFD700;
-         border-radius: 12px;
-         z-index: 1000;
-         text-align: center;
-         color: white;
-         max-width: 280px;
-         width: 80vw;
-    `;
-    intro.innerHTML = `
-        <div style="color: #FFD700; font-weight: bold;">Round ${gameState.currentRound}</div>
-        <div>${round.name}</div>
-        <div style="font-size: 1rem; margin-top: 10px;">${round.setting}</div>
-    `;
-    
-    const gameScreen = document.getElementById('gameScreen');
-    if (gameScreen) {
-        gameScreen.appendChild(intro);
-        
-        setTimeout(() => {
-            if (intro.parentNode) {
-                intro.remove();
+// Enhanced round intro popup
+function showRoundIntroPopup(round) {
+    try {
+        if (gameState.isMobile) {
+            // Mobile: Show small slide-in notification
+            showMobileRoundNotification(round);
+        } else {
+            // Desktop: Show center popup
+            const intro = document.createElement('div');
+            intro.className = 'round-complete-popup show';
+            intro.style.cssText = `
+                position: fixed !important;
+                top: 50% !important;
+                left: 50% !important;
+                transform: translate(-50%, -50%) scale(1) !important;
+                background: linear-gradient(135deg, #d5365a 0%, #a0243d 100%) !important;
+                color: #fff !important;
+                padding: 15px 25px !important;
+                border-radius: 15px !important;
+                text-align: center !important;
+                z-index: 999 !important;
+                box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5) !important;
+                max-width: 250px !important;
+                font-size: 0.9rem !important;
+                border: 2px solid #FFD700 !important;
+                backdrop-filter: blur(10px) !important;
+                -webkit-backdrop-filter: blur(10px) !important;
+            `;
+            intro.innerHTML = `
+                <div style="color: #FFD700; font-weight: bold;">Round ${gameState.currentRound}</div>
+                <div>${round.name}</div>
+                <div style="font-size: 1rem; margin-top: 10px;">${round.setting}</div>
+            `;
+            
+            const gameScreen = document.getElementById('gameScreen');
+            if (gameScreen) {
+                gameScreen.appendChild(intro);
+                
+                const timeoutId = setTimeout(() => {
+                    if (intro.parentNode) {
+                        intro.remove();
+                    }
+                }, 3000);
+                cleanupTracker.addTimeout(timeoutId);
             }
-        }, 3000);
+        }
+    } catch (error) {
+        console.error('Round intro popup failed:', error);
+    }
+}
+
+// Enhanced mobile round notification
+function showMobileRoundNotification(round) {
+    if (window.innerWidth > 768) return;
+    
+    try {
+        const notification = document.createElement('div');
+        notification.className = 'mobile-round-notification';
+        notification.innerHTML = `Round ${gameState.currentRound}: ${round.name}`;
+        
+        document.body.appendChild(notification);
+        
+        const timeoutId = setTimeout(() => {
+            if (notification.parentNode) {
+                notification.style.animation = 'slideOutLeft 0.5s ease-out forwards';
+                const innerTimeoutId = setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.remove();
+                    }
+                }, 500);
+                cleanupTracker.addTimeout(innerTimeoutId);
+            }
+        }, 2500);
+        cleanupTracker.addTimeout(timeoutId);
+    } catch (error) {
+        console.error('Mobile notification failed:', error);
     }
 }
 
 // ============================================================================
-// DISTRACTION SPAWNING AND MANAGEMENT
+// ENHANCED DISTRACTION SPAWNING AND MANAGEMENT
 // ============================================================================
 
 function spawnDistractions() {
-    if (!gameState.gameRunning || gameState.distractionsSpawned >= gameState.distractionsRequired) {
+    if (!gameState.gameRunning || !gameState.roundInProgress || 
+        gameState.distractionsSpawned >= gameState.distractionsRequired) {
+        console.log('🛑 Stopping distraction spawn:', {
+            gameRunning: gameState.gameRunning,
+            roundInProgress: gameState.roundInProgress,
+            spawned: gameState.distractionsSpawned,
+            required: gameState.distractionsRequired
+        });
         return;
     }
     
-    const round = rounds[gameState.currentRound - 1];
-    const distraction = round.distractions[Math.floor(Math.random() * round.distractions.length)];
-    
-    createDistraction(distraction, round.reactionTime);
-    gameState.distractionsSpawned++;
-    
-    if (gameState.distractionsSpawned < gameState.distractionsRequired) {
-        const nextSpawn = round.spawnRate * (0.8 + Math.random() * 0.4);
-        gameState.spawnTimeout = setTimeout(() => {
-            spawnDistractions();
-        }, nextSpawn);
+    try {
+        const round = rounds[gameState.currentRound - 1];
+        const distraction = round.distractions[Math.floor(Math.random() * round.distractions.length)];
+        
+        createDistraction(distraction, round.reactionTime);
+        gameState.distractionsSpawned++;
+        
+        console.log(`📍 Spawned distraction ${gameState.distractionsSpawned}/${gameState.distractionsRequired}`);
+        
+        if (gameState.distractionsSpawned < gameState.distractionsRequired) {
+            const nextSpawn = round.spawnRate * (0.8 + Math.random() * 0.4);
+            gameState.spawnTimeout = setTimeout(() => {
+                spawnDistractions();
+            }, nextSpawn);
+            cleanupTracker.addTimeout(gameState.spawnTimeout);
+        } else {
+            console.log('✅ All distractions spawned for round', gameState.currentRound);
+        }
+    } catch (error) {
+        console.error('Distraction spawning failed:', error);
+        gracefulRecover();
     }
 }
 
 function createDistraction(distractionData, reactionTime) {
-    const distraction = document.createElement('div');
-    distraction.className = 'distraction';
-    distraction.dataset.type = distractionData.name;
-    distraction.dataset.spawnTime = Date.now();
-    distraction.dataset.booster = distractionData.booster || false;
-    
-    if (distractionData.special === 'sticky') {
-        const stickyTexts = [
-            "Don't<br>forget<br>milk!",
-            "Buy<br>eggs<br>today",
-            "Call<br>mom<br>❤️",
-            "Meeting<br>at 3pm",
-            "Gym<br>tonight!",
-            "Pay<br>bills!",
-            "Date<br>night<br>8pm",
-            "Doctor<br>appt<br>2pm"
-        ];
-        const randomText = stickyTexts[Math.floor(Math.random() * stickyTexts.length)];
-        distraction.innerHTML = `
-            <div class="sticky-note">
-                <div style="transform: rotate(${-10 + Math.random() * 20}deg); font-size: 12px;">
-                    ${randomText}
+    try {
+        const distraction = document.createElement('div');
+        distraction.className = 'distraction';
+        distraction.dataset.type = distractionData.name;
+        distraction.dataset.spawnTime = Date.now();
+        distraction.dataset.booster = distractionData.booster || false;
+        
+        if (distractionData.special === 'sticky') {
+            const stickyTexts = [
+                "Don't<br>forget<br>milk!",
+                "Buy<br>eggs<br>today",
+                "Call<br>mom<br>❤️",
+                "Meeting<br>at 3pm",
+                "Gym<br>tonight!",
+                "Pay<br>bills!",
+                "Date<br>night<br>8pm",
+                "Doctor<br>appt<br>2pm"
+            ];
+            const randomText = stickyTexts[Math.floor(Math.random() * stickyTexts.length)];
+            distraction.innerHTML = `
+                <div class="sticky-note">
+                    <div style="transform: rotate(${-10 + Math.random() * 20}deg); font-size: 12px;">
+                        ${randomText}
+                    </div>
                 </div>
-            </div>
-        `;
-    } else {
-        const iconClass = distractionData.booster ? 'distraction-icon glass booster' : 'distraction-icon glass';
-        distraction.innerHTML = `
-            <div class="${iconClass}">
-                ${distractionData.icon}
-                <div class="distraction-timer" ${distractionData.booster ? 'style="background: #FFD700; color: #000;"' : ''}>${(reactionTime / 1000).toFixed(1)}</div>
-            </div>
-        `;
-    }
-    
-    const x = 10 + Math.random() * 80;
-    const y = 20 + Math.random() * 60;
-    distraction.style.left = x + '%';
-    distraction.style.top = y + '%';
-    
-    const gameScreen = document.getElementById('gameScreen');
-    if (gameScreen) {
-        gameScreen.appendChild(distraction);
-    }
-    
-    playSound(distractionData.sound || 'pop', 0.3);
-    gameState.distractions.push(distraction);
-    
-    let timeLeft = reactionTime;
-    const timerInterval = setInterval(() => {
-        timeLeft -= 100;
-        const timerEl = distraction.querySelector('.distraction-timer');
-        if (timerEl) {
-            timerEl.textContent = (timeLeft / 1000).toFixed(1);
+            `;
+        } else {
+            const iconClass = distractionData.booster ? 'distraction-icon glass booster' : 'distraction-icon glass';
+            distraction.innerHTML = `
+                <div class="${iconClass}">
+                    ${distractionData.icon}
+                    <div class="distraction-timer" ${distractionData.booster ? 'style="background: #FFD700; color: #000;"' : ''}>${(reactionTime / 1000).toFixed(1)}</div>
+                </div>
+            `;
         }
         
-        if (timeLeft <= 0) {
-            clearInterval(timerInterval);
-            if (distraction.parentNode) {
-                failDistraction(distraction);
-            }
+        const x = 10 + Math.random() * 80;
+        const y = 20 + Math.random() * 60;
+        distraction.style.left = x + '%';
+        distraction.style.top = y + '%';
+        
+        const gameScreen = document.getElementById('gameScreen');
+        if (gameScreen) {
+            gameScreen.appendChild(distraction);
         }
-    }, 100);
-    
-    distraction.timerInterval = timerInterval;
+        
+        playSound(distractionData.sound || 'pop', 0.3);
+        gameState.distractions.push(distraction);
+        
+        let timeLeft = reactionTime;
+        const timerInterval = setInterval(() => {
+            timeLeft -= 100;
+            const timerEl = distraction.querySelector('.distraction-timer');
+            if (timerEl) {
+                timerEl.textContent = (timeLeft / 1000).toFixed(1);
+            }
+            
+            if (timeLeft <= 0) {
+                clearInterval(timerInterval);
+                if (distraction.parentNode) {
+                    failDistraction(distraction);
+                }
+            }
+        }, 100);
+        
+        distraction.timerInterval = timerInterval;
+        cleanupTracker.addInterval(timerInterval);
+        
+    } catch (error) {
+        console.error('Distraction creation failed:', error);
+    }
 }
 
-// Add these functions to respond to game events
+// Enhanced silhouette animations
 function animateSilhouetteOnSuccess() {
-    const silhouette = document.getElementById('coupleSilhouette');
-    if (silhouette) {
-        // Brief success pulse
-        silhouette.style.filter = 'drop-shadow(0 0 40px rgba(255, 215, 0, 0.8))';
-        silhouette.style.transform = 'translate(-50%, -50%) scale(1.1)';
-        
-        setTimeout(() => {
-            silhouette.style.filter = 'drop-shadow(0 0 20px rgba(213, 54, 90, 0.5))';
-            silhouette.style.transform = 'translate(-50%, -50%) scale(1)';
-        }, 200);
+    try {
+        const silhouette = document.getElementById('coupleSilhouette');
+        if (silhouette) {
+            // Brief success pulse
+            silhouette.style.filter = 'drop-shadow(0 0 40px rgba(255, 215, 0, 0.8))';
+            silhouette.style.transform = 'translate(-50%, -50%) scale(1.1)';
+            
+            const timeoutId = setTimeout(() => {
+                silhouette.style.filter = 'drop-shadow(0 0 20px rgba(213, 54, 90, 0.5))';
+                silhouette.style.transform = 'translate(-50%, -50%) scale(1)';
+            }, 200);
+            cleanupTracker.addTimeout(timeoutId);
+        }
+    } catch (error) {
+        console.error('Silhouette success animation failed:', error);
     }
 }
 
 function animateSilhouetteOnMiss() {
-    const silhouette = document.getElementById('coupleSilhouette');
-    if (silhouette) {
-        // Brief shake and red glow
-        silhouette.style.animation = 'shake 0.5s ease-out';
-        silhouette.style.filter = 'drop-shadow(0 0 20px rgba(255, 0, 0, 0.6))';
-        
-        setTimeout(() => {
-            const originalClass = getSilhouetteAnimationClass(gameState.currentRound);
-            silhouette.className = `couple-silhouette ${originalClass}`;
-            silhouette.style.filter = 'drop-shadow(0 0 20px rgba(213, 54, 90, 0.5))';
-        }, 500);
+    try {
+        const silhouette = document.getElementById('coupleSilhouette');
+        if (silhouette) {
+            // Brief shake and red glow
+            silhouette.style.animation = 'shake 0.5s ease-out';
+            silhouette.style.filter = 'drop-shadow(0 0 20px rgba(255, 0, 0, 0.6))';
+            
+            const timeoutId = setTimeout(() => {
+                const originalClass = getSilhouetteAnimationClass(gameState.currentRound);
+                silhouette.className = `couple-silhouette ${originalClass}`;
+                silhouette.style.filter = 'drop-shadow(0 0 20px rgba(213, 54, 90, 0.5))';
+            }, 500);
+            cleanupTracker.addTimeout(timeoutId);
+        }
+    } catch (error) {
+        console.error('Silhouette miss animation failed:', error);
     }
 }
 
 function eliminateDistraction(distraction) {
     if (!distraction.parentNode) return;
     
-    if (distraction.timerInterval) {
-        clearInterval(distraction.timerInterval);
-    }
-    
-    const reactionTime = Date.now() - parseInt(distraction.dataset.spawnTime);
-    const isBooster = distraction.dataset.booster === 'true';
-    
-    const points = isBooster ? 20 : 10;
-    gameState.score += points;
-    gameState.roundScore += points;
-    gameState.totalEliminations++;
-    gameState.streak++;
-    
-    gameState.multiKillCount++;
-    if (gameState.multiKillTimer) {
-        clearTimeout(gameState.multiKillTimer);
-    }
-    gameState.multiKillTimer = setTimeout(() => {
-        gameState.multiKillCount = 0;
-    }, 2000);
-    
-    if (gameState.streak > gameState.bestStreak) {
-        gameState.bestStreak = gameState.streak;
-    }
-    
-    gameState.consecutiveMisses = 0;
-    
-    if (gameState.streak >= 5 && gameState.streak % 5 === 0) {
-        gainHeart('perfectCombo');
-    }
-    
-    checkAchievements(reactionTime);
-    createParticleEffect(distraction);
-    playSound('success', 0.5);
+    try {
+        if (distraction.timerInterval) {
+            clearInterval(distraction.timerInterval);
+            cleanupTracker.intervals.delete(distraction.timerInterval);
+        }
+        
+        const reactionTime = Date.now() - parseInt(distraction.dataset.spawnTime);
+        const isBooster = distraction.dataset.booster === 'true';
+        
+        const points = isBooster ? 20 : 10;
+        gameState.score += points;
+        gameState.roundScore += points;
+        gameState.totalEliminations++;
+        gameState.streak++;
+        
+        gameState.multiKillCount++;
+        if (gameState.multiKillTimer) {
+            clearTimeout(gameState.multiKillTimer);
+        }
+        gameState.multiKillTimer = setTimeout(() => {
+            gameState.multiKillCount = 0;
+        }, 2000);
+        cleanupTracker.addTimeout(gameState.multiKillTimer);
+        
+        if (gameState.streak > gameState.bestStreak) {
+            gameState.bestStreak = gameState.streak;
+        }
+        
+        gameState.consecutiveMisses = 0;
+        
+        if (gameState.streak >= 5 && gameState.streak % 5 === 0) {
+            gainHeart('perfectCombo');
+        }
+        
+        checkAchievements(reactionTime);
+        createEnhancedParticleEffect(distraction);
+        playSound('success', 0.5);
 
-    // silhouette success animation - after sound for perfect timing
-    animateSilhouetteOnSuccess();
-    
-    if (gameState.totalEliminations === 1) {
-        showHint("Great job! Keep tapping!");
+        // Enhanced vibration feedback
+        vibrate([30]);
+
+        // Silhouette success animation
+        animateSilhouetteOnSuccess();
+        
+        if (gameState.totalEliminations === 1) {
+            showHint("Great job! Keep tapping!");
+        }
+        
+        distraction.remove();
+        const index = gameState.distractions.indexOf(distraction);
+        if (index > -1) {
+            gameState.distractions.splice(index, 1);
+        }
+        
+        updateHUD(false, true);
+        checkRoundCompletion();
+        
+    } catch (error) {
+        console.error('Distraction elimination failed:', error);
     }
-    
-    distraction.remove();
-    const index = gameState.distractions.indexOf(distraction);
-    if (index > -1) {
-        gameState.distractions.splice(index, 1);
-    }
-    
-    updateHUD(false, true);
-    checkRoundCompletion();
 }
 
 function failDistraction(distraction) {
-    if (distraction.timerInterval) {
-        clearInterval(distraction.timerInterval);
-    }
-    
-    const currentTime = Date.now();
-    if (currentTime - gameState.lastMissTime < 10000) {
-        gameState.consecutiveMisses++;
-    } else {
-        gameState.consecutiveMisses = 1;
-    }
-    gameState.lastMissTime = currentTime;
-    
-    let lossReason = 'missed';
-    if (gameState.consecutiveMisses >= 2) {
-        lossReason = 'consecutive';
-    }
-    
-    const isCritical = (gameState.currentRound >= 7) && 
-                     (distraction.dataset.type === 'phone' || 
-                      distraction.dataset.type === 'thoughts' || 
-                      distraction.dataset.type === 'latework');
-    
-    if (isCritical) {
-        lossReason = 'critical';
-    }
-    
-    loseHeart(lossReason);
-    gameState.streak = 0;
-    gameState.roundMissed++;
+    try {
+        if (distraction.timerInterval) {
+            clearInterval(distraction.timerInterval);
+            cleanupTracker.intervals.delete(distraction.timerInterval);
+        }
+        
+        const currentTime = Date.now();
+        if (currentTime - gameState.lastMissTime < 10000) {
+            gameState.consecutiveMisses++;
+        } else {
+            gameState.consecutiveMisses = 1;
+        }
+        gameState.lastMissTime = currentTime;
+        
+        let lossReason = 'missed';
+        if (gameState.consecutiveMisses >= 2) {
+            lossReason = 'consecutive';
+        }
+        
+        const isCritical = (gameState.currentRound >= 7) && 
+                         (distraction.dataset.type === 'phone' || 
+                          distraction.dataset.type === 'thoughts' || 
+                          distraction.dataset.type === 'latework');
+        
+        if (isCritical) {
+            lossReason = 'critical';
+        }
+        
+        loseHeart(lossReason);
+        gameState.streak = 0;
+        gameState.roundMissed++;
 
-     // silhouette miss animation - after heart loss for perfect timing
-    animateSilhouetteOnMiss();
-    
-    if (gameState.roundMissed >= 2) {
-        showHint("Focus! Don't lose the connection!");
-    }
-    
-    distraction.remove();
-    const index = gameState.distractions.indexOf(distraction);
-    if (index > -1) {
-        gameState.distractions.splice(index, 1);
-    }
-    
-    if (gameState.intimacyHearts > 0) {
-        checkRoundCompletion();
+        // Silhouette miss animation
+        animateSilhouetteOnMiss();
+        
+        if (gameState.roundMissed >= 2) {
+            showHint("Focus! Don't lose the connection!");
+        }
+        
+        distraction.remove();
+        const index = gameState.distractions.indexOf(distraction);
+        if (index > -1) {
+            gameState.distractions.splice(index, 1);
+        }
+        
+        if (gameState.intimacyHearts > 0) {
+            checkRoundCompletion();
+        }
+        
+    } catch (error) {
+        console.error('Distraction failure handling failed:', error);
     }
 }
 
+// Enhanced round completion check with safety guards
 function checkRoundCompletion() {
-    if (gameState.distractionsSpawned >= gameState.distractionsRequired && 
-        gameState.distractions.length === 0) {
-        completeRound();
+    try {
+        console.log('🔍 Checking round completion:', {
+            spawned: gameState.distractionsSpawned,
+            required: gameState.distractionsRequired,
+            remaining: gameState.distractions.length,
+            roundInProgress: gameState.roundInProgress
+        });
+        
+        if (gameState.distractionsSpawned >= gameState.distractionsRequired && 
+            gameState.distractions.length === 0 && 
+            gameState.roundInProgress) {
+            console.log('✅ Round completion criteria met!');
+            completeRound();
+        }
+    } catch (error) {
+        console.error('Round completion check failed:', error);
     }
 }
 
 // ============================================================================
-// VISUAL EFFECTS AND UI UPDATES
+// ENHANCED VISUAL EFFECTS AND UI UPDATES
 // ============================================================================
 
-function createParticleEffect(element) {
-    const rect = element.getBoundingClientRect();
-    const x = rect.left + rect.width / 2;
-    const y = rect.top + rect.height / 2;
-    
-    for (let i = 0; i < 10; i++) {
-        const particle = document.createElement('div');
-        particle.className = 'particle';
-        particle.style.left = x + 'px';
-        particle.style.top = y + 'px';
-        particle.style.setProperty('--tx', (Math.random() - 0.5) * 100 + 'px');
-        particle.style.setProperty('--ty', (Math.random() - 0.5) * 100 + 'px');
+function createEnhancedParticleEffect(element) {
+    try {
+        const rect = element.getBoundingClientRect();
+        const x = rect.left + rect.width / 2;
+        const y = rect.top + rect.height / 2;
         
-        document.body.appendChild(particle);
+        const particleCount = gameState.isMobile ? 5 : 10; // Reduce on mobile
         
-        setTimeout(() => {
-            if (particle.parentNode) {
-                particle.remove();
-            }
-        }, 1000);
+        for (let i = 0; i < particleCount; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = x + 'px';
+            particle.style.top = y + 'px';
+            particle.style.setProperty('--tx', (Math.random() - 0.5) * 100 + 'px');
+            particle.style.setProperty('--ty', (Math.random() - 0.5) * 100 + 'px');
+            
+            // Enhanced particle colors
+            const colors = ['#FFD700', '#FF69B4', '#00CED1', '#FF6347', '#98FB98'];
+            particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+            particle.style.boxShadow = `0 0 10px ${particle.style.background}`;
+            
+            document.body.appendChild(particle);
+            
+            const timeoutId = setTimeout(() => {
+                if (particle.parentNode) {
+                    particle.remove();
+                }
+            }, 1000);
+            cleanupTracker.addTimeout(timeoutId);
+        }
+    } catch (error) {
+        console.error('Particle effect creation failed:', error);
     }
 }
 
-function shakeScreen() {
-    const gameScreen = document.getElementById('gameScreen');
-    if (gameScreen) {
-        gameScreen.style.animation = 'none';
-        setTimeout(() => {
-            gameScreen.style.animation = 'shake 0.5s ease-out';
-        }, 10);
+function enhancedShakeScreen() {
+    try {
+        const gameScreen = document.getElementById('gameScreen');
+        if (gameScreen) {
+            gameScreen.style.animation = 'none';
+            const timeoutId = setTimeout(() => {
+                gameScreen.style.animation = 'shake 0.5s ease-out';
+                
+                const resetTimeoutId = setTimeout(() => {
+                    gameScreen.style.animation = '';
+                }, 500);
+                cleanupTracker.addTimeout(resetTimeoutId);
+            }, 10);
+            cleanupTracker.addTimeout(timeoutId);
+        }
+    } catch (error) {
+        console.error('Screen shake failed:', error);
     }
 }
 
 function updateHUD(animateLoss = false, animateScore = false) {
-    const scoreEl = document.getElementById('score');
-    if (scoreEl) {
-        scoreEl.textContent = gameState.score;
-        if (animateScore) {
-            scoreEl.style.transform = 'scale(1.2)';
-            setTimeout(() => {
-                scoreEl.style.transform = 'scale(1)';
-            }, 200);
+    try {
+        const scoreEl = document.getElementById('score');
+        if (scoreEl) {
+            scoreEl.textContent = gameState.score;
+            if (animateScore) {
+                scoreEl.style.transform = 'scale(1.2)';
+                scoreEl.style.color = '#FFD700';
+                const timeoutId = setTimeout(() => {
+                    scoreEl.style.transform = 'scale(1)';
+                    scoreEl.style.color = '';
+                }, 200);
+                cleanupTracker.addTimeout(timeoutId);
+            }
         }
+        
+        // Update FPS display if exists
+        const fpsEl = document.getElementById('fps');
+        if (fpsEl) {
+            fpsEl.textContent = `FPS: ${performanceMonitor.fps}`;
+            fpsEl.style.color = performanceMonitor.fps < 30 ? '#ff4444' : '#44ff44';
+        }
+        
+        updateHeartMeter();
+    } catch (error) {
+        console.error('HUD update failed:', error);
     }
-    
-    updateHeartMeter();
 }
 
 function showHint(message) {
-    const hint = document.createElement('div');
-    hint.className = 'hint-popup';
-    hint.textContent = message;
-    
-    const gameScreen = document.getElementById('gameScreen');
-    if (gameScreen) {
-        gameScreen.appendChild(hint);
+    try {
+        const hint = document.createElement('div');
+        hint.className = 'hint-popup';
+        hint.textContent = message;
         
-        setTimeout(() => {
-            if (hint.parentNode) {
-                hint.remove();
-            }
-        }, 2000);
+        const gameScreen = document.getElementById('gameScreen');
+        if (gameScreen) {
+            gameScreen.appendChild(hint);
+            
+            const timeoutId = setTimeout(() => {
+                if (hint.parentNode) {
+                    hint.remove();
+                }
+            }, 2000);
+            cleanupTracker.addTimeout(timeoutId);
+        }
+    } catch (error) {
+        console.error('Hint display failed:', error);
     }
 }
 
 // ============================================================================
-// ROUND COMPLETION AND PROGRESSION
+// ENHANCED ROUND COMPLETION AND PROGRESSION
 // ============================================================================
 
 function completeRound() {
-    gameState.gameRunning = false;
-    
-    if (gameState.spawnTimeout) {
-        clearTimeout(gameState.spawnTimeout);
-    }
-    
-    gameState.distractions.forEach(d => {
-        if (d.timerInterval) clearInterval(d.timerInterval);
-        if (d.parentNode) d.remove();
-    });
-    gameState.distractions = [];
-    
-    const roundTime = (Date.now() - gameState.roundStartTime) / 1000;
-    if (gameState.currentRound === 1 && roundTime < 30 && !gameState.achievements.has('speedDemon')) {
-        gameState.achievements.add('speedDemon');
-        showAchievement(achievements.speedDemon);
-    }
-    
-    if (gameState.roundMissed === 0) {
-        gameState.perfectRounds++;
-        gainHeart('roundCompletion');
+    try {
+        console.log('🎉 Completing round', gameState.currentRound);
         
-        if (!gameState.achievements.has('penetratingFocus')) {
-            gameState.achievements.add('penetratingFocus');
-            setTimeout(() => {
-                showAchievement(achievements.penetratingFocus);
-            }, 100);
+        gameState.gameRunning = false;
+        gameState.roundInProgress = false;
+        
+        if (gameState.spawnTimeout) {
+            clearTimeout(gameState.spawnTimeout);
         }
-    }
-    
-    setTimeout(() => {
-        const roundPopup = document.getElementById('roundCompletePopup');
-        const roundNumber = document.getElementById('roundNumber');
         
-        if (roundPopup && roundNumber) {
-            roundNumber.textContent = gameState.currentRound;
-            roundPopup.style.position = 'fixed';
-            roundPopup.style.top = '55%';
-            roundPopup.classList.add('show');
+        // Clean up remaining distractions
+        gameState.distractions.forEach(d => {
+            if (d.timerInterval) {
+                clearInterval(d.timerInterval);
+                cleanupTracker.intervals.delete(d.timerInterval);
+            }
+            if (d.parentNode) d.remove();
+        });
+        gameState.distractions = [];
+        
+        const roundTime = (Date.now() - gameState.roundStartTime) / 1000;
+        console.log(`⏱️ Round ${gameState.currentRound} completed in ${roundTime.toFixed(1)}s`);
+        
+        // Speed Demon achievement check (Round 1 < 30s)
+        if (gameState.currentRound === 1 && roundTime < 30 && !gameState.achievements.has('speedDemon')) {
+            gameState.achievements.add('speedDemon');
+            showAchievement(achievements.speedDemon);
+        }
+        
+        // Perfect round bonus
+        if (gameState.roundMissed === 0) {
+            gameState.perfectRounds++;
+            gainHeart('roundCompletion');
             
-            setTimeout(() => {
-                roundPopup.classList.remove('show');
-                gameState.currentRound++;
-                gameState.gameRunning = true;
-                startRound(gameState.currentRound);
-            }, 2000);
+            if (!gameState.achievements.has('penetratingFocus')) {
+                gameState.achievements.add('penetratingFocus');
+                const timeoutId = setTimeout(() => {
+                    showAchievement(achievements.penetratingFocus);
+                }, 100);
+                cleanupTracker.addTimeout(timeoutId);
+            }
         }
-    }, gameState.roundMissed === 0 ? 1500 : 100);
+        
+        // Show round complete popup and proceed
+        const timeoutId = setTimeout(() => {
+            const roundPopup = document.getElementById('roundCompletePopup');
+            const roundNumber = document.getElementById('roundNumber');
+            
+            if (roundPopup && roundNumber) {
+                roundNumber.textContent = gameState.currentRound;
+                roundPopup.style.position = 'fixed';
+                roundPopup.style.top = '55%';
+                roundPopup.classList.add('show');
+                
+                const innerTimeoutId = setTimeout(() => {
+                    roundPopup.classList.remove('show');
+                    
+                    // Proper round progression
+                    gameState.currentRound++;
+                    console.log('🚀 Moving to round', gameState.currentRound);
+                    
+                    if (gameState.currentRound > rounds.length) {
+                        console.log('🏁 All rounds completed!');
+                        endGame();
+                    } else {
+                        gameState.gameRunning = true;
+                        startRound(gameState.currentRound);
+                    }
+                }, 2000);
+                cleanupTracker.addTimeout(innerTimeoutId);
+            }
+        }, gameState.roundMissed === 0 ? 1500 : 100);
+        cleanupTracker.addTimeout(timeoutId);
+        
+    } catch (error) {
+        console.error('Round completion failed:', error);
+        gracefulRecover();
+    }
 }
 
 // ============================================================================
-// ACHIEVEMENT SYSTEM
+// ENHANCED ACHIEVEMENT SYSTEM WITH SPAM PREVENTION
 // ============================================================================
 
 function checkAchievements(reactionTime) {
-    if (reactionTime < 800 && !gameState.achievements.has('quickDraw')) {
-        gameState.achievements.add('quickDraw');
-        showAchievement(achievements.quickDraw);
-    }
-    
-    if (gameState.multiKillCount >= 3 && !gameState.achievements.has('multiPosition')) {
-        gameState.achievements.add('multiPosition');
-        showAchievement(achievements.multiPosition);
-    }
-    
-    if (gameState.streak >= 7 && !gameState.achievements.has('heatWave')) {
-        gameState.achievements.add('heatWave');
-        showAchievement(achievements.heatWave);
-    }
-    
-    if (gameState.perfectRounds >= 2 && !gameState.achievements.has('staminaSupreme')) {
-        gameState.achievements.add('staminaSupreme');
-        showAchievement(achievements.staminaSupreme);
-    }
-    
-    if (gameState.score >= 150 && !gameState.achievements.has('warrior3x')) {
-        gameState.achievements.add('warrior3x');
-        showAchievement(achievements.warrior3x);
+    try {
+        if (reactionTime < 800 && !gameState.achievements.has('quickDraw')) {
+            gameState.achievements.add('quickDraw');
+            showAchievement(achievements.quickDraw);
+        }
+        
+        if (gameState.multiKillCount >= 3 && !gameState.achievements.has('multiPosition')) {
+            gameState.achievements.add('multiPosition');
+            showAchievement(achievements.multiPosition);
+        }
+        
+        if (gameState.streak >= 7 && !gameState.achievements.has('heatWave')) {
+            gameState.achievements.add('heatWave');
+            showAchievement(achievements.heatWave);
+        }
+        
+        if (gameState.perfectRounds >= 2 && !gameState.achievements.has('staminaSupreme')) {
+            gameState.achievements.add('staminaSupreme');
+            showAchievement(achievements.staminaSupreme);
+        }
+        
+        if (gameState.score >= 150 && !gameState.achievements.has('warrior3x')) {
+            gameState.achievements.add('warrior3x');
+            showAchievement(achievements.warrior3x);
+        }
+    } catch (error) {
+        console.error('Achievement check failed:', error);
     }
 }
 
 function showAchievement(achievement) {
-    const popup = document.getElementById('achievementPopup');
-    const icon = document.getElementById('achievementIcon');
-    const title = document.getElementById('achievementTitle');
-    const desc = document.getElementById('achievementDesc');
-    
-    if (popup && icon && title && desc) {
-        icon.textContent = achievement.icon;
-        title.textContent = achievement.name;
-        desc.textContent = achievement.desc;
-        
-        popup.classList.add('show');
-        playSound('achievement', 0.7);
-        
-        // Update the achievement board with animation
-        updateAchievementBoard(achievement.id);
-        
-        // Mobile achievement notification
-        showMobileAchievementNotification(achievement);
-        
-        setTimeout(() => {
-            popup.classList.remove('show');
-        }, 3000);
-    }
-}
-
-// Achievement Board Update Function
-function updateAchievementBoard(achievementId) {
-    console.log('🏆 Updating achievement board for:', achievementId);
-    
-    // Achievement mapping to board items
-    const achievementMap = {
-        'quickDraw': 'Quick Draw',
-        'penetratingFocus': 'Perfect Round',
-        'multiPosition': 'Multi-Position',
-        'heatWave': 'Heat Wave',
-        'warrior3x': '3X Warrior',
-        'speedDemon': 'Speed Demon',
-        'staminaSupreme': 'Stamina Supreme',
-        'climaxControl': 'Climax Control'
-    };
-    
-    const achievementItems = document.querySelectorAll('.achievement-board li');
-    const targetText = achievementMap[achievementId];
-    
-    if (!targetText) {
-        console.log('⚠️ No mapping found for achievement:', achievementId);
-        return;
-    }
-    
-    achievementItems.forEach(item => {
-        const text = item.textContent;
-        
-        // Check if this item matches the unlocked achievement
-        if (text.includes(targetText)) {
-            console.log('✅ Found matching achievement item:', text);
-            
-            // Mark as unlocked with animation
-            item.classList.add('unlocked', 'just-unlocked');
-            
-            // Add a sparkle effect
-            createSparkleEffect(item);
-            
-            // Remove the unlock animation after it completes, keep unlocked state
-            setTimeout(() => {
-                item.classList.remove('just-unlocked');
-            }, 1500);
+    try {
+        // Prevent achievement spam
+        if (gameState.achievementShown.has(achievement.id)) {
+            return;
         }
-    });
+        gameState.achievementShown.add(achievement.id);
+        
+        const popup = document.getElementById('achievementPopup');
+        const icon = document.getElementById('achievementIcon');
+        const title = document.getElementById('achievementTitle');
+        const desc = document.getElementById('achievementDesc');
+        
+        if (popup && icon && title && desc) {
+            icon.textContent = achievement.icon;
+            title.textContent = achievement.name;
+            desc.textContent = achievement.desc;
+            
+            popup.classList.add('show');
+            playSound('achievement', 0.7);
+            
+            // Enhanced vibration for achievements
+            vibrate([200, 100, 200]);
+            
+            // Update the achievement board with animation
+            updateAchievementBoard(achievement.id);
+            
+            // Mobile achievement notification
+            showMobileAchievementNotification(achievement);
+            
+            const timeoutId = setTimeout(() => {
+                popup.classList.remove('show');
+            }, 3000);
+            cleanupTracker.addTimeout(timeoutId);
+        }
+    } catch (error) {
+        console.error('Achievement display failed:', error);
+    }
 }
 
- function showMobileAchievementNotification(achievement) {
+// Enhanced Achievement Board Update Function
+function updateAchievementBoard(achievementId) {
+    try {
+        console.log('🏆 Updating achievement board for:', achievementId);
+        
+        // Achievement mapping to board items
+        const achievementMap = {
+            'quickDraw': 'Quick Draw',
+            'penetratingFocus': 'Perfect Round',
+            'multiPosition': 'Multi-Position',
+            'heatWave': 'Heat Wave',
+            'warrior3x': '3X Warrior',
+            'speedDemon': 'Speed Demon',
+            'staminaSupreme': 'Stamina Supreme',
+            'climaxControl': 'Climax Control'
+        };
+        
+        const achievementItems = document.querySelectorAll('.achievement-board li');
+        const targetText = achievementMap[achievementId];
+        
+        if (!targetText) {
+            console.log('⚠️ No mapping found for achievement:', achievementId);
+            return;
+        }
+        
+        achievementItems.forEach(item => {
+            const text = item.textContent;
+            
+            // Check if this item matches the unlocked achievement
+            if (text.includes(targetText)) {
+                console.log('✅ Found matching achievement item:', text);
+                
+                // Mark as unlocked with animation
+                item.classList.add('unlocked', 'just-unlocked');
+                
+                // Add a sparkle effect
+                createSparkleEffect(item);
+                
+                // Remove the unlock animation after it completes, keep unlocked state
+                const timeoutId = setTimeout(() => {
+                    item.classList.remove('just-unlocked');
+                }, 1500);
+                cleanupTracker.addTimeout(timeoutId);
+            }
+        });
+    } catch (error) {
+        console.error('Achievement board update failed:', error);
+    }
+}
+
+function showMobileAchievementNotification(achievement) {
     // Only show on mobile
     if (window.innerWidth > 768) return;
     
-    const notification = document.createElement('div');
-    notification.className = 'mobile-achievement-notification';
-    notification.innerHTML = `${achievement.icon} ${achievement.name}`;
-    
-    document.body.appendChild(notification);
-    
-    setTimeout(() => {
-        if (notification.parentNode) {
-            notification.style.animation = 'slideOutRight 0.5s ease-out forwards';
-            setTimeout(() => {
-                if (notification.parentNode) {
-                    notification.remove();
-                }
-            }, 500);
-        }
-    }, 3000);
+    try {
+        const notification = document.createElement('div');
+        notification.className = 'mobile-achievement-notification';
+        notification.innerHTML = `${achievement.icon} ${achievement.name}`;
+        
+        document.body.appendChild(notification);
+        
+        const timeoutId = setTimeout(() => {
+            if (notification.parentNode) {
+                notification.style.animation = 'slideOutRight 0.5s ease-out forwards';
+                const innerTimeoutId = setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.remove();
+                    }
+                }, 500);
+                cleanupTracker.addTimeout(innerTimeoutId);
+            }
+        }, 3000);
+        cleanupTracker.addTimeout(timeoutId);
+    } catch (error) {
+        console.error('Mobile achievement notification failed:', error);
+    }
 }
   
-// Optional: Add sparkle effect for extra visual impact
+// Enhanced sparkle effect for achievements
 function createSparkleEffect(element) {
-    for (let i = 0; i < 3; i++) {
-        setTimeout(() => {
-            const sparkle = document.createElement('div');
-            sparkle.innerHTML = '✨';
-            sparkle.style.cssText = `
-                position: absolute;
-                font-size: 12px;
-                color: #FFD700;
-                pointer-events: none;
-                animation: sparkleFloat 1s ease-out forwards;
-                left: ${Math.random() * 100}%;
-                top: 50%;
-                z-index: 1000;
-            `;
-            
-            element.style.position = 'relative';
-            element.appendChild(sparkle);
-            
-            setTimeout(() => {
-                if (sparkle.parentNode) {
-                    sparkle.remove();
-                }
-            }, 1000);
-        }, i * 200);
+    try {
+        for (let i = 0; i < 3; i++) {
+            const timeoutId = setTimeout(() => {
+                const sparkle = document.createElement('div');
+                sparkle.innerHTML = '✨';
+                sparkle.style.cssText = `
+                    position: absolute;
+                    font-size: 12px;
+                    color: #FFD700;
+                    pointer-events: none;
+                    animation: sparkleFloat 1s ease-out forwards;
+                    left: ${Math.random() * 100}%;
+                    top: 50%;
+                    z-index: 1000;
+                `;
+                
+                element.style.position = 'relative';
+                element.appendChild(sparkle);
+                
+                const cleanupTimeoutId = setTimeout(() => {
+                    if (sparkle.parentNode) {
+                        sparkle.remove();
+                    }
+                }, 1000);
+                cleanupTracker.addTimeout(cleanupTimeoutId);
+            }, i * 200);
+            cleanupTracker.addTimeout(timeoutId);
+        }
+    } catch (error) {
+        console.error('Sparkle effect failed:', error);
     }
 }
 
 // ============================================================================
-// GAME END AND RESULTS
+// ENHANCED GAME END AND RESULTS
 // ============================================================================
 
 function endGame() {
-    gameState.gameRunning = false;
-    
-    if (gameState.spawnTimeout) {
-        clearTimeout(gameState.spawnTimeout);
-    }
-    
-    stopBackgroundMusic();
-    
-    const achievementBoard = document.getElementById('achievementBoard');
-    if (achievementBoard) {
-        achievementBoard.style.display = 'none';
-    }
-    
-    gameState.lastScore = gameState.score;
     try {
-        localStorage.setItem('lastScore', gameState.score);
+        console.log('🏁 Game ending...');
+        
+        gameState.cleanup();
+        stopBackgroundMusic();
+        
+        const achievementBoard = document.getElementById('achievementBoard');
+        if (achievementBoard) {
+            achievementBoard.style.display = 'none';
+        }
+        
+        gameState.lastScore = gameState.score;
+        try {
+            localStorage.setItem('lastScore', gameState.score);
+            localStorage.setItem('audioEnabled', gameState.audioEnabled);
+            
+            // Update best scores
+            const currentBest = localStorage.getItem('bestScore') || 0;
+            if (gameState.score > currentBest) {
+                localStorage.setItem('bestScore', gameState.score);
+            }
+            
+            const currentBestStreak = localStorage.getItem('bestStreak') || 0;
+            if (gameState.bestStreak > currentBestStreak) {
+                localStorage.setItem('bestStreak', gameState.bestStreak);
+            }
+        } catch (error) {
+            console.error('Storage save failed:', error);
+        }
+        
+        const silhouetteDiv = document.getElementById('coupleSilhouette');
+        if (silhouetteDiv) {
+            silhouetteDiv.style.display = 'none';
+        }
+        
+        const playTime = Math.floor((Date.now() - gameState.gameStartTime) / 1000);
+        
+        let message = `Your embrace lasted ${playTime} seconds!`;
+        if (gameState.score >= 300) {
+            message += " Legendary performance! 🔥";
+        } else if (gameState.score >= 200) {
+            message += " Impressive stamina! 💪";
+        } else if (gameState.score >= 100) {
+            message += " Good focus! Keep practicing!";
+        } else {
+            message += " Room for improvement!";
+        }
+        
+        const finalScore = document.getElementById('finalScore');
+        const performanceMessage = document.getElementById('performanceMessage');
+        
+        if (finalScore) finalScore.textContent = gameState.score;
+        if (performanceMessage) performanceMessage.textContent = message;
+        
+        generateQRCode();
+        generateChallengeCode();
+        
+        // Check climax control achievement once at the end
+        if (gameState.intimacyHearts === 5 && !gameState.achievements.has('climaxControl')) {
+            gameState.achievements.add('climaxControl');
+            showAchievement(achievements.climaxControl);
+        }
+        
+        const timeoutId = setTimeout(() => {
+            showScreen('resultsScreen');
+        }, 1000);
+        cleanupTracker.addTimeout(timeoutId);
+        
+        console.log('🏁 Game ended successfully');
     } catch (error) {
-        console.error('Storage save failed:', error);
+        console.error('Game end failed:', error);
+        gracefulRecover();
     }
-    
-    gameState.distractions.forEach(d => {
-        if (d.timerInterval) clearInterval(d.timerInterval);
-        if (d.parentNode) d.remove();
-    });
-    
-    const silhouetteDiv = document.getElementById('coupleSilhouette');
-    if (silhouetteDiv) {
-        silhouetteDiv.style.display = 'none';
-    }
-    
-    const playTime = Math.floor((Date.now() - gameState.gameStartTime) / 1000);
-    
-    let message = `Your embrace lasted ${playTime} seconds!`;
-    if (gameState.score >= 300) {
-        message += " Legendary performance! 🔥";
-    } else if (gameState.score >= 200) {
-        message += " Impressive stamina! 💪";
-    } else if (gameState.score >= 100) {
-        message += " Good focus! Keep practicing!";
-    } else {
-        message += " Room for improvement!";
-    }
-    
-    const finalScore = document.getElementById('finalScore');
-    const performanceMessage = document.getElementById('performanceMessage');
-    
-    if (finalScore) finalScore.textContent = gameState.score;
-    if (performanceMessage) performanceMessage.textContent = message;
-    
-    generateQRCode();
-    generateChallengeCode();
-    
-    if (gameState.intimacyHearts === 5 && !gameState.achievements.has('climaxControl')) {
-        gameState.achievements.add('climaxControl');
-        showAchievement(achievements.climaxControl);
-    }
-    
-    setTimeout(() => {
-        showScreen('resultsScreen');
-    }, 1000);
 }
 
 // ============================================================================
-// QR CODE AND CHALLENGE SYSTEM
+// ENHANCED QR CODE AND CHALLENGE SYSTEM
 // ============================================================================
 
 function generateQRCode() {
-    const qrDiv = document.getElementById('qrCode');
-    if (!qrDiv || typeof QRious === 'undefined') return;
-    
-    qrDiv.innerHTML = '';
-    
-    const canvas = document.createElement('canvas');
-    qrDiv.appendChild(canvas);
-    
     try {
+        const qrDiv = document.getElementById('qrCode');
+        if (!qrDiv || typeof QRious === 'undefined') return;
+        
+        qrDiv.innerHTML = '';
+        
+        const canvas = document.createElement('canvas');
+        qrDiv.appendChild(canvas);
+        
         new QRious({
             element: canvas,
             value: 'https://blinkit.com/prn/kamasutra-longlast-condom/prid/25756?ref=endless-embrace-qr&score=' + gameState.score + '&challenge=' + gameState.challengeCode,
@@ -3680,49 +4202,50 @@ function generateQRCode() {
 }
 
 function saveQRCode() {
-    const canvas = document.querySelector('#qrCode canvas');
-    if (canvas) {
-        try {
+    try {
+        const canvas = document.querySelector('#qrCode canvas');
+        if (canvas) {
             const link = document.createElement('a');
-            link.download = 'ks-endless-embrace-score.png';
+            link.download = `ks-endless-embrace-score-${gameState.score}.png`;
             link.href = canvas.toDataURL();
             link.click();
-        } catch (error) {
-            console.error('QR Code save failed:', error);
         }
+    } catch (error) {
+        console.error('QR Code save failed:', error);
     }
 }
 
 function generateChallengeCode() {
-    const code = Math.floor(100000 + Math.random() * 900000).toString();
-    gameState.challengeCode = code;
-    
-    const challengeCodeEl = document.getElementById('challengeCode');
-    if (challengeCodeEl) {
-        challengeCodeEl.textContent = code;
-    }
-    
-    const challengeData = {
-        code: code,
-        score: gameState.score,
-        time: Math.floor((Date.now() - gameState.gameStartTime) / 1000),
-        achievements: Array.from(gameState.achievements),
-        lives: gameState.lives,
-        perfectRounds: gameState.perfectRounds
-    };
-    
     try {
+        const code = Math.floor(100000 + Math.random() * 900000).toString();
+        gameState.challengeCode = code;
+        
+        const challengeCodeEl = document.getElementById('challengeCode');
+        if (challengeCodeEl) {
+            challengeCodeEl.textContent = code;
+        }
+        
+        const challengeData = {
+            code: code,
+            score: gameState.score,
+            time: Math.floor((Date.now() - gameState.gameStartTime) / 1000),
+            achievements: Array.from(gameState.achievements),
+            lives: gameState.lives,
+            perfectRounds: gameState.perfectRounds,
+            timestamp: Date.now()
+        };
+        
         localStorage.setItem('challenge_' + code, JSON.stringify(challengeData));
+        
+        const coupleStatus = document.getElementById('coupleStatus');
+        const challengeStatusText = document.getElementById('challengeStatusText');
+        
+        if (coupleStatus && challengeStatusText) {
+            coupleStatus.style.display = 'block';
+            challengeStatusText.textContent = 'Challenge created! Share this code with your partner.';
+        }
     } catch (error) {
-        console.error('Challenge data save failed:', error);
-    }
-    
-    const coupleStatus = document.getElementById('coupleStatus');
-    const challengeStatusText = document.getElementById('challengeStatusText');
-    
-    if (coupleStatus && challengeStatusText) {
-        coupleStatus.style.display = 'block';
-        challengeStatusText.textContent = 'Challenge created! Share this code with your partner.';
+        console.error('Challenge code generation failed:', error);
     }
 }
 
@@ -3738,6 +4261,14 @@ function enterChallengeCode(code) {
         const partnerData = localStorage.getItem('challenge_' + code);
         if (partnerData) {
             const partner = JSON.parse(partnerData);
+            
+            // Check if challenge is not too old (24 hours)
+            const timeSince = Date.now() - partner.timestamp;
+            if (timeSince > 86400000) {
+                alert('This challenge code has expired. Please get a new one from your partner.');
+                return;
+            }
+            
             const yourData = {
                 score: gameState.score,
                 time: Math.floor((Date.now() - gameState.gameStartTime) / 1000),
@@ -3755,29 +4286,33 @@ function enterChallengeCode(code) {
 }
 
 // ============================================================================
-// COUPLE CHALLENGE SYSTEM
+// ENHANCED COUPLE CHALLENGE SYSTEM
 // ============================================================================
 
 function displayCoupleResults(player1, player2) {
-    const metrics = calculateCoupleMetrics(player1, player2);
-    
-    const elements = {
-        yourScore: document.getElementById('yourScore'),
-        partnerScore: document.getElementById('partnerScore'),
-        totalScore: document.getElementById('totalScore'),
-        harmonyLevel: document.getElementById('harmonyLevel'),
-        combinedTime: document.getElementById('combinedTime'),
-        coupleResults: document.getElementById('coupleResults')
-    };
-    
-    if (elements.yourScore) elements.yourScore.textContent = player1.score;
-    if (elements.partnerScore) elements.partnerScore.textContent = player2.score;
-    if (elements.totalScore) elements.totalScore.textContent = metrics.totalScore;
-    if (elements.harmonyLevel) elements.harmonyLevel.textContent = metrics.harmonyLevel;
-    if (elements.combinedTime) elements.combinedTime.textContent = metrics.combinedTime + 's';
-    if (elements.coupleResults) elements.coupleResults.style.display = 'block';
-    
-    checkCoupleAchievements(metrics, player1, player2);
+    try {
+        const metrics = calculateCoupleMetrics(player1, player2);
+        
+        const elements = {
+            yourScore: document.getElementById('yourScore'),
+            partnerScore: document.getElementById('partnerScore'),
+            totalScore: document.getElementById('totalScore'),
+            harmonyLevel: document.getElementById('harmonyLevel'),
+            combinedTime: document.getElementById('combinedTime'),
+            coupleResults: document.getElementById('coupleResults')
+        };
+        
+        if (elements.yourScore) elements.yourScore.textContent = player1.score;
+        if (elements.partnerScore) elements.partnerScore.textContent = player2.score;
+        if (elements.totalScore) elements.totalScore.textContent = metrics.totalScore;
+        if (elements.harmonyLevel) elements.harmonyLevel.textContent = metrics.harmonyLevel;
+        if (elements.combinedTime) elements.combinedTime.textContent = metrics.combinedTime + 's';
+        if (elements.coupleResults) elements.coupleResults.style.display = 'block';
+        
+        checkCoupleAchievements(metrics, player1, player2);
+    } catch (error) {
+        console.error('Couple results display failed:', error);
+    }
 }
 
 function calculateCoupleMetrics(player1Data, player2Data) {
@@ -3814,152 +4349,236 @@ function calculateHarmony(score1, score2) {
 }
 
 function checkCoupleAchievements(metrics, player1, player2) {
-    const unlockedAchievements = [];
-    
-    if (metrics.scoreDifference <= metrics.averageScore * 0.1) {
-        unlockedAchievements.push(coupleAchievements.perfectHarmony);
+    try {
+        const unlockedAchievements = [];
+        
+        if (metrics.scoreDifference <= metrics.averageScore * 0.1) {
+            unlockedAchievements.push(coupleAchievements.perfectHarmony);
+        }
+        
+        if (metrics.totalScore > 300) {
+            unlockedAchievements.push(coupleAchievements.powerCouple);
+        }
+        
+        if (metrics.combinedTime > 180) {
+            unlockedAchievements.push(coupleAchievements.marathonLovers);
+        }
+        
+        if (metrics.sharedAchievements.length >= 3) {
+            unlockedAchievements.push(coupleAchievements.synchronizedSouls);
+        }
+        
+        if (metrics.scoreDifference > 100) {
+            unlockedAchievements.push(coupleAchievements.competitiveSpirits);
+        }
+        
+        if (player1.score === player2.score) {
+            unlockedAchievements.push(coupleAchievements.twinFlames);
+        }
+        
+        if (unlockedAchievements.length > 0) {
+            const timeoutId = setTimeout(() => {
+                unlockedAchievements.forEach((achievement, index) => {
+                    const innerTimeoutId = setTimeout(() => {
+                        showAchievement(achievement);
+                    }, index * 1500);
+                    cleanupTracker.addTimeout(innerTimeoutId);
+                });
+            }, 500);
+            cleanupTracker.addTimeout(timeoutId);
+        }
+        
+        return unlockedAchievements;
+    } catch (error) {
+        console.error('Couple achievements check failed:', error);
+        return [];
     }
-    
-    if (metrics.totalScore > 300) {
-        unlockedAchievements.push(coupleAchievements.powerCouple);
-    }
-    
-    if (metrics.combinedTime > 180) {
-        unlockedAchievements.push(coupleAchievements.marathonLovers);
-    }
-    
-    if (metrics.sharedAchievements.length >= 3) {
-        unlockedAchievements.push(coupleAchievements.synchronizedSouls);
-    }
-    
-    if (metrics.scoreDifference > 100) {
-        unlockedAchievements.push(coupleAchievements.competitiveSpirits);
-    }
-    
-    if (player1.score === player2.score) {
-        unlockedAchievements.push(coupleAchievements.twinFlames);
-    }
-    
-    if (unlockedAchievements.length > 0) {
-        setTimeout(() => {
-            unlockedAchievements.forEach((achievement, index) => {
-                setTimeout(() => {
-                    showAchievement(achievement);
-                }, index * 1500);
-            });
-        }, 500);
-    }
-    
-    return unlockedAchievements;
 }
 
 // ============================================================================
-// UTILITY FUNCTIONS
+// ENHANCED UTILITY FUNCTIONS
 // ============================================================================
 
 function restartGame() {
-    showScreen('gameScreen');
+    try {
+        cleanupTracker.cleanup();
+        showScreen('gameScreen');
+    } catch (error) {
+        console.error('Game restart failed:', error);
+        gracefulRecover();
+    }
 }
 
 function showLeaderboard() {
-    const bestScore = localStorage.getItem('bestScore') || 0;
-    const lastScore = gameState.lastScore || localStorage.getItem('lastScore') || 0;
-    const bestStreak = localStorage.getItem('bestStreak') || 0;
-    
-    const modal = document.createElement('div');
-    modal.className = 'modal show';
-    modal.innerHTML = `
-        <div class="modal-content glass">
-            <h2 style="color: #FFD700;">Leaderboard</h2>
-            <p style="margin: 20px 0;">Best Score: ${bestScore}</p>
-            <p>Last Score: ${lastScore}</p>
-            <p>Longest Streak: ${bestStreak}</p>
-            <button class="btn" onclick="this.parentElement.parentElement.remove()">Close</button>
-        </div>
-    `;
-    document.body.appendChild(modal);
+    try {
+        const bestScore = localStorage.getItem('bestScore') || 0;
+        const lastScore = gameState.lastScore || localStorage.getItem('lastScore') || 0;
+        const bestStreak = localStorage.getItem('bestStreak') || 0;
+        const totalGames = localStorage.getItem('totalGames') || 0;
+        
+        const modal = document.createElement('div');
+        modal.className = 'modal show';
+        modal.innerHTML = `
+            <div class="modal-content glass">
+                <h2 style="color: #FFD700;">📊 Leaderboard</h2>
+                <div style="text-align: left; margin: 20px 0;">
+                    <p><strong>🏆 Best Score:</strong> ${bestScore}</p>
+                    <p><strong>🎯 Last Score:</strong> ${lastScore}</p>
+                    <p><strong>🔥 Longest Streak:</strong> ${bestStreak}</p>
+                    <p><strong>🎮 Total Games:</strong> ${totalGames}</p>
+                    <p><strong>⚡ Current FPS:</strong> ${performanceMonitor.fps}</p>
+                </div>
+                <button class="btn" onclick="this.parentElement.parentElement.remove()">Close</button>
+            </div>
+        `;
+        document.body.appendChild(modal);
+        
+        // Auto-close after 10 seconds
+        const timeoutId = setTimeout(() => {
+            if (modal.parentNode) {
+                modal.remove();
+            }
+        }, 10000);
+        cleanupTracker.addTimeout(timeoutId);
+        
+    } catch (error) {
+        console.error('Leaderboard display failed:', error);
+    }
 }
 
 function shareWhatsApp() {
-    let message;
-    
-    const coupleResults = document.getElementById('coupleResults');
-    if (coupleResults && coupleResults.style.display !== 'none') {
-        const template = coupleSharingTemplates[Math.floor(Math.random() * coupleSharingTemplates.length)];
-        const totalScore = document.getElementById('totalScore')?.textContent || '0';
-        const harmonyLevel = document.getElementById('harmonyLevel')?.textContent || 'Unknown';
-        const combinedTime = document.getElementById('combinedTime')?.textContent.replace('s', '') || '0';
+    try {
+        let message;
         
-        message = template
-            .replace('{totalScore}', totalScore)
-            .replace('{harmonyLevel}', harmonyLevel)
-            .replace('{combinedTime}', combinedTime)
-            .replace('{challengeCode}', gameState.challengeCode || '');
-    } else {
-        const template = hinglishTemplates[Math.floor(Math.random() * hinglishTemplates.length)];
-        message = template
-            .replace('{score}', gameState.score)
-            .replace('{time}', Math.floor((Date.now() - gameState.gameStartTime) / 1000))
-            .replace('{streak}', gameState.bestStreak);
+        const coupleResults = document.getElementById('coupleResults');
+        if (coupleResults && coupleResults.style.display !== 'none') {
+            const template = coupleSharingTemplates[Math.floor(Math.random() * coupleSharingTemplates.length)];
+            const totalScore = document.getElementById('totalScore')?.textContent || '0';
+            const harmonyLevel = document.getElementById('harmonyLevel')?.textContent || 'Unknown';
+            const combinedTime = document.getElementById('combinedTime')?.textContent.replace('s', '') || '0';
+            
+            message = template
+                .replace('{totalScore}', totalScore)
+                .replace('{harmonyLevel}', harmonyLevel)
+                .replace('{combinedTime}', combinedTime)
+                .replace('{challengeCode}', gameState.challengeCode || '');
+        } else {
+            const template = hinglishTemplates[Math.floor(Math.random() * hinglishTemplates.length)];
+            message = template
+                .replace('{score}', gameState.score)
+                .replace('{time}', Math.floor((Date.now() - gameState.gameStartTime) / 1000))
+                .replace('{streak}', gameState.bestStreak);
+        }
+        
+        const url = `https://wa.me/?text=${encodeURIComponent(message + '\n\nPlay here: ' + window.location.href + '?challenge=' + (gameState.challengeCode || ''))}`;
+        window.open(url, '_blank');
+        
+    } catch (error) {
+        console.error('WhatsApp sharing failed:', error);
     }
-    
-    const url = `https://wa.me/?text=${encodeURIComponent(message + '\n\nPlay here: ' + window.location.href + '?challenge=' + (gameState.challengeCode || ''))}`;
-    window.open(url, '_blank');
 }
 
 function toggleAudio() {
-    gameState.audioEnabled = !gameState.audioEnabled;
-    const icon = document.getElementById('audioIcon');
-    const toggle = document.getElementById('audioToggle');
-    
-    if (icon && toggle) {
-        if (gameState.audioEnabled) {
-            icon.textContent = '🔊';
-            toggle.classList.remove('muted');
-            if (gameState.gameRunning && gameState.currentRound <= rounds.length) {
-                const round = rounds[gameState.currentRound - 1];
-                playBackgroundMusic(round.bgMusic);
+    try {
+        gameState.audioEnabled = !gameState.audioEnabled;
+        const icon = document.getElementById('audioIcon');
+        const toggle = document.getElementById('audioToggle');
+        
+        if (icon && toggle) {
+            if (gameState.audioEnabled) {
+                icon.textContent = '🔊';
+                toggle.classList.remove('muted');
+                if (gameState.gameRunning && gameState.currentRound <= rounds.length) {
+                    const round = rounds[gameState.currentRound - 1];
+                    playBackgroundMusic(round.bgMusic);
+                }
+            } else {
+                icon.textContent = '🔇';
+                toggle.classList.add('muted');
+                stopBackgroundMusic();
             }
-        } else {
-            icon.textContent = '🔇';
-            toggle.classList.add('muted');
-            stopBackgroundMusic();
         }
+        
+        // Save preference
+        try {
+            localStorage.setItem('audioEnabled', gameState.audioEnabled);
+        } catch (error) {
+            console.error('Audio preference save failed:', error);
+        }
+        
+    } catch (error) {
+        console.error('Audio toggle failed:', error);
     }
 }
 
 // ============================================================================
-// ANIMATION LOOP
+// ENHANCED VIBRATION SYSTEM WITH FALLBACKS
+// ============================================================================
+
+function vibrate(pattern = [50]) {
+    if (!gameState.audioEnabled) return; // Respect audio preference for haptics too
+    
+    try {
+        if ('vibrate' in navigator) {
+            navigator.vibrate(pattern);
+        } else if ('webkitVibrate' in navigator) {
+            navigator.webkitVibrate(pattern);
+        }
+    } catch (error) {
+        console.log('Vibration failed:', error);
+    }
+}
+
+// Enhanced touch feedback with vibration
+document.addEventListener('touchstart', (e) => {
+    if (e.target.classList.contains('btn') || e.target.closest('.distraction')) {
+        vibrate([20]);
+    }
+});
+
+// ============================================================================
+// ENHANCED ANIMATION LOOP WITH PERFORMANCE MONITORING
 // ============================================================================
 
 function animate() {
-    requestAnimationFrame(animate);
-    
-    if (particleSystem) {
-        particleSystem.rotation.y += 0.001;
-        particleSystem.rotation.x += 0.0005;
+    try {
+        requestAnimationFrame(animate);
         
-        const positions = particleSystem.geometry.attributes.position.array;
-        const time = Date.now() * 0.001;
+        // Update performance monitor
+        performanceMonitor.update();
         
-        for (let i = 0; i < positions.length; i += 3) {
-            positions[i + 1] += Math.sin(time + i) * 0.001;
+        if (particleSystem) {
+            particleSystem.rotation.y += 0.001;
+            particleSystem.rotation.x += 0.0005;
+            
+            const positions = particleSystem.geometry.attributes.position.array;
+            const time = Date.now() * 0.001;
+            
+            for (let i = 0; i < positions.length; i += 3) {
+                positions[i + 1] += Math.sin(time + i) * 0.001;
+            }
+            
+            particleSystem.geometry.attributes.position.needsUpdate = true;
         }
         
-        particleSystem.geometry.attributes.position.needsUpdate = true;
-    }
-    
-    if (renderer && scene && camera) {
-        renderer.render(scene, camera);
+        if (renderer && scene && camera) {
+            renderer.render(scene, camera);
+        }
+    } catch (error) {
+        console.error('Animation loop error:', error);
+        // Don't break the animation loop, just log the error
     }
 }
 
 // ============================================================================
-// EVENT HANDLERS AND STORAGE
+// ENHANCED EVENT HANDLERS AND STORAGE
 // ============================================================================
 
 window.addEventListener('beforeunload', () => {
     try {
+        emergencySave();
+        cleanupTracker.cleanup();
+        
         const currentBest = localStorage.getItem('bestScore') || 0;
         if (gameState.score > currentBest) {
             localStorage.setItem('bestScore', gameState.score);
@@ -3969,36 +4588,13 @@ window.addEventListener('beforeunload', () => {
         if (gameState.bestStreak > currentBestStreak) {
             localStorage.setItem('bestStreak', gameState.bestStreak);
         }
+        
+        // Update total games counter
+        const totalGames = parseInt(localStorage.getItem('totalGames') || '0') + 1;
+        localStorage.setItem('totalGames', totalGames);
+        
     } catch (error) {
         console.error('Storage save failed:', error);
-    }
-});
-
-// Prevent zoom on double tap
-let lastTouchEnd = 0;
-document.addEventListener('touchend', (e) => {
-    const now = Date.now();
-    if (now - lastTouchEnd <= 300) {
-        e.preventDefault();
-    }
-    lastTouchEnd = now;
-}, false);
-
-// Vibration support
-function vibrate(pattern = [50]) {
-    if ('vibrate' in navigator && gameState.audioEnabled) {
-        try {
-            navigator.vibrate(pattern);
-        } catch (error) {
-            console.log('Vibration failed:', error);
-        }
-    }
-}
-
-// Enhanced touch feedback
-document.addEventListener('touchstart', (e) => {
-    if (e.target.classList.contains('btn') || e.target.closest('.distraction')) {
-        vibrate([20]);
     }
 });
 
@@ -4018,26 +4614,25 @@ window.showEnterCode = showEnterCode;
 window.shareWhatsApp = shareWhatsApp;
 window.toggleAudio = toggleAudio;
 
-// ============================================================================
-// MOBILE OPTIMIZATION ENHANCEMENTS
-// ============================================================================
+// Debug mode 
+const DEBUG_MODE = false;
 
-// Prevent iOS Safari bouncing
-document.addEventListener('touchmove', function(e) {
-    if (e.target.closest('.modal-content, .results-panel')) return;
-    e.preventDefault();
-}, { passive: false });
+if (DEBUG_MODE) {
+    console.log('🎮 KamaSutra Endless Embrace Game - Debug Mode Active');
+    
+    // Additional debug logging
+    window.addEventListener('load', () => {
+        console.log('🔍 Debug Info:', {
+            screenWidth: window.innerWidth,
+            screenHeight: window.innerHeight,
+            isMobile: window.innerWidth <= 768,
+            audioContext: !!window.AudioContext,
+            localStorage: !!window.localStorage,
+            threeJS: !!window.THREE
+        });
+    });
+}
 
-// Better orientation change handling
-window.addEventListener('orientationchange', function() {
-    setTimeout(() => {
-        if (camera && renderer) {
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth, window.innerHeight);
-        }
-    }, 100);
-});
 </script>
 </body>
 </html>
