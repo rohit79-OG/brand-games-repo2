@@ -823,6 +823,12 @@ p {
     border: 2px solid #fff;
 }
 
+.combo-message,
+[class*="combo"] {
+    z-index: 3500 !important;
+    position: fixed !important;
+}
+
 .achievement-popup.show {
     animation: achievementPop 0.6s ease-out forwards;
 }
@@ -1172,6 +1178,10 @@ p {
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.3);
+    touch-action: manipulation !important; 
+    -webkit-touch-callout: none !important; 
+    -webkit-user-select: none !important; 
+    user-select: none !important;
 }
 
 .audio-toggle:hover {
@@ -1196,6 +1206,8 @@ p {
         background: rgba(0, 0, 0, 0.7) !important;
         border: 2px solid rgba(255, 255, 255, 0.8) !important;
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5) !important;
+        pointer-events: auto !important; 
+        z-index: 3000 !important;
     }
 
     .audio-toggle span {
@@ -2538,10 +2550,10 @@ const gameState = {
 };
 
 // ========================================================================
-// MOBILE SYSTEM Set Up
+// MOBILE SYSTEM SetUp
 // ========================================================================
 
-// 1. ENHANCED MOBILE DETECTION AND STATE MANAGEMENT
+// 1. MOBILE DETECTION AND STATE MANAGEMENT
 const mobileState = {
     isMobile: window.innerWidth <= 768,
     isTouch: 'ontouchstart' in window,
@@ -2566,7 +2578,7 @@ const mobileState = {
     }
 };
 
-// 2. ENHANCED TOUCH FEEDBACK SYSTEM
+// 2. TOUCH FEEDBACK SYSTEM
 class TouchFeedbackManager {
     constructor() {
         this.feedbackQueue = [];
@@ -2575,7 +2587,7 @@ class TouchFeedbackManager {
         this.feedbackCooldown = 50; // Prevent feedback spam
     }
     
-    // Enhanced haptic feedback with patterns
+    // Haptic feedback with patterns
     haptic(pattern = 'light', force = false) {
         if (!mobileState.vibrationSupported && !force) return;
         
@@ -2648,7 +2660,7 @@ class TouchFeedbackManager {
         }, 400);
     }
     
-    // Enhanced button press feedback
+    // Buttonpress feedback
     buttonPress(element, intensity = 'medium') {
         if (!element) return;
         
@@ -3104,7 +3116,7 @@ const messageAnimationCSS = `
 `;
 
 // ========================================================================
-// PROGRESSIVE DIFFICULTY SYSTEM Set up
+// PROGRESSIVE DIFFICULTY SYSTEM Setup
 // ========================================================================
 
 // 1. DIFFICULTY TRACKING STATE
@@ -3268,33 +3280,37 @@ function createAdaptiveDistraction(baseDistractionData, baseReactionTime) {
             }
         }
 
-        // Positioning with better collision detection
-           const safeMargin = gameState.isMobile ? 12 : 8;
-           const safeWidth = 100 - (safeMargin * 2);
-           const safeHeight = gameState.isMobile ? 50 : 65; // Reduced height on mobile
+        // Enhanced positioning with better collision detection
+             const leftMargin = gameState.isMobile ? 8 : 5;
+             const rightMargin = gameState.isMobile ? 15 : 8; 
+             const topMargin = gameState.isMobile ? 30 : 25;
+             const bottomMargin = gameState.isMobile ? 25 : 20;
 
-           let x, y;
-           let attempts = 0;
-           let validPosition = false;
+             const safeWidth = 100 - leftMargin - rightMargin;
+             const safeHeight = 100 - topMargin - bottomMargin;
+
+            let x, y;
+            let attempts = 0;
+            let validPosition = false;
 
        do {
-           x = safeMargin + Math.random() * safeWidth;
-           y = (gameState.isMobile ? 30 : 25) + Math.random() * safeHeight;
-           attempts++;
-    
-         // Check if position conflicts with visible messages
-            validPosition = !isPositionOccupiedByMessage(x, y);
-    
-        } while (!validPosition && attempts < 15);
+            x = leftMargin + Math.random() * safeWidth; // FIXED: use leftMargin instead of safeMargin
+            y = topMargin + Math.random() * safeHeight; // FIXED: use topMargin and remove the hardcoded values
+            attempts++;
 
-        // If still no valid position, force to bottom area
+        // Check if position conflicts with visible messages
+           validPosition = !isPositionOccupiedByMessage(x, y);
+
+          } while (!validPosition && attempts < 15);
+
+       // If still no valid position, force to safe center area
           if (!validPosition) {
-          x = 20 + Math.random() * 60; // Center area
-          y = gameState.isMobile ? 75 : 70; // Bottom area
+           x = 15 + Math.random() * 70; // FIXED: More conservative center area
+           y = gameState.isMobile ? 70 : 65; // FIXED: Use safer fallback positions
         }
 
-        distraction.style.left = x + '%';
-        distraction.style.top = y + '%';
+          distraction.style.left = x + '%';
+          distraction.style.top = y + '%';
 
         const gameScreen = document.getElementById('gameScreen');
         if (gameScreen) {
@@ -5497,35 +5513,37 @@ function createDistraction(distractionData, reactionTime) {
                 `;
             }
         }
-
          
-              // Enhanced positioning with better collision detection
-              const safeMargin = gameState.isMobile ? 12 : 8;
-              const safeWidth = 100 - (safeMargin * 2);
-              const safeHeight = gameState.isMobile ? 50 : 65; // Reduced height on mobile
+              // Positioning with better collision detection and edges
+               const leftMargin = gameState.isMobile ? 8 : 5;
+               const rightMargin = gameState.isMobile ? 15 : 8; 
+               const topMargin = gameState.isMobile ? 30 : 25;
+               const bottomMargin = gameState.isMobile ? 25 : 20;
+               const safeWidth = 100 - leftMargin - rightMargin;
+               const safeHeight = 100 - topMargin - bottomMargin;
 
-              let x, y;
-              let attempts = 0;
-              let validPosition = false;
+               let x, y;
+               let attempts = 0;
+               let validPosition = false;
 
-            do {
-            x = safeMargin + Math.random() * safeWidth;
-            y = (gameState.isMobile ? 30 : 25) + Math.random() * safeHeight;
-            attempts++;
-    
-          // Check if position conflicts with visible messages
-             validPosition = !isPositionOccupiedByMessage(x, y);
-    
+         do {
+               x = leftMargin + Math.random() * safeWidth; // FIXED: use leftMargin instead of safeMargin
+               y = topMargin + Math.random() * safeHeight; // FIXED: use topMargin and remove the hardcoded values
+               attempts++;
+
+            // Check if position conflicts with visible messages
+            validPosition = !isPositionOccupiedByMessage(x, y);
+
             } while (!validPosition && attempts < 15);
 
-         // If still no valid position, force to bottom area
-            if (!validPosition) {
-               x = 20 + Math.random() * 60; // Center area
-               y = gameState.isMobile ? 75 : 70; // Bottom area
+           // If still no valid position, force to safe center area
+              if (!validPosition) {
+              x = 15 + Math.random() * 70; // FIXED: More conservative center area
+              y = gameState.isMobile ? 70 : 65; // FIXED: Use safer fallback positions
             }
 
-distraction.style.left = x + '%';
-distraction.style.top = y + '%';
+            distraction.style.left = x + '%';
+            distraction.style.top = y + '%';
 
         const gameScreen = document.getElementById('gameScreen');
         if (gameScreen) {
@@ -5910,7 +5928,7 @@ function showCenteredComboEffect(multiplier, comboCount, actualPoints) {
             color: ${getComboColor(multiplier)};
             text-shadow: 0 0 8px ${getComboColor(multiplier)};
             pointer-events: none;
-            z-index: 2500;
+            z-index: 3500;
             animation: centeredComboFloat 1.8s ease-out forwards;
             text-align: center;
             white-space: nowrap;
@@ -6539,7 +6557,7 @@ function getComboColor(multiplier) {
 }
 
 // ============================================================================
-// ENHANCED ACHIEVEMENT SYSTEM WITH SPAM PREVENTION
+// ACHIEVEMENT SYSTEM WITH SPAM PREVENTION
 // ============================================================================
 
 function checkAchievements(reactionTime) {
@@ -7101,6 +7119,12 @@ function shareWhatsApp() {
 
 function toggleAudio() {
     try {
+
+        // Prevent event bubbling on mobile
+        if (event) {
+            event.preventDefault();
+            event.stopPropagation();
+        }
         gameState.audioEnabled = !gameState.audioEnabled;
         const icon = document.getElementById('audioIcon');
         const toggle = document.getElementById('audioToggle');
