@@ -37,31 +37,6 @@
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37);
         }
 
-        /* Instructions screen glass panel specific styling */
-        #instructionsScreen .glass {
-            padding: 30px;
-            max-width: 400px;
-            width: 90%;
-            text-align: center;
-            margin: 0 auto;
-        }
-
-        @media (min-width: 769px) {
-            #instructionsScreen .glass {
-                max-width: 400px !important;
-                width: 85% !important;
-                padding: 30px !important;
-            }
-        }
-
-        @media (max-width: 768px) {
-            #instructionsScreen .glass {
-                max-width: 85vw !important;
-                width: 90% !important;
-                padding: 25px 20px !important;
-            }
-        }
-
         /* Screens */
         .screen {
             position: fixed;
@@ -116,99 +91,93 @@
             }
         }
 
-        /* Age Verification Screen */
-        #ageVerificationScreen .glass {
-           padding: 40px 30px !important;
-           max-width: 400px !important;
-           width: 85% !important;
-           text-align: center !important;
-           margin: 0 auto !important;
-        }
+       /* Start Screen Glass Panel - Base Rules */
+.start-panel {
+    padding: 30px 30px;
+    max-width: 400px;
+    width: 85%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px auto;
+    justify-content: center;
+    min-height: auto;
+}
 
-        #ageVerificationScreen .btn {
-           padding: 12px 30px !important;
-           font-size: clamp(1rem, 4vw, 1.2rem) !important;
-           min-height: 48px !important;
-           max-height: 55px !important;
-        }
+/* Desktop Start Screen Rules */
+@media (min-width: 769px) {
+    #startScreen {
+        padding: 30px 20px !important;
+        box-sizing: border-box;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
 
-        /* Mobile Age Verification */
-        @media (max-width: 768px) {
-            #ageVerificationScreen .glass {
-                padding: 30px 20px 35px 20px !important;
-                max-width: 85vw !important;
-                width: 90% !important;
-            }
+    .start-panel {
+        padding: 30px 30px;
+        max-width: 400px;
+        width: 85%;
+        margin: 20px auto;
+    }
 
-            #ageVerificationScreen .btn {
-                padding: 10px 20px !important;
-                font-size: 0.9rem !important;
-                min-height: 44px !important;
-                max-height: 48px !important;
-                min-width: 120px !important;
-                max-width: 140px !important;
-            }
+    .start-panel .btn {
+        min-width: 200px;
+        width: auto;
+        padding: 12px 30px !important;
+        margin: 8px 0;
+    }
 
-            #ageVerificationScreen h2 {
-                font-size: 1.5rem !important;
-                margin-bottom: 15px !important;
-            }
+    .start-panel h1 {
+        font-size: clamp(2rem, 8vw, 3rem);
+    }
 
-            #ageVerificationScreen p {
-                font-size: 0.95rem !important;
-                margin: 20px 0 25px 0 !important;
-            }
+    .start-panel .brand-logo {
+        margin-bottom: 20px;
+    }
 
-            #ageVerificationScreen > div {
-                display: flex !important;
-                gap: 15px !important;
-                justify-content: center !important;
-                flex-wrap: wrap !important;
-            }
-        }
+    .start-panel .game-logo {
+        margin-bottom: 8px;
+    }
+}
 
-        /* Start Screen Glass Panel */
-        .start-panel {
-            padding: 40px 30px;
-            max-width: 400px;
-            width: 85%;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin: 0 auto;
-        }
+/* Mobile Start Screen Rules */
+@media (max-width: 768px) {
+    .start-panel {
+        padding: 30px 20px 35px 20px;
+        max-width: 92vw;
+        width: 90%;
+        margin: 0 auto;
+    }
 
-        /* Mobile Start Screen */
-        @media (max-width: 768px) {
-            .start-panel {
-                padding: 30px 20px 35px 20px;
-                max-width: 92vw;
-                width: 90%;
-                margin: 0 auto;
-            }
-    
-            #startScreen {
-                padding: 0 !important;
-                margin: 0 !important;
-                display: flex !important;
-                align-items: center !important;
-                justify-content: center !important;
-                min-height: 100vh !important;
-            }
+    #startScreen {
+        padding: 0 !important;
+        margin: 0 !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        min-height: 100vh !important;
+    }
 
-            .start-panel h1 {
-                font-size: 2rem !important;
-            }
+    .start-panel h1 {
+        font-size: 2rem !important;
+    }
 
-            .start-panel .brand-logo {
-                margin-bottom: 15px !important;
-            }
+    .start-panel .brand-logo {
+        margin-bottom: 15px !important;
+    }
 
-            .start-panel .game-logo {
-                margin-bottom: 8px !important;
-            }
-        }
+    .start-panel .game-logo {
+        margin-bottom: 10px !important;
+    }
+
+    .start-panel .btn {
+        min-width: 150px;
+        padding: 12px 25px !important;
+        margin: 6px 0;
+    }
+}
 
         /* Results Panel */
         .results-panel {
@@ -607,8 +576,8 @@
         }
 
         .distraction-icon {
-            width: 60px;
-            height: 60px;
+            width: 80px !important;
+            height: 80px !important;
             background: rgba(255, 255, 255, 0.15);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
@@ -617,7 +586,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2rem;
+            font-size: 2.5rem;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
             position: relative;
         }
@@ -635,32 +604,317 @@
             }
             
             .distraction-icon {
-                width: 50px !important;
-                height: 50px !important;
-                font-size: 1.5rem !important;
+                width: 70px !important;
+                height: 70px !important;
+                font-size: 2rem !important;
             }
         }
 
-        @keyframes glowPulse {
-            0%, 100% { box-shadow: 0 0 25px rgba(255, 215, 0, 0.6); }
-            50% { box-shadow: 0 0 35px rgba(255, 215, 0, 0.9); }
+        /* Golden Border for Distractions */
+        .distraction-icon {
+           width: 60px;
+           height: 60px;
+           background: rgba(255, 255, 255, 0.15);
+           backdrop-filter: blur(10px);
+           -webkit-backdrop-filter: blur(10px);
+           border: 3px solid #FFD700; /* ADD GOLDEN BORDER */
+           border-radius: 50%;
+           display: flex;
+           align-items: center;
+           justify-content: center;
+           font-size: 2rem;
+           box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4); /* GOLDEN SHADOW */
+           position: relative;
+           overflow: visible; /* Allow timer circle to show */
         }
 
-        .distraction-timer {
-            position: absolute;
-            top: -5px;
-            right: -5px;
-            width: 20px;
-            height: 20px;
-            background: #d5365a;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.8rem;
-            font-weight: bold;
-            color: #fff;
-        }
+
+/* Enhanced Priority Ring System with Urgency-Based Pulsing */
+.priority-ring {
+    position: absolute;
+    top: -8px;
+    left: -8px;
+    right: -8px;
+    bottom: -8px;
+    border-radius: 50%;
+    border: 4px solid transparent;
+    pointer-events: none;
+    z-index: 5; /* Lower z-index so BONUS text stays above */
+}
+
+/* Critical - Very intense pulsing red ring */
+.priority-ring.critical {
+    border: 6px solid #FF4444;
+    animation: criticalRingIntense 0.4s ease-in-out infinite;
+    box-shadow: 0 0 25px rgba(255, 68, 68, 1);
+}
+
+/* Warning - Medium pulsing orange ring */
+.priority-ring.warning {
+    border: 4px solid #FFA500;
+    animation: warningRingMedium 0.8s ease-in-out infinite;
+    box-shadow: 0 0 20px rgba(255, 165, 0, 0.8);
+}
+
+/* Safe - Gentle pulsing green ring */
+.priority-ring.safe {
+    border: 3px solid #32CD32;
+    animation: safeRingGentle 1.5s ease-in-out infinite;
+    box-shadow: 0 0 15px rgba(50, 205, 50, 0.6);
+}
+
+/* Enhanced Critical Ring Animation - Very Fast & Intense */
+@keyframes criticalRingIntense {
+    0%, 100% { 
+        transform: scale(1);
+        border-width: 6px;
+        opacity: 1;
+        box-shadow: 0 0 25px rgba(255, 68, 68, 1);
+    }
+    25% { 
+        transform: scale(1.15);
+        border-width: 8px;
+        opacity: 0.9;
+        box-shadow: 0 0 35px rgba(255, 68, 68, 1);
+    }
+    50% { 
+        transform: scale(1.25);
+        border-width: 10px;
+        opacity: 0.8;
+        box-shadow: 0 0 45px rgba(255, 68, 68, 1);
+    }
+    75% { 
+        transform: scale(1.15);
+        border-width: 8px;
+        opacity: 0.9;
+        box-shadow: 0 0 35px rgba(255, 68, 68, 1);
+    }
+}
+
+/* Enhanced Warning Ring Animation - Medium Intensity */
+@keyframes warningRingMedium {
+    0%, 100% { 
+        transform: scale(1);
+        border-width: 4px;
+        opacity: 0.9;
+        box-shadow: 0 0 20px rgba(255, 165, 0, 0.8);
+    }
+    33% { 
+        transform: scale(1.08);
+        border-width: 5px;
+        opacity: 1;
+        box-shadow: 0 0 25px rgba(255, 165, 0, 1);
+    }
+    66% { 
+        transform: scale(1.12);
+        border-width: 6px;
+        opacity: 0.95;
+        box-shadow: 0 0 30px rgba(255, 165, 0, 0.9);
+    }
+}
+
+/* Enhanced Safe Ring Animation - Gentle Pulse */
+@keyframes safeRingGentle {
+    0%, 100% { 
+        transform: scale(1);
+        border-width: 3px;
+        opacity: 0.7;
+        box-shadow: 0 0 15px rgba(50, 205, 50, 0.6);
+    }
+    50% { 
+        transform: scale(1.04);
+        border-width: 4px;
+        opacity: 0.9;
+        box-shadow: 0 0 20px rgba(50, 205, 50, 0.8);
+    }
+}
+
+/* Trophy Distraction - priority ring */
+.distraction-icon.trophy {
+    background: linear-gradient(45deg, #FFD700 0%, #FFA500 50%, #FF8C00 100%) !important;
+    border: 3px solid #FFFF00 !important;
+    box-shadow: 0 0 30px rgba(255, 215, 0, 0.8) !important;
+    animation: trophyPulse 1.5s ease-in-out infinite !important;
+    position: relative; /* Ensure positioning context */
+}
+
+.trophy-bonus {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #FFD700;
+    color: #000;
+    font-size: 0.7rem;
+    font-weight: bold;
+    padding: 2px 6px;
+    border-radius: 8px;
+    border: 1px solid #FFA500;
+    white-space: nowrap;
+    z-index: 15; /* Higher z-index than priority ring (5) */
+    pointer-events: none; /* Don't interfere with clicking */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); /* Add shadow for better visibility */
+}
+
+/* Enhanced Trophy Pulse Animation */
+@keyframes trophyPulse {
+    0%, 100% { 
+        box-shadow: 0 0 30px rgba(255, 215, 0, 0.8);
+        transform: scale(1);
+    }
+    25% { 
+        box-shadow: 0 0 35px rgba(255, 215, 0, 0.9);
+        transform: scale(1.02);
+    }
+    50% { 
+        box-shadow: 0 0 45px rgba(255, 215, 0, 1);
+        transform: scale(1.05);
+    }
+    75% { 
+        box-shadow: 0 0 40px rgba(255, 215, 0, 0.95);
+        transform: scale(1.03);
+    }
+}
+
+* Urgency Particle Effects */
+@keyframes urgencyParticleFly {
+    0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 1;
+    }
+    70% {
+        transform: translate(calc(var(--tx) * 0.8), calc(var(--ty) * 0.8)) scale(1.2);
+        opacity: 0.8;
+    }
+    100% {
+        transform: translate(var(--tx), var(--ty)) scale(0);
+        opacity: 0;
+    }
+}
+
+/* Trophy Sparkle Animation */
+@keyframes trophySparkle {
+    0% {
+        transform: scale(0) rotate(0deg);
+        opacity: 0;
+    }
+    20% {
+        transform: scale(1.2) rotate(180deg);
+        opacity: 1;
+    }
+    80% {
+        transform: scale(1) rotate(360deg);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(0) rotate(540deg);
+        opacity: 0;
+    }
+}
+
+/* Booster Ring Expand Animation */
+@keyframes boosterRingExpand {
+    0% {
+        transform: scale(0.5);
+        opacity: 1;
+        border-width: 3px;
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 0.8;
+        border-width: 2px;
+    }
+    100% {
+        transform: scale(2);
+        opacity: 0;
+        border-width: 1px;
+    }
+}
+
+/* Screen Flash Effect */
+@keyframes screenFlash {
+    0% {
+        opacity: var(--flash-opacity, 0.3);
+    }
+    50% {
+        opacity: calc(var(--flash-opacity, 0.3) * 0.6);
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+/* Enhanced Shake Animation with Intensity Levels */
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10% { transform: translateX(-2px) translateY(-1px); }
+    20% { transform: translateX(2px) translateY(1px); }
+    30% { transform: translateX(-3px) translateY(-2px); }
+    40% { transform: translateX(3px) translateY(2px); }
+    50% { transform: translateX(-2px) translateY(-1px); }
+    60% { transform: translateX(2px) translateY(1px); }
+    70% { transform: translateX(-1px) translateY(-1px); }
+    80% { transform: translateX(1px) translateY(1px); }
+    90% { transform: translateX(-1px) translateY(0); }
+}
+
+/* Urgency-specific particle styles */
+.urgency-particle {
+    transform-origin: center;
+    will-change: transform, opacity;
+}
+
+.urgency-particle.critical {
+    animation-duration: 0.8s !important;
+    box-shadow: 0 0 8px rgba(255, 68, 68, 0.8) !important;
+}
+
+.urgency-particle.warning {
+    animation-duration: 0.9s !important;
+    box-shadow: 0 0 6px rgba(255, 165, 0, 0.7) !important;
+}
+
+.urgency-particle.safe {
+    animation-duration: 1.0s !important;
+    box-shadow: 0 0 4px rgba(50, 205, 50, 0.6) !important;
+}
+
+/* Enhanced silhouette effects for different urgency levels */
+.couple-silhouette.critical-miss {
+    filter: drop-shadow(0 0 30px rgba(255, 0, 0, 1)) brightness(0.7) !important;
+    animation: shake 0.8s ease-out !important;
+}
+
+.couple-silhouette.warning-miss {
+    filter: drop-shadow(0 0 25px rgba(255, 165, 0, 0.8)) brightness(0.85) !important;
+    animation: shake 0.6s ease-out !important;
+}
+
+.couple-silhouette.safe-miss {
+    filter: drop-shadow(0 0 20px rgba(255, 0, 0, 0.4)) !important;
+    animation: shake 0.4s ease-out !important;
+}
+
+/* Responsive adjustments for mobile */
+@media (max-width: 768px) {
+    .urgency-particle {
+        width: 3px !important;
+        height: 3px !important;
+    }
+    
+    @keyframes shake {
+        0%, 100% { transform: translateX(0); }
+        10% { transform: translateX(-1px) translateY(-0.5px); }
+        20% { transform: translateX(1px) translateY(0.5px); }
+        30% { transform: translateX(-1.5px) translateY(-1px); }
+        40% { transform: translateX(1.5px) translateY(1px); }
+        50% { transform: translateX(-1px) translateY(-0.5px); }
+        60% { transform: translateX(1px) translateY(0.5px); }
+        70% { transform: translateX(-0.5px) translateY(-0.5px); }
+        80% { transform: translateX(0.5px) translateY(0.5px); }
+        90% { transform: translateX(-0.5px) translateY(0); }
+    }
+}
 
         .sticky-note {
             width: 100px;
@@ -1094,7 +1348,7 @@
             z-index: 2;
             opacity: 0.8;
             filter: drop-shadow(0 0 20px rgba(213, 54, 90, 0.5));
-            transition: all 0.5s ease;
+            transition: opacity 0.5s ease, filter 0.5s ease;
         }
 
         .couple-silhouette img {
@@ -1135,6 +1389,21 @@
 
         .silhouette-ultimate-unity {
          animation: ultimateUnity 6s ease-in-out infinite;
+        }
+        
+       .silhouette-intro-scale {
+         transform: translate(-50%, -50%) scale(0.8) !important;
+         transition: all 0.3s ease !important;
+        }
+
+        .silhouette-grow-scale {
+        transform: translate(-50%, -50%) scale(1.05) !important;
+        transition: all 0.8s ease !important;
+        }
+
+       .silhouette-normal-scale {
+        transform: translate(-50%, -50%) scale(1) !important;
+        transition: all 0.3s ease !important;
         }
 
         /* Other UI Elements */
@@ -1217,8 +1486,8 @@
             width: 150px;
             height: 150px;
             background: #fff;
-            padding: 2px;
-            border-radius: 10px;
+            padding: 1px;
+            border-radius: 8px;
             margin: 10px;
         }
 
@@ -1669,6 +1938,20 @@
             }
         }
 
+            @keyframes comboFloat {
+            0% {
+               transform: scale(0.5) translateY(0);
+               opacity: 1;
+            }
+            50% {
+               transform: scale(1.2) translateY(-20px);
+               opacity: 1;
+            }
+            100% {
+               transform: scale(1) translateY(-40px);
+               opacity: 0;
+            }
+        }
         /* Hide problematic elements */
         .round-intro {
             display: none !important;
@@ -1692,43 +1975,14 @@
     </div>
    </div>
 
-    <!-- Age Verification Screen -->
-    <div id="ageVerificationScreen" class="screen">
-        <div class="glass" style="padding: 40px; text-align: center;">
-            <img src="https://assets.codepen.io/t-24779/KS_logo_two.png" alt="KamaSutra" class="brand-logo">
-            <h2>Age Verification</h2>
-            <p style="margin: 30px 0;">This experience is intended for adults.<br>Are you 18 or older?</p>
-            <div style="display: flex; gap: 20px; justify-content: center;">
-                <button class="btn" onclick="verifyAge(true)">Yes, I am</button>
-                <button class="btn btn-secondary" onclick="verifyAge(false)">No, I'm not</button>
-            </div>
-        </div>
-    </div>
-
     <!-- Start Screen -->
     <div id="startScreen" class="screen">
         <div class="glass start-panel">
             <img src="https://assets.codepen.io/t-24779/KS_logo_two.png" alt="KamaSutra" class="brand-logo">
             <h1>Endless Embrace</h1>
-            <img src="https://assets.codepen.io/t-24779/embrace-emoji.png" alt="Endless Embrace" class="game-logo">
-            <p style="color: #FFD700; font-size: 1.2rem; margin: 20px 0;">Endless Passion. Embrace Up 3X.</p>
-            <button class="btn" onclick="showInstructions()">Start Embrace</button>
-            <button class="btn btn-secondary" onclick="showLeaderboard()">Leaderboard</button>
-        </div>
-    </div>
-
-    <!-- Instructions Screen -->
-    <div id="instructionsScreen" class="screen">
-        <div class="glass" style="padding: 30px; max-width: 400px; width: 90%;">
-            <h2>How to Play</h2>
-            <div id="instructionContent">
-                <p>Protect your intimate moments by eliminating distractions!</p>
-                <div style="margin: 30px 0;">
-                    <div class="distraction-icon" style="margin: 0 auto;">⏰</div>
-                </div>
-                <p>Tap distractions quickly before time runs out!</p>
-            </div>
-            <button class="btn" id="instructionBtn" onclick="nextInstruction()">Next</button>
+            <img src="https://assets.codepen.io/t-24779/bg-seated-embrace-pose.png" alt="Endless Embrace" class="game-logo">
+            <p style="color: #FFD700; font-size: 1.2rem; margin: 20px 0;">Kill the mood killers. Last Longer</p>
+            <button class="btn" onclick="showScreen('gameScreen')">Play Game</button>
         </div>
     </div>
 
@@ -1986,7 +2240,6 @@ const gameState = {
     lastDistraction: 0,
     gameRunning: false,
     audioEnabled: true,
-    instructionStep: 0,
     roundScore: 0,
     totalEliminations: 0,
     perfectRounds: 0,
@@ -1994,6 +2247,10 @@ const gameState = {
     tipIndex: 0,
     lastScore: 0,
     roundMissed: 0,
+    comboCount: 0,
+    comboMultiplier: 1,
+    lastEliminationTime: 0,
+    comboTimeWindow: 2000, 
     multiKillTimer: null,
     multiKillCount: 0,
     challengeCode: null,
@@ -2006,6 +2263,12 @@ const gameState = {
     heartUpdateInProgress: false,
     isMobile: window.innerWidth <= 768,
     gameplayStarted: false,
+    comboTutorialShown: false,
+    lastShakeTime: 0,
+    shakeIntensity: 1,
+    trophyBonusShown: false,
+    totalTrophiesCollected: 0,
+    priorityTutorialShown: false,
     
     // State management
     cleanup() {
@@ -2042,6 +2305,952 @@ const gameState = {
         this.achievementShown.clear();
     }
 };
+
+ // Message queues
+    const messageQueue = {
+    queue: [],
+    isShowing: false,
+    
+    add(message, type = 'hint', duration = 2000) {
+        this.queue.push({ message, type, duration });
+        this.processQueue();
+    },
+    
+    processQueue() {
+        if (this.isShowing || this.queue.length === 0) return;
+        
+        this.isShowing = true;
+        const { message, type, duration } = this.queue.shift();
+        
+        this.showMessage(message, type, duration);
+    },
+    
+    showMessage(message, type, duration) {
+        try {
+            const messageEl = document.createElement('div');
+            
+            // Always center the message properly
+            messageEl.style.cssText = `
+                position: fixed;
+                top: 35%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: rgba(0, 0, 0, 0.9);
+                color: #fff;
+                padding: 12px 20px;
+                border-radius: 15px;
+                font-size: 0.9rem;
+                font-weight: bold;
+                z-index: 1500;
+                max-width: 280px;
+                text-align: center;
+                border: 2px solid ${type === 'combo' ? '#FFD700' : '#FF4444'};
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+                box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+                animation: messageSlideIn 0.4s ease-out forwards;
+                opacity: 0;
+                transform: translate(-50%, -60%) scale(0.8);
+            `;
+            
+            messageEl.textContent = message;
+            document.body.appendChild(messageEl);
+            
+            // Fade out and remove
+            const timeoutId = setTimeout(() => {
+                messageEl.style.animation = 'messageSlideOut 0.4s ease-out forwards';
+                
+                const removeTimeoutId = setTimeout(() => {
+                    if (messageEl.parentNode) {
+                        messageEl.remove();
+                    }
+                    this.isShowing = false;
+                    
+                    // Process next message in queue
+                    setTimeout(() => this.processQueue(), 200);
+                }, 400);
+                cleanupTracker.addTimeout(removeTimeoutId);
+            }, duration);
+            cleanupTracker.addTimeout(timeoutId);
+            
+        } catch (error) {
+            console.error('Message display failed:', error);
+            this.isShowing = false;
+            setTimeout(() => this.processQueue(), 200);
+        }
+    }
+};
+
+// ========================================================================
+// MOBILE SYSTEM Set Up
+// ========================================================================
+
+// 1. ENHANCED MOBILE DETECTION AND STATE MANAGEMENT
+const mobileState = {
+    isMobile: window.innerWidth <= 768,
+    isTouch: 'ontouchstart' in window,
+    devicePixelRatio: window.devicePixelRatio || 1,
+    orientation: window.innerHeight > window.innerWidth ? 'portrait' : 'landscape',
+    lastTouchTime: 0,
+    touchStartPosition: { x: 0, y: 0 },
+    touchMoveThreshold: 10,
+    vibrationSupported: 'vibrate' in navigator,
+    
+    // Performance tracking for mobile
+    performance: {
+        frameDrops: 0,
+        averageFPS: 60,
+        lowFPSCount: 0
+    },
+    
+    // Update mobile state
+    update() {
+        this.isMobile = window.innerWidth <= 768;
+        this.orientation = window.innerHeight > window.innerWidth ? 'portrait' : 'landscape';
+    }
+};
+
+// 2. ENHANCED TOUCH FEEDBACK SYSTEM
+class TouchFeedbackManager {
+    constructor() {
+        this.feedbackQueue = [];
+        this.isProcessing = false;
+        this.lastFeedbackTime = 0;
+        this.feedbackCooldown = 50; // Prevent feedback spam
+    }
+    
+    // Enhanced haptic feedback with patterns
+    haptic(pattern = 'light', force = false) {
+        if (!mobileState.vibrationSupported && !force) return;
+        
+        const now = Date.now();
+        if (now - this.lastFeedbackTime < this.feedbackCooldown && !force) return;
+        
+        let vibrationPattern;
+        switch (pattern) {
+            case 'light':
+                vibrationPattern = [20];
+                break;
+            case 'medium':
+                vibrationPattern = [50];
+                break;
+            case 'heavy':
+                vibrationPattern = [80];
+                break;
+            case 'double':
+                vibrationPattern = [30, 20, 30];
+                break;
+            case 'triple':
+                vibrationPattern = [20, 15, 20, 15, 20];
+                break;
+            case 'success':
+                vibrationPattern = [10, 10, 10];
+                break;
+            case 'error':
+                vibrationPattern = [100, 50, 100];
+                break;
+            case 'combo':
+                vibrationPattern = [15, 10, 25, 10, 35];
+                break;
+            default:
+                vibrationPattern = [30];
+        }
+        
+        try {
+            if (gameState.audioEnabled && navigator.vibrate) {
+                navigator.vibrate(vibrationPattern);
+                this.lastFeedbackTime = now;
+            }
+        } catch (error) {
+            console.log('Haptic feedback failed:', error);
+        }
+    }
+    
+    // Visual touch feedback
+    showTouchRipple(x, y, color = '#FFD700') {
+        const ripple = document.createElement('div');
+        ripple.style.cssText = `
+            position: fixed;
+            left: ${x - 25}px;
+            top: ${y - 25}px;
+            width: 50px;
+            height: 50px;
+            border: 2px solid ${color};
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 3000;
+            animation: touchRipple 0.4s ease-out forwards;
+            opacity: 0.8;
+        `;
+        
+        document.body.appendChild(ripple);
+        
+        setTimeout(() => {
+            if (ripple.parentNode) {
+                ripple.remove();
+            }
+        }, 400);
+    }
+    
+    // Enhanced button press feedback
+    buttonPress(element, intensity = 'medium') {
+        if (!element) return;
+        
+        // Visual feedback
+        element.style.transform = 'scale(0.95)';
+        element.style.transition = 'transform 0.1s ease-out';
+        
+        // Haptic feedback
+        this.haptic(intensity);
+        
+        // Reset visual state
+        setTimeout(() => {
+            element.style.transform = '';
+            element.style.transition = '';
+        }, 100);
+    }
+    
+    // Distraction touch feedback
+    distractionHit(element, urgency = 'safe') {
+        const rect = element.getBoundingClientRect();
+        const x = rect.left + rect.width / 2;
+        const y = rect.top + rect.height / 2;
+        
+        // Color based on urgency
+        let color = '#32CD32'; // Safe - green
+        let hapticPattern = 'light';
+        
+        if (urgency === 'critical') {
+            color = '#FF4444';
+            hapticPattern = 'heavy';
+        } else if (urgency === 'warning') {
+            color = '#FFA500';
+            hapticPattern = 'medium';
+        }
+        
+        // Show visual ripple
+        this.showTouchRipple(x, y, color);
+        
+        // Enhanced haptic feedback
+        this.haptic(hapticPattern);
+    }
+}
+
+// 3. MOBILE-OPTIMIZED EVENT HANDLING
+class MobileEventHandler {
+    constructor() {
+        this.lastTouchEnd = 0;
+        this.touchStartTime = 0;
+        this.touchStartPos = { x: 0, y: 0 };
+        this.preventNextClick = false;
+        this.touchMoveDistance = 0;
+        
+        this.setupMobileEvents();
+    }
+    
+    setupMobileEvents() {
+        // Enhanced touch start handling
+        document.addEventListener('touchstart', (e) => {
+            this.handleTouchStart(e);
+        }, { passive: false });
+        
+        // Enhanced touch move handling  
+        document.addEventListener('touchmove', (e) => {
+            this.handleTouchMove(e);
+        }, { passive: false });
+        
+        // Enhanced touch end handling
+        document.addEventListener('touchend', (e) => {
+            this.handleTouchEnd(e);
+        }, { passive: false });
+        
+        // Prevent double-tap zoom
+        document.addEventListener('gesturestart', (e) => {
+            e.preventDefault();
+        });
+        
+        // Handle orientation change with better timing
+        window.addEventListener('orientationchange', () => {
+            this.handleOrientationChange();
+        });
+        
+        // Handle visibility changes for mobile power management
+        document.addEventListener('visibilitychange', () => {
+            this.handleVisibilityChange();
+        });
+    }
+    
+    handleTouchStart(e) {
+        const touch = e.touches[0];
+        this.touchStartTime = Date.now();
+        this.touchStartPos = { x: touch.clientX, y: touch.clientY };
+        this.touchMoveDistance = 0;
+        
+        // Immediate haptic feedback for responsive feel
+        if (this.isInteractiveElement(e.target)) {
+            touchFeedback.haptic('light');
+        }
+        
+        // Prevent scrolling on game screen
+        if (e.target.closest('#gameScreen') && gameState.gameRunning) {
+            e.preventDefault();
+        }
+    }
+    
+    handleTouchMove(e) {
+        if (!e.touches[0]) return;
+        
+        const touch = e.touches[0];
+        const deltaX = touch.clientX - this.touchStartPos.x;
+        const deltaY = touch.clientY - this.touchStartPos.y;
+        this.touchMoveDistance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+        
+        // Prevent scrolling during gameplay
+        if (gameState.gameRunning && e.target.closest('#gameScreen')) {
+            e.preventDefault();
+        }
+        
+        // Allow scrolling in results screen
+        if (e.target.closest('.results-panel, .modal-content')) {
+            return; // Let natural scrolling happen
+        }
+    }
+    
+    handleTouchEnd(e) {
+        const touchDuration = Date.now() - this.touchStartTime;
+        const now = Date.now();
+        
+        // Prevent double-tap zoom
+        if (now - this.lastTouchEnd <= 300) {
+            e.preventDefault();
+            this.preventNextClick = true;
+            setTimeout(() => {
+                this.preventNextClick = false;
+            }, 100);
+        }
+        this.lastTouchEnd = now;
+        
+        // Only trigger interaction if it's a tap (not a drag)
+        if (this.touchMoveDistance < mobileState.touchMoveThreshold) {
+            // This was a tap, not a drag
+            if (gameState.gameRunning) {
+                this.handleGameTap(e);
+            } else {
+                this.handleMenuTap(e);
+            }
+        }
+    }
+    
+    handleGameTap(e) {
+        if (!gameState.gameRunning || this.preventNextClick) return;
+        
+        const touch = e.changedTouches[0];
+        const x = touch.clientX;
+        const y = touch.clientY;
+        
+        // Find distraction at touch point with improved hit detection
+        const distractions = document.querySelectorAll('.distraction');
+        let hitDetected = false;
+        
+        distractions.forEach(distraction => {
+            if (!distraction.parentNode) return;
+            
+            const rect = distraction.getBoundingClientRect();
+            
+            // Expand hit area for mobile (easier to tap)
+            const padding = 10;
+            const expandedRect = {
+                left: rect.left - padding,
+                top: rect.top - padding,
+                right: rect.right + padding,
+                bottom: rect.bottom + padding
+            };
+            
+            if (x >= expandedRect.left && x <= expandedRect.right && 
+                y >= expandedRect.top && y <= expandedRect.bottom) {
+                
+                hitDetected = true;
+                const urgency = distraction.dataset.urgency || 'safe';
+                
+                // Enhanced mobile feedback
+                touchFeedback.distractionHit(distraction, urgency);
+                
+                // Eliminate with enhanced feedback
+                eliminateDistraction(distraction);
+            }
+        });
+        
+        // Miss feedback
+        if (!hitDetected && distractions.length > 0) {
+            touchFeedback.haptic('light');
+            touchFeedback.showTouchRipple(x, y, '#FF6666');
+        }
+    }
+    
+    handleMenuTap(e) {
+        if (this.preventNextClick) return;
+        
+        const touch = e.changedTouches[0];
+        const element = document.elementFromPoint(touch.clientX, touch.clientY);
+        
+        if (element && element.closest('.btn')) {
+            const button = element.closest('.btn');
+            touchFeedback.buttonPress(button, 'medium');
+        }
+    }
+    
+    handleOrientationChange() {
+        // Delay to allow orientation to settle
+        setTimeout(() => {
+            mobileState.update();
+            
+            // Trigger resize handling
+            if (camera && renderer) {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            }
+            
+            // Update mobile-specific UI
+            this.updateMobileUI();
+            
+            // Show orientation hint if needed
+            if (mobileState.isMobile && gameState.gameRunning) {
+                const orientationHint = mobileState.orientation === 'portrait' ? 
+                    "💡 Try landscape mode for better gameplay!" : 
+                    "👍 Landscape mode is perfect for this game!";
+                
+                messageQueue.add(orientationHint, 'hint', 2000);
+            }
+        }, 200);
+    }
+    
+    handleVisibilityChange() {
+        if (document.hidden) {
+            // Pause/reduce activity when tab is hidden (mobile power saving)
+            if (gameState.gameRunning) {
+                emergencySave();
+            }
+            
+            // Reduce particle count for performance
+            if (particleSystem) {
+                const positions = particleSystem.geometry.attributes.position.array;
+                particleSystem.geometry.attributes.position.count = Math.floor(positions.length / 3);
+            }
+        } else {
+            // Resume when visible
+            if (particleSystem) {
+                const positions = particleSystem.geometry.attributes.position.array;
+                particleSystem.geometry.attributes.position.count = positions.length / 3;
+            }
+        }
+    }
+    
+    updateMobileUI() {
+        // Update achievement board visibility
+        if (gameState.gameRunning) {
+            updateAchievementBoardVisibility();
+        }
+        
+        // Adjust UI scaling based on device pixel ratio
+        if (mobileState.devicePixelRatio > 2) {
+            document.documentElement.style.setProperty('--mobile-scale', '0.9');
+        } else {
+            document.documentElement.style.setProperty('--mobile-scale', '1');
+        }
+    }
+    
+    isInteractiveElement(element) {
+        return element.closest('.btn, .distraction, .heart, .audio-toggle');
+    }
+}
+
+// 4. MOBILE PERFORMANCE OPTIMIZATION
+class MobilePerformanceManager {
+    constructor() {
+        this.frameCount = 0;
+        this.lastFPSTime = performance.now();
+        this.performanceMode = 'normal'; // normal, performance, potato
+        
+        this.startMonitoring();
+    }
+    
+    startMonitoring() {
+        const checkPerformance = () => {
+            this.frameCount++;
+            const now = performance.now();
+            
+            if (now - this.lastFPSTime >= 1000) {
+                const fps = Math.round((this.frameCount * 1000) / (now - this.lastFPSTime));
+                mobileState.performance.averageFPS = fps;
+                
+                if (fps < 25) {
+                    mobileState.performance.lowFPSCount++;
+                    if (mobileState.performance.lowFPSCount > 3) {
+                        this.optimizeForPerformance();
+                    }
+                } else {
+                    mobileState.performance.lowFPSCount = Math.max(0, mobileState.performance.lowFPSCount - 1);
+                }
+                
+                this.frameCount = 0;
+                this.lastFPSTime = now;
+            }
+            
+            requestAnimationFrame(checkPerformance);
+        };
+        
+        checkPerformance();
+    }
+    
+    optimizeForPerformance() {
+        if (this.performanceMode === 'potato') return;
+        
+        console.log('📱 Optimizing for mobile performance...');
+        
+        // Reduce particle count
+        if (particleSystem) {
+            const positions = particleSystem.geometry.attributes.position.array;
+            particleSystem.geometry.attributes.position.count = Math.floor(positions.length / 2);
+        }
+        
+        // Reduce animation complexity
+        document.documentElement.style.setProperty('--animation-scale', '0.7');
+        
+        // Lower renderer pixel ratio
+        if (renderer && mobileState.devicePixelRatio > 1) {
+            renderer.setPixelRatio(Math.min(mobileState.devicePixelRatio, 1.5));
+        }
+        
+        this.performanceMode = 'performance';
+        
+        // Show performance optimization message
+        if (mobileState.isMobile && gameState.gameRunning) {
+            messageQueue.add("🚀 Performance optimized for your device!", 'hint', 2000);
+        }
+    }
+}
+
+// 5. MOBILE-SPECIFIC UI IMPROVEMENTS
+function initMobileUI() {
+    // Add mobile-specific CSS variables
+    const mobileCSS = `
+        :root {
+            --mobile-scale: 1;
+            --animation-scale: 1;
+        }
+        
+        @media (max-width: 768px) {
+            .distraction-icon {
+                width: calc(70px * var(--mobile-scale)) !important;
+                height: calc(70px * var(--mobile-scale)) !important;
+                font-size: calc(2rem * var(--mobile-scale)) !important;
+            }
+            
+            .btn {
+                min-height: 48px !important;
+                padding: 12px 20px !important;
+                font-size: calc(1rem * var(--mobile-scale)) !important;
+                transform: scale(var(--mobile-scale));
+            }
+            
+            .hint-popup, .mobile-achievement-notification {
+                font-size: calc(0.85rem * var(--mobile-scale)) !important;
+                transform: scale(var(--animation-scale));
+            }
+        }
+    `;
+    
+    // Add touch ripple animation
+    const touchRippleCSS = `
+        @keyframes touchRipple {
+            0% {
+                transform: scale(0);
+                opacity: 0.8;
+            }
+            50% {
+                transform: scale(1);
+                opacity: 0.4;
+            }
+            100% {
+                transform: scale(1.5);
+                opacity: 0;
+            }
+        }
+    `;
+    
+    // Add CSS to page
+    if (!document.getElementById('mobileEnhancementCSS')) {
+        const style = document.createElement('style');
+        style.id = 'mobileEnhancementCSS';
+        style.textContent = mobileCSS + touchRippleCSS;
+        document.head.appendChild(style);
+    }
+}
+
+// 6. INITIALIZE MOBILE SYSTEMS
+const touchFeedback = new TouchFeedbackManager();
+const mobileEventHandler = new MobileEventHandler();
+const mobilePerformanceManager = new MobilePerformanceManager();
+
+// Initialize mobile UI on page load
+document.addEventListener('DOMContentLoaded', () => {
+    initMobileUI();
+    mobileState.update();
+});
+
+// 7. MOBILE-OPTIMIZED UTILITY FUNCTIONS
+function mobileVibrate(pattern = [50], force = false) {
+    if (mobileState.isMobile || force) {
+        touchFeedback.haptic(Array.isArray(pattern) ? 'medium' : pattern, force);
+    }
+}
+
+function showMobileOptimizedHint(message, duration = 2000) {
+    if (mobileState.isMobile) {
+        messageQueue.add(message, 'hint', duration);
+    } else {
+        showHint(message, duration);
+    }
+}
+
+// Export mobile utilities for use in other functions
+window.mobileUtils = {
+    state: mobileState,
+    touchFeedback: touchFeedback,
+    vibrate: mobileVibrate,
+    showHint: showMobileOptimizedHint
+};
+
+// MESSAGE ANIMATIONS CSS
+const messageAnimationCSS = `
+@keyframes messageSlideIn {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -60%) scale(0.8);
+    }
+    100% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+@keyframes messageSlideOut {
+    0% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -40%) scale(0.9);
+    }
+}
+`;
+
+// ========================================================================
+// PROGRESSIVE DIFFICULTY SYSTEM Set up
+// ========================================================================
+
+// 1. DIFFICULTY TRACKING STATE
+const difficultyState = {
+    // Player performance metrics
+    playerSkill: 0.5, // 0 = beginner, 1 = expert
+    recentPerformance: [], // Last 10 eliminations
+    currentDifficultyLevel: 'normal', // easy, normal, hard, expert
+    
+    // Performance tracking
+    totalEliminations: 0,
+    totalMisses: 0,
+    averageReactionTime: 1000,
+    recentReactionTimes: [],
+    perfectRoundsStreak: 0,
+    
+    // Difficulty modifiers
+    spawnRateMultiplier: 1.0,
+    reactionTimeMultiplier: 1.0,
+    criticalChance: 0.1, // 10% base critical chance
+    urgencyDistribution: { critical: 0.1, warning: 0.3, safe: 0.6 },
+    
+    // Adaptation settings
+    adaptationRate: 0.1, // How quickly difficulty adapts
+    minDifficulty: 0.2,
+    maxDifficulty: 2.0,
+    
+    // Update player skill based on performance
+    updateSkill(reactionTime, success, urgency) {
+        // Track reaction time
+        this.recentReactionTimes.push(reactionTime);
+        if (this.recentReactionTimes.length > 20) {
+            this.recentReactionTimes.shift();
+        }
+        
+        // Calculate average reaction time
+        this.averageReactionTime = this.recentReactionTimes.reduce((a, b) => a + b, 0) / this.recentReactionTimes.length;
+        
+        // Track recent performance (1 = success, 0 = miss)
+        this.recentPerformance.push(success ? 1 : 0);
+        if (this.recentPerformance.length > 10) {
+            this.recentPerformance.shift();
+        }
+        
+        // Calculate skill based on multiple factors
+        const successRate = this.recentPerformance.reduce((a, b) => a + b, 0) / this.recentPerformance.length;
+        const reactionScore = Math.max(0, (2000 - this.averageReactionTime) / 2000);
+        const urgencyBonus = urgency === 'critical' ? 0.2 : urgency === 'warning' ? 0.1 : 0;
+        
+        // Calculate new skill level
+        const targetSkill = (successRate * 0.6) + (reactionScore * 0.3) + (urgencyBonus * 0.1);
+        
+        // Smoothly adjust skill level
+        this.playerSkill += (targetSkill - this.playerSkill) * this.adaptationRate;
+        this.playerSkill = Math.max(0, Math.min(1, this.playerSkill));
+        
+        // Update difficulty level
+        this.updateDifficultyLevel();
+        
+        // Log for debugging
+        console.log(`🎯 Skill: ${this.playerSkill.toFixed(2)}, Success: ${(successRate * 100).toFixed(0)}%, Avg Time: ${this.averageReactionTime.toFixed(0)}ms, Level: ${this.currentDifficultyLevel}`);
+    },
+    
+    updateDifficultyLevel() {
+        if (this.playerSkill < 0.25) {
+            this.currentDifficultyLevel = 'easy';
+            this.spawnRateMultiplier = 1.3; // Slower spawning
+            this.reactionTimeMultiplier = 1.4; // More time to react
+            this.criticalChance = 0.05; // Fewer critical distractions
+            this.urgencyDistribution = { critical: 0.05, warning: 0.2, safe: 0.75 };
+        } else if (this.playerSkill < 0.5) {
+            this.currentDifficultyLevel = 'normal';
+            this.spawnRateMultiplier = 1.0; // Normal spawning
+            this.reactionTimeMultiplier = 1.0; // Normal reaction time
+            this.criticalChance = 0.1; // Normal critical chance
+            this.urgencyDistribution = { critical: 0.1, warning: 0.3, safe: 0.6 };
+        } else if (this.playerSkill < 0.75) {
+            this.currentDifficultyLevel = 'hard';
+            this.spawnRateMultiplier = 0.85; // Faster spawning
+            this.reactionTimeMultiplier = 0.85; // Less time to react
+            this.criticalChance = 0.18; // More critical distractions
+            this.urgencyDistribution = { critical: 0.18, warning: 0.4, safe: 0.42 };
+        } else {
+            this.currentDifficultyLevel = 'expert';
+            this.spawnRateMultiplier = 0.7; // Much faster spawning
+            this.reactionTimeMultiplier = 0.7; // Much less time to react
+            this.criticalChance = 0.25; // Many critical distractions
+            this.urgencyDistribution = { critical: 0.25, warning: 0.45, safe: 0.3 };
+        }
+    },
+    
+    reset() {
+        this.recentPerformance = [];
+        this.recentReactionTimes = [];
+        this.perfectRoundsStreak = 0;
+        // Don't reset playerSkill - keep learning across games
+    }
+};
+
+// 2. ENHANCED DISTRACTION CREATION WITH ADAPTIVE DIFFICULTY
+function createAdaptiveDistraction(baseDistractionData, baseReactionTime) {
+    try {
+        const distraction = document.createElement('div');
+        distraction.className = 'distraction'; 
+        distraction.dataset.type = baseDistractionData.name;
+        distraction.dataset.spawnTime = Date.now();
+        distraction.dataset.booster = baseDistractionData.booster || false;
+
+        const isTrophy = Math.random() < 0.05;
+        if (isTrophy) {
+            distraction.dataset.trophy = 'true';
+            distraction.dataset.bonusPoints = '100';
+        }
+
+        // ADAPTIVE URGENCY ASSIGNMENT
+        const adaptiveUrgency = assignAdaptiveUrgency(baseReactionTime);
+        distraction.dataset.urgency = adaptiveUrgency;
+        
+        // ADAPTIVE REACTION TIME
+        const adaptiveReactionTime = Math.floor(baseReactionTime * difficultyState.reactionTimeMultiplier);
+        
+        // Create distraction HTML (same as before)
+        if (baseDistractionData.special === 'sticky') {
+            const stickyTexts = [
+                "Don't<br>forget<br>milk!",
+                "Buy<br>eggs<br>today",
+                "Call<br>mom<br>❤️",
+                "Meeting<br>at 3pm",
+                "Gym<br>tonight!",
+                "Pay<br>bills!",
+                "Date<br>night<br>8pm",
+                "Doctor<br>appt<br>2pm"
+            ];
+            const randomText = stickyTexts[Math.floor(Math.random() * stickyTexts.length)];
+            distraction.innerHTML = `
+                <div class="sticky-note">
+                    <div style="transform: rotate(${-10 + Math.random() * 20}deg); font-size: 12px;">
+                        ${randomText}
+                    </div>
+                </div>
+            `;
+        } else {
+            const isTrophy = distraction.dataset.trophy === 'true';
+            
+            if (isTrophy) {
+                distraction.innerHTML = `
+                    <div class="distraction-icon glass trophy">
+                        🏆
+                        <div class="trophy-bonus">BONUS!</div>
+                        <div class="priority-ring ${adaptiveUrgency}"></div>
+                    </div>
+                `;
+            } else {
+                const iconClass = baseDistractionData.booster ? 'distraction-icon glass booster' : 'distraction-icon glass';
+                distraction.innerHTML = `
+                    <div class="${iconClass}">
+                        ${baseDistractionData.icon}
+                        <div class="priority-ring ${adaptiveUrgency}"></div>
+                    </div>
+                `;
+            }
+        }
+
+        // Position distraction
+        const x = 10 + Math.random() * 80;
+        const y = 20 + Math.random() * 60;
+        distraction.style.left = x + '%';
+        distraction.style.top = y + '%';
+
+        const gameScreen = document.getElementById('gameScreen');
+        if (gameScreen) {
+            gameScreen.appendChild(distraction);
+        }
+        
+        // Tutorial for priority rings
+        if (gameState.totalEliminations === 0 && !gameState.priorityTutorialShown) {
+            const timeoutId = setTimeout(() => {
+                messageQueue.add("🔴 Thick rings = URGENT! 🟠 Medium = Soon! 🟢 Thin = Safe!", 'hint', 3000);
+                gameState.priorityTutorialShown = true;
+            }, 1000);
+            cleanupTracker.addTimeout(timeoutId);
+        }
+
+        playSound(baseDistractionData.sound || 'pop', 0.3);
+        
+        // Play priority ring audio cue
+        const timeoutId = setTimeout(() => {
+            playPriorityRingCue(adaptiveUrgency);
+        }, 200);
+        cleanupTracker.addTimeout(timeoutId);
+        
+        gameState.distractions.push(distraction);
+
+        // ADAPTIVE TIMER LOGIC
+        let timeLeft = adaptiveReactionTime;
+        const timerInterval = setInterval(() => {
+            timeLeft -= 100;
+            const timerEl = distraction.querySelector('.distraction-timer');
+            if (timerEl) {
+                timerEl.textContent = (timeLeft / 1000).toFixed(1);
+            }
+            
+            if (timeLeft <= 0) {
+                clearInterval(timerInterval);
+                cleanupTracker.intervals.delete(timerInterval);
+                if (distraction.parentNode && gameState.distractions.includes(distraction)) {
+                    failDistraction(distraction);
+                }
+            }
+        }, 100);
+
+        distraction.timerInterval = timerInterval;
+        cleanupTracker.addInterval(timerInterval);
+
+    } catch (error) {
+        console.error('Adaptive distraction creation failed:', error);
+    }
+}
+
+// 3. ADAPTIVE URGENCY ASSIGNMENT
+function assignAdaptiveUrgency(baseReactionTime) {
+    const distribution = difficultyState.urgencyDistribution;
+    const rand = Math.random();
+    
+    if (rand < distribution.critical) {
+        return 'critical';
+    } else if (rand < distribution.critical + distribution.warning) {
+        return 'warning';
+    } else {
+        return 'safe';
+    }
+}
+
+// 4. ADAPTIVE SPAWN RATE SYSTEM
+function spawnAdaptiveDistractions() {
+    if (!gameState.gameRunning || !gameState.roundInProgress || 
+        gameState.distractionsSpawned >= gameState.distractionsRequired) {
+        return;
+    }
+    
+    try {
+        const round = rounds[gameState.currentRound - 1];
+        const distraction = round.distractions[Math.floor(Math.random() * round.distractions.length)];
+        
+        // Use adaptive distraction creation
+        createAdaptiveDistraction(distraction, round.reactionTime);
+        gameState.distractionsSpawned++;
+        
+        console.log(`📍 Spawned adaptive distraction ${gameState.distractionsSpawned}/${gameState.distractionsRequired} (Difficulty: ${difficultyState.currentDifficultyLevel})`);
+        
+        if (gameState.distractionsSpawned < gameState.distractionsRequired) {
+            // ADAPTIVE SPAWN RATE
+            const adaptiveSpawnRate = Math.floor(round.spawnRate * difficultyState.spawnRateMultiplier * (0.8 + Math.random() * 0.4));
+            
+            gameState.spawnTimeout = setTimeout(() => {
+                spawnAdaptiveDistractions();
+            }, adaptiveSpawnRate);
+            cleanupTracker.addTimeout(gameState.spawnTimeout);
+        }
+    } catch (error) {
+        console.error('Adaptive distraction spawning failed:', error);
+        gracefulRecover();
+    }
+}
+
+// 5. DIFFICULTY FEEDBACK SYSTEM
+function showDifficultyFeedback() {
+    const messages = {
+        easy: "🌱 Taking it easy! The game is adapting to help you learn.",
+        normal: "⚖️ Perfect balance! You're getting the hang of this.",
+        hard: "🔥 Challenge mode activated! You're doing great.",
+        expert: "⚡ EXPERT LEVEL! You're a distraction-elimination master!"
+    };
+    
+    const currentLevel = difficultyState.currentDifficultyLevel;
+    if (messages[currentLevel]) {
+        messageQueue.add(messages[currentLevel], 'hint', 3000);
+    }
+}
+
+// 6. DIFFICULTY ANALYTICS
+function getDifficultyAnalytics() {
+    return {
+        playerSkill: difficultyState.playerSkill,
+        currentLevel: difficultyState.currentDifficultyLevel,
+        averageReactionTime: difficultyState.averageReactionTime,
+        successRate: difficultyState.recentPerformance.length > 0 ? 
+            difficultyState.recentPerformance.reduce((a, b) => a + b, 0) / difficultyState.recentPerformance.length : 0,
+        spawnRateMultiplier: difficultyState.spawnRateMultiplier,
+        reactionTimeMultiplier: difficultyState.reactionTimeMultiplier
+    };
+}
+
+
+
+// Add CSS animations to page
+if (!document.getElementById('messageAnimationCSS')) {
+    const style = document.createElement('style');
+    style.id = 'messageAnimationCSS';
+    style.textContent = messageAnimationCSS;
+    document.head.appendChild(style);
+}
 
 // Static Data Arrays (keeping existing arrays as they are good)
 const loadingTips = [
@@ -2164,11 +3373,13 @@ const rounds = [
             { icon: '🗞️', name: 'newspaper', sound: 'rustle', booster: true },
             { icon: '🥞', name: 'breakfast', sound: 'sizzle' },
             { icon: '🚿', name: 'shower', sound: 'water' },
-            { icon: '👔', name: 'clothes', sound: 'zipper' }
+            { icon: '👔', name: 'clothes', sound: 'zipper' },
+            { icon: '🐕', name: 'dog', sound: 'bark' },
+            { icon: '🚪', name: 'doorbell', sound: 'ring', booster: true }
         ],
-        spawnRate: 3000,
-        reactionTime: 2000,
-        distractionsRequired: 8
+        spawnRate: 1900,
+        reactionTime: 1800,
+        distractionsRequired: 10
     },
     {
         name: "Sneaking Moments",
@@ -2189,8 +3400,8 @@ const rounds = [
             { icon: '🎒', name: 'backpack', sound: 'bump' },
             { icon: '☂️', name: 'umbrella', sound: 'poke' }
         ],
-        spawnRate: 2500,
-        reactionTime: 1800,
+        spawnRate: 1800,
+        reactionTime: 1600,
         distractionsRequired: 12
     },
     {
@@ -2218,8 +3429,8 @@ const rounds = [
             { icon: '🖊️', name: 'pen', sound: 'click' },
             { icon: '📌', name: 'pin', sound: 'tack', special: 'sticky' }
         ],
-        spawnRate: 2000,
-        reactionTime: 1600,
+        spawnRate: 1400,
+        reactionTime: 1500,
         distractionsRequired: 18
     },
     {
@@ -2251,8 +3462,8 @@ const rounds = [
             { icon: '🎒', name: 'backpack', sound: 'zip' },
             { icon: '🗞️', name: 'headlines', sound: 'gasp' }
         ],
-        spawnRate: 1800,
-        reactionTime: 1500,
+        spawnRate: 1200,
+        reactionTime: 1800,
         distractionsRequired: 22
     },
     {
@@ -2290,8 +3501,8 @@ const rounds = [
             { icon: '🍕', name: 'foodtruck', sound: 'sizzle' },
             { icon: '📣', name: 'megaphone', sound: 'announce', booster: true }
         ],
-        spawnRate: 1400,
-        reactionTime: 1800,
+        spawnRate: 1100,
+        reactionTime: 1600,
         distractionsRequired: 28
     },
     {
@@ -2333,7 +3544,7 @@ const rounds = [
             { icon: '🎨', name: 'art', sound: 'auction' },
             { icon: '🍰', name: 'dessert', sound: 'wheel' }
         ],
-        spawnRate: 1600,
+        spawnRate: 1200,
         reactionTime: 1500,
         distractionsRequired: 32
     },
@@ -2389,8 +3600,8 @@ const rounds = [
             { icon: '🚀', name: 'rocket', sound: 'launch', booster: true },
             { icon: '🛸', name: 'ufo', sound: 'alien' }
         ],
-        spawnRate: 1400,
-        reactionTime: 1400,
+        spawnRate: 1200,
+        reactionTime: 1500,
         distractionsRequired: 45
     },
     {
@@ -2456,7 +3667,7 @@ const rounds = [
             { icon: '🦄', name: 'unicorn', sound: 'magical', booster: true }
         ],
         spawnRate: 1200,
-        reactionTime: 1300,
+        reactionTime: 1400,
         distractionsRequired: 55
     }
 ];
@@ -2600,7 +3811,7 @@ async function init() {
                 if (loadingScreen) {
                     loadingScreen.style.display = 'none';
                 }
-                showScreen('ageVerificationScreen');
+                showScreen('startScreen');
             }, 500);
         }, 1000);
 
@@ -2710,7 +3921,7 @@ function setupThreeJS() {
 function createParticleSystem() {
     try {
         const particleGeometry = new THREE.BufferGeometry();
-        const particleCount = gameState.isMobile ? 50 : 100; // Reduce particles on mobile
+        const particleCount = gameState.isMobile ? 100 : 150; // Reduce particles on mobile
         const positions = new Float32Array(particleCount * 3);
         const colors = new Float32Array(particleCount * 3);
         
@@ -2804,6 +4015,7 @@ async function preloadAssets() {
 // ENHANCED AUDIO SYSTEM WITH FALLBACKS
 // ============================================================================
 
+// AUDIO INITIALIZATION WITH SOUND TYPES 
 async function initAudio() {
     try {
         const savedAudioState = localStorage.getItem('audioEnabled');
@@ -2814,6 +4026,7 @@ async function initAudio() {
         audioContext = new (window.AudioContext || window.webkitAudioContext)();
         
         try {
+            // Basic sounds (keep existing ones)
             audioBuffers.success = createTone(880, 0.1);
             audioBuffers.fail = createTone(220, 0.2);
             audioBuffers.achievement = createTone(1320, 0.3);
@@ -2821,17 +4034,40 @@ async function initAudio() {
             audioBuffers.ding = createTone(660, 0.1);
             audioBuffers.pop = createTone(550, 0.05);
             audioBuffers.buzz = createNoise(0.1);
+            
+            // NEW Enhanced sounds
+            audioBuffers.eliminateCritical = createUrgencyTone(1100, 0.15, 'critical');
+            audioBuffers.eliminateWarning = createUrgencyTone(880, 0.12, 'warning');
+            audioBuffers.eliminateSafe = createUrgencyTone(660, 0.1, 'safe');
+            
+            audioBuffers.missCritical = createUrgencyTone(150, 0.4, 'critical-miss');
+            audioBuffers.missWarning = createUrgencyTone(200, 0.3, 'warning-miss');
+            audioBuffers.missSafe = createUrgencyTone(250, 0.2, 'safe-miss');
+            
+            audioBuffers.combo1_5x = createComboTone(1200, 0.2, 1.5);
+            audioBuffers.combo2x = createComboTone(1400, 0.25, 2);
+            audioBuffers.combo3x = createComboTone(1600, 0.3, 3);
+            
+            audioBuffers.trophyCollect = createTrophySound();
+            audioBuffers.boosterCollect = createBoosterSound();
+            audioBuffers.heartLoss = createHeartLossSound();
+            audioBuffers.heartGain = createHeartGainSound();
+            
+            audioBuffers.priorityCritical = createPriorityRingTone('critical');
+            audioBuffers.priorityWarning = createPriorityRingTone('warning');
+            audioBuffers.prioritySafe = createPriorityRingTone('safe');
         } catch (error) {
-            console.warn('Basic audio creation failed:', error);
+            console.warn('Enhanced audio creation failed:', error);
         }
         
         try {
+            // FIXED: Use your existing background music creation instead of external function
             createBackgroundMusic();
         } catch (error) {
             console.warn('Background music creation failed:', error);
         }
         
-        console.log('🔊 Audio system initialized');
+        console.log('🔊 Enhanced audio system initialized');
     } catch (error) {
         console.warn('Audio initialization failed, continuing without audio:', error);
         gameState.audioEnabled = false;
@@ -2857,6 +4093,362 @@ function createBackgroundMusic() {
             console.warn(`Failed to create ${name} track:`, error);
         }
     });
+}
+
+
+function playSpatialSound(soundName, x, y, volume = 0.5) {
+    if (!gameState.audioEnabled || !audioContext || !audioBuffers[soundName]) return;
+    
+    try {
+        const source = audioContext.createBufferSource();
+        const panner = audioContext.createStereoPanner();
+        const gainNode = audioContext.createGain();
+        
+        source.buffer = audioBuffers[soundName];
+        
+        const screenWidth = window.innerWidth;
+        const panPosition = (x / screenWidth) * 2 - 1;
+        
+        panner.pan.setValueAtTime(Math.max(-1, Math.min(1, panPosition)), audioContext.currentTime);
+        gainNode.gain.value = volume;
+        
+        source.connect(panner);
+        panner.connect(gainNode);
+        gainNode.connect(audioContext.destination);
+        
+        cleanupTracker.addAudioSource(source);
+        source.start();
+        
+        const timeoutId = setTimeout(() => {
+            cleanupTracker.audioSources.delete(source);
+        }, (audioBuffers[soundName].duration * 1000) + 100);
+        cleanupTracker.addTimeout(timeoutId);
+        
+    } catch (error) {
+        console.warn('Spatial sound playback failed:', error);
+    }
+}
+
+function playComboSound(multiplier, volume = 0.6) {
+    if (!gameState.audioEnabled || !audioContext) return;
+    
+    let soundName;
+    if (multiplier >= 3) {
+        soundName = 'combo3x';
+    } else if (multiplier >= 2) {
+        soundName = 'combo2x';
+    } else if (multiplier >= 1.5) {
+        soundName = 'combo1_5x';
+    }
+    
+    if (soundName) {
+        playSound(soundName, volume);
+    }
+}
+
+function playTrophySound() {
+    playSound('trophyCollect', 0.7);
+}
+
+function playBoosterSound() {
+    playSound('boosterCollect', 0.5);
+}
+
+function playHeartLossSound() {
+    playSound('heartLoss', 0.6);
+}
+
+function playHeartGainSound() {
+    playSound('heartGain', 0.6);
+}
+
+function playPriorityRingCue(urgency) {
+    if (!gameState.audioEnabled || !audioContext) return;
+    
+    let soundName;
+    switch (urgency) {
+        case 'critical': soundName = 'priorityCritical'; break;
+        case 'warning': soundName = 'priorityWarning'; break;
+        case 'safe': soundName = 'prioritySafe'; break;
+    }
+    
+    if (soundName) {
+        playSound(soundName, 0.3);
+    }
+}
+
+// 4. ADD SIMPLE DYNAMIC MUSIC AND AMBIENT FUNCTIONS
+let currentMusicState = 'normal';
+
+function updateDynamicMusic() {
+    // Simple version - just update music state based on hearts
+    try {
+        let newState = 'normal';
+        if (gameState.intimacyHearts <= 1) {
+            newState = 'lowHearts';
+        } else if (gameState.comboCount >= 5) {
+            newState = 'highCombo';
+        }
+        
+        if (newState !== currentMusicState) {
+            currentMusicState = newState;
+            // Could add music transitions here later
+        }
+    } catch (error) {
+        console.error('Dynamic music update failed:', error);
+    }
+}
+
+let ambientAudioTimeout = null;
+
+function startAmbientAudio() {
+    // Simple ambient audio - just subtle background sounds occasionally
+    const playAmbient = () => {
+        if (!gameState.gameRunning || !gameState.audioEnabled) return;
+        
+        if (Math.random() < 0.2) { // 20% chance
+            playSound('pop', 0.05);
+        }
+        
+        ambientAudioTimeout = setTimeout(playAmbient, 8000 + Math.random() * 5000);
+        cleanupTracker.addTimeout(ambientAudioTimeout);
+    };
+    
+    playAmbient();
+}
+
+function stopAmbientAudio() {
+    if (ambientAudioTimeout) {
+        clearTimeout(ambientAudioTimeout);
+        ambientAudioTimeout = null;
+    }
+}
+
+function createUrgencyTone(frequency, duration, urgencyType) {
+    if (!audioContext) return null;
+    
+    const sampleRate = audioContext.sampleRate;
+    const length = sampleRate * duration;
+    const buffer = audioContext.createBuffer(2, length, sampleRate);
+    
+    for (let channel = 0; channel < 2; channel++) {
+        const data = buffer.getChannelData(channel);
+        
+        for (let i = 0; i < length; i++) {
+            const t = i / sampleRate;
+            let sample = 0;
+            
+            switch (urgencyType) {
+                case 'critical':
+                    sample = Math.sin(2 * Math.PI * frequency * t) * 0.8 +
+                            Math.sin(2 * Math.PI * frequency * 2 * t) * 0.3;
+                    break;
+                case 'warning':
+                    const vibrato = 1 + 0.1 * Math.sin(2 * Math.PI * 5 * t);
+                    sample = Math.sin(2 * Math.PI * frequency * vibrato * t) * 0.7;
+                    break;
+                case 'safe':
+                    sample = Math.sin(2 * Math.PI * frequency * t) * 0.6;
+                    break;
+                case 'critical-miss':
+                    sample = Math.sin(2 * Math.PI * frequency * t) * 0.9 +
+                            (Math.random() - 0.5) * 0.3;
+                    break;
+                case 'warning-miss':
+                    sample = Math.sin(2 * Math.PI * frequency * t) * 0.7;
+                    break;
+                case 'safe-miss':
+                    sample = Math.sin(2 * Math.PI * frequency * t) * 0.5;
+                    break;
+                default:
+                    sample = Math.sin(2 * Math.PI * frequency * t);
+            }
+            
+            const envelope = Math.exp(-i / (length * 0.3));
+            data[i] = sample * envelope;
+        }
+    }
+    
+    return buffer;
+}
+
+function createComboTone(frequency, duration, multiplier) {
+    if (!audioContext) return null;
+    
+    const sampleRate = audioContext.sampleRate;
+    const length = sampleRate * duration;
+    const buffer = audioContext.createBuffer(2, length, sampleRate);
+    
+    for (let channel = 0; channel < 2; channel++) {
+        const data = buffer.getChannelData(channel);
+        
+        for (let i = 0; i < length; i++) {
+            const t = i / sampleRate;
+            let sample = 0;
+            
+            for (let harm = 1; harm <= multiplier; harm++) {
+                const harmFreq = frequency * harm * 0.8;
+                const harmAmp = 0.8 / harm;
+                sample += Math.sin(2 * Math.PI * harmFreq * t) * harmAmp;
+            }
+            
+            if (multiplier >= 2) {
+                sample += Math.sin(2 * Math.PI * frequency * 4 * t) * 0.2 * Math.sin(10 * Math.PI * t);
+            }
+            
+            const envelope = Math.exp(-i / (length * 0.4));
+            data[i] = sample * envelope * 0.6;
+        }
+    }
+    
+    return buffer;
+}
+
+function createTrophySound() {
+    if (!audioContext) return null;
+    
+    const sampleRate = audioContext.sampleRate;
+    const duration = 0.6;
+    const length = sampleRate * duration;
+    const buffer = audioContext.createBuffer(2, length, sampleRate);
+    
+    for (let channel = 0; channel < 2; channel++) {
+        const data = buffer.getChannelData(channel);
+        
+        for (let i = 0; i < length; i++) {
+            const t = i / sampleRate;
+            
+            const freq1 = 880 * (1 + t * 0.5);
+            const freq2 = 1100 * (1 + t * 0.3);
+            const freq3 = 1320 * (1 + t * 0.2);
+            
+            let sample = Math.sin(2 * Math.PI * freq1 * t) * 0.4 +
+                        Math.sin(2 * Math.PI * freq2 * t) * 0.3 +
+                        Math.sin(2 * Math.PI * freq3 * t) * 0.2;
+            
+            sample += Math.sin(2 * Math.PI * 2640 * t) * 0.2 * Math.sin(20 * Math.PI * t);
+            
+            const envelope = Math.sin(Math.PI * t / duration) * Math.exp(-t / (duration * 0.4));
+            data[i] = sample * envelope;
+        }
+    }
+    
+    return buffer;
+}
+
+function createBoosterSound() {
+    if (!audioContext) return null;
+    
+    const sampleRate = audioContext.sampleRate;
+    const duration = 0.4;
+    const length = sampleRate * duration;
+    const buffer = audioContext.createBuffer(2, length, sampleRate);
+    
+    for (let channel = 0; channel < 2; channel++) {
+        const data = buffer.getChannelData(channel);
+        
+        for (let i = 0; i < length; i++) {
+            const t = i / sampleRate;
+            
+            const freq = 660 + 440 * t;
+            let sample = Math.sin(2 * Math.PI * freq * t) * 0.7;
+            sample += Math.sin(2 * Math.PI * freq * 1.5 * t) * 0.3;
+            
+            const envelope = Math.exp(-t / (duration * 0.6));
+            data[i] = sample * envelope;
+        }
+    }
+    
+    return buffer;
+}
+
+function createHeartLossSound() {
+    if (!audioContext) return null;
+    
+    const sampleRate = audioContext.sampleRate;
+    const duration = 0.5;
+    const length = sampleRate * duration;
+    const buffer = audioContext.createBuffer(2, length, sampleRate);
+    
+    for (let channel = 0; channel < 2; channel++) {
+        const data = buffer.getChannelData(channel);
+        
+        for (let i = 0; i < length; i++) {
+            const t = i / sampleRate;
+            
+            const freq = 440 * (1 - t * 0.7);
+            let sample = Math.sin(2 * Math.PI * freq * t) * 0.8;
+            sample += Math.sin(2 * Math.PI * freq * 0.75 * t) * 0.4;
+            
+            const envelope = Math.exp(-t / (duration * 0.4));
+            data[i] = sample * envelope;
+        }
+    }
+    
+    return buffer;
+}
+
+function createHeartGainSound() {
+    if (!audioContext) return null;
+    
+    const sampleRate = audioContext.sampleRate;
+    const duration = 0.4;
+    const length = sampleRate * duration;
+    const buffer = audioContext.createBuffer(2, length, sampleRate);
+    
+    for (let channel = 0; channel < 2; channel++) {
+        const data = buffer.getChannelData(channel);
+        
+        for (let i = 0; i < length; i++) {
+            const t = i / sampleRate;
+            
+            const freq = 660 * (1 + t * 0.5);
+            let sample = Math.sin(2 * Math.PI * freq * t) * 0.7;
+            sample += Math.sin(2 * Math.PI * freq * 1.25 * t) * 0.4;
+            
+            const envelope = Math.sin(Math.PI * t / duration);
+            data[i] = sample * envelope;
+        }
+    }
+    
+    return buffer;
+}
+
+function createPriorityRingTone(urgencyType) {
+    if (!audioContext) return null;
+    
+    const sampleRate = audioContext.sampleRate;
+    const duration = 0.3;
+    const length = sampleRate * duration;
+    const buffer = audioContext.createBuffer(2, length, sampleRate);
+    
+    let frequency, intensity;
+    switch (urgencyType) {
+        case 'critical':
+            frequency = 800; intensity = 0.4; break;
+        case 'warning':
+            frequency = 600; intensity = 0.3; break;
+        case 'safe':
+            frequency = 400; intensity = 0.2; break;
+        default:
+            frequency = 500; intensity = 0.2;
+    }
+    
+    for (let channel = 0; channel < 2; channel++) {
+        const data = buffer.getChannelData(channel);
+        
+        for (let i = 0; i < length; i++) {
+            const t = i / sampleRate;
+            
+            const pulse = (Math.sin(2 * Math.PI * 4 * t) + 1) / 2;
+            let sample = Math.sin(2 * Math.PI * frequency * t) * pulse * intensity;
+            
+            const envelope = Math.exp(-t / (duration * 0.5));
+            data[i] = sample * envelope;
+        }
+    }
+    
+    return buffer;
 }
 
 function createMusicTrack(frequencies, volume, style) {
@@ -3004,6 +4596,24 @@ function stopBackgroundMusic() {
     }
 }
 
+function getEliminationSoundName(urgency) {
+    switch (urgency) {
+        case 'critical': return 'eliminateCritical';
+        case 'warning': return 'eliminateWarning';
+        case 'safe': return 'eliminateSafe';
+        default: return 'success';
+    }
+}
+
+function getMissSoundName(urgency) {
+    switch (urgency) {
+        case 'critical': return 'missCritical';
+        case 'warning': return 'missWarning'; 
+        case 'safe': return 'missSafe';
+        default: return 'fail';
+    }
+}
+
 // ============================================================================
 // ENHANCED HEART METER SYSTEM WITH SAFETY GUARDS
 // ============================================================================
@@ -3060,12 +4670,16 @@ function loseHeart(reason = 'missed') {
     
     const previousHearts = gameState.intimacyHearts;
     gameState.intimacyHearts = Math.max(0, gameState.intimacyHearts - heartsToLose);
-    
+    playHeartLossSound();
     playHeartLossEffect(previousHearts, heartsToLose);
     updateHeartMeter();
     
     // Enhanced vibration feedback
+    if (mobileState.isMobile) {
+    touchFeedback.haptic('error');
+    } else {
     vibrate([100, 50, 100]);
+    }
     
     if (gameState.intimacyHearts <= 0) {
         const timeoutId = setTimeout(() => {
@@ -3080,12 +4694,16 @@ function gainHeart(reason = 'bonus') {
     
     const previousHearts = gameState.intimacyHearts;
     gameState.intimacyHearts = Math.min(gameState.maxHearts, gameState.intimacyHearts + 1);
-    
+    playHeartGainSound();
     playHeartGainEffect(previousHearts);
     updateHeartMeter();
     
     // Enhanced vibration feedback
+    if (mobileState.isMobile) {
+    touchFeedback.haptic('success');
+    } else {
     vibrate([50, 30, 50]);
+    }
     
     if (reason === 'perfectCombo') {
         showHint("Perfect combo! Heart restored! 💕");
@@ -3156,7 +4774,7 @@ function setupEventListeners() {
     document.addEventListener('touchstart', handleInteraction);
     
     // Enhanced mobile handling
-    document.addEventListener('touchend', handleTouchEnd, false);
+    // document.addEventListener('touchend', handleTouchEnd, false);
     document.addEventListener('touchmove', handleTouchMove, { passive: false });
     
     // Orientation change with delay
@@ -3184,28 +4802,53 @@ function handleResize() {
 }
 
 function handleInteraction(event) {
+    // Skip if mobile event handler is managing touches
+    if (mobileState.isMobile && event.type.startsWith('touch')) {
+        return; // Let mobile event handler manage this
+    }
+    
     if (!gameState.gameRunning) return;
+    
+    // Prevent event bubbling
+    event.preventDefault();
+    event.stopPropagation();
     
     const x = event.clientX || (event.touches && event.touches[0].clientX);
     const y = event.clientY || (event.touches && event.touches[0].clientY);
     
+    if (!x || !y) return; // Safety check
+    
     const distractions = document.querySelectorAll('.distraction');
+    let hitDetected = false;
+    
     distractions.forEach(distraction => {
+        if (!distraction.parentNode) return; // Skip removed distractions
+        
         const rect = distraction.getBoundingClientRect();
-        if (x >= rect.left && x <= rect.right && y >= rect.top && y <= rect.bottom) {
+        
+        // Enhanced hit detection for desktop
+        const padding = mobileState.isMobile ? 15 : 5; // Larger touch targets on mobile
+        
+        if (x >= (rect.left - padding) && x <= (rect.right + padding) && 
+            y >= (rect.top - padding) && y <= (rect.bottom + padding)) {
+            hitDetected = true;
+            
+            // Enhanced feedback for desktop
+            if (!mobileState.isMobile) {
+                const urgency = distraction.dataset.urgency || 'safe';
+                touchFeedback.showTouchRipple(x, y, urgency === 'critical' ? '#FF4444' : 
+                                              urgency === 'warning' ? '#FFA500' : '#32CD32');
+            }
+            
             eliminateDistraction(distraction);
         }
     });
-}
-
-// Enhanced touch handling
-let lastTouchEnd = 0;
-function handleTouchEnd(e) {
-    const now = Date.now();
-    if (now - lastTouchEnd <= 300) {
-        e.preventDefault(); // Prevent zoom on double tap
+    
+    // Add debug logging for desktop misses
+    if (!hitDetected && distractions.length > 0 && !mobileState.isMobile) {
+        console.log('🖱️ Desktop click missed all distractions:', {x, y, distractionsCount: distractions.length});
+        touchFeedback.showTouchRipple(x, y, '#FF6666');
     }
-    lastTouchEnd = now;
 }
 
 function handleTouchMove(e) {
@@ -3293,98 +4936,6 @@ function showScreen(screenId) {
     }
 }
 
-function verifyAge(isAdult) {
-    if (isAdult) {
-        showScreen('startScreen');
-        playSound('success');
-    } else {
-        const screen = document.getElementById('ageVerificationScreen');
-        if (screen) {
-            screen.innerHTML = `
-                <div class="glass" style="padding: 40px; text-align: center;">
-                    <img src="https://assets.codepen.io/t-24779/KS_logo_two.png" alt="KamaSutra" class="brand-logo">
-                    <h2>Thank You</h2>
-                    <p>This experience is intended for adults. Thank you for your understanding.</p>
-                </div>
-            `;
-        }
-    }
-}
-
-// ============================================================================
-// ENHANCED INSTRUCTIONS SYSTEM
-// ============================================================================
-
-function showInstructions() {
-    gameState.instructionStep = 0;
-    updateInstruction();
-    showScreen('instructionsScreen');
-}
-
-function nextInstruction() {
-    gameState.instructionStep++;
-    if (gameState.instructionStep >= 3) {
-        showScreen('gameScreen');
-    } else {
-        updateInstruction();
-    }
-}
-
-function updateInstruction() {
-    const content = document.getElementById('instructionContent');
-    const btn = document.getElementById('instructionBtn');
-    
-    if (!content || !btn) return;
-    
-    const instructions = [
-        {
-            html: `
-                <p>Protect your intimate moments by eliminating distractions!</p>
-                <div style="margin: 30px 0;">
-                    <div class="distraction-icon glass" style="margin: 0 auto;">⏰</div>
-                </div>
-                <p>Tap distractions quickly before time runs out!</p>
-            `,
-            btnText: 'Next'
-        },
-        {
-            html: `
-                <p>React fast! You have only 1.5 seconds!</p>
-                <div style="margin: 30px 0;">
-                    <div class="distraction-icon glass" style="margin: 0 auto; position: relative;">
-                        📱
-                        <div class="distraction-timer">1.5</div>
-                    </div>
-                </div>
-                <p>Watch for the timer on each distraction!</p>
-            `,
-            btnText: 'Next'
-        },
-        {
-            html: `
-                <p>Progress through 8 rounds of increasing intimacy!</p>
-                <div style="margin: 30px 0;">
-                    <div class="intimacy-meter" style="justify-content: center;">
-                        <span class="heart active">❤️</span>
-                        <span class="heart active">❤️</span>
-                        <span class="heart active">❤️</span>
-                        <span class="heart active">❤️</span>
-                        <span class="heart active">❤️</span>
-                    </div>
-                </div>
-                <p>Don't let distractions break your focus!</p>
-            `,
-            btnText: 'Start Game'
-        }
-    ];
-
-    if (gameState.instructionStep < instructions.length) {
-        const instruction = instructions[gameState.instructionStep];
-        content.innerHTML = instruction.html;
-        btn.textContent = instruction.btnText;
-    }
-}
-
 // ============================================================================
 // GAME LOGIC - MAIN GAME FUNCTIONS
 // ============================================================================
@@ -3393,6 +4944,8 @@ function startGame() {
     try {
         // Clean up any existing game state
         gameState.reset();
+        // Reset difficulty tracking 
+        difficultyState.reset();
         
         Object.assign(gameState, {
             currentRound: 1,
@@ -3420,7 +4973,15 @@ function startGame() {
         
         startRound(gameState.currentRound);
         animate();
-        
+       if (mobileState.isMobile) {
+           mobileState.update();
+           console.log('📱 Mobile optimizations active');
+       // Show mobile-specific welcome message
+       setTimeout(() => {
+          messageQueue.add("📱 Tap distractions to eliminate them!", 'hint', 2500);
+        }, 1000);
+        }
+        startAmbientAudio();
         console.log('🎮 Game started successfully');
     } catch (error) {
         console.error('Game start failed:', error);
@@ -3473,16 +5034,29 @@ function startRound(roundNumber) {
     }
 }
 
-// Enhanced Achievement Board Visibility Management
+// Achievement Board Visibility Management
 function updateAchievementBoardVisibility() {
     const achievementBoard = document.getElementById('achievementBoard');
     if (!achievementBoard) return;
     
-    if (gameState.isMobile && gameState.gameplayStarted) {
-        // Hide on mobile during gameplay
-        achievementBoard.classList.add('gameplay-hidden');
+    // Enhanced mobile visibility logic
+    if (mobileState.isMobile) {
+        if (gameState.gameplayStarted && mobileState.orientation === 'portrait') {
+            // Hide in portrait mode during gameplay for more screen space
+            achievementBoard.classList.add('gameplay-hidden');
+        } else if (gameState.gameplayStarted && mobileState.orientation === 'landscape') {
+            // Show in landscape mode if performance is good
+            if (mobileState.performance.averageFPS > 40) {
+                achievementBoard.classList.remove('gameplay-hidden');
+            } else {
+                achievementBoard.classList.add('gameplay-hidden');
+            }
+        } else {
+            // Show before gameplay starts
+            achievementBoard.classList.remove('gameplay-hidden');
+        }
     } else {
-        // Show on desktop or mobile before gameplay starts
+        // Always show on desktop
         achievementBoard.classList.remove('gameplay-hidden');
     }
 }
@@ -3494,33 +5068,34 @@ function updateCoupleSilhouette(imageSrc) {
         
         if (silhouetteDiv && silhouetteImg) {
             silhouetteDiv.className = 'couple-silhouette';
-            
             silhouetteDiv.style.opacity = '0';
-            silhouetteDiv.style.transform = 'translate(-50%, -50%) scale(0.8)';
-            
-            const timeoutId = setTimeout(() => {
-                silhouetteImg.src = imageSrc;
-                
-                const animationClass = getSilhouetteAnimationClass(gameState.currentRound);
-                silhouetteDiv.classList.add(animationClass);
-                
-                silhouetteDiv.style.opacity = '0.8';
-                silhouetteDiv.style.transform = 'translate(-50%, -50%) scale(1)';
-                silhouetteDiv.style.display = 'block';
-                
-                const innerTimeoutId = setTimeout(() => {
-                    silhouetteDiv.style.transition = 'all 0.8s ease';
-                    silhouetteDiv.style.opacity = '0.9';
-                    silhouetteDiv.style.transform = 'translate(-50%, -50%) scale(1.05)';
-                    
-                    const finalTimeoutId = setTimeout(() => {
-                        silhouetteDiv.style.transform = 'translate(-50%, -50%) scale(1)';
-                    }, 300);
-                    cleanupTracker.addTimeout(finalTimeoutId);
-                }, 100);
-                cleanupTracker.addTimeout(innerTimeoutId);
-                
-            }, 300);
+            silhouetteDiv.classList.add('silhouette-intro-scale');
+
+    const timeoutId = setTimeout(() => {
+    silhouetteImg.src = imageSrc;
+    
+    const animationClass = getSilhouetteAnimationClass(gameState.currentRound);
+    silhouetteDiv.classList.add(animationClass);
+    
+    silhouetteDiv.style.opacity = '0.8';
+    silhouetteDiv.style.display = 'block';
+    silhouetteDiv.classList.remove('silhouette-intro-scale');
+    silhouetteDiv.classList.add('silhouette-normal-scale');
+    
+    const innerTimeoutId = setTimeout(() => {
+        silhouetteDiv.style.opacity = '0.9';
+        silhouetteDiv.classList.remove('silhouette-normal-scale');
+        silhouetteDiv.classList.add('silhouette-grow-scale');
+        
+        const finalTimeoutId = setTimeout(() => {
+            silhouetteDiv.classList.remove('silhouette-grow-scale');
+            silhouetteDiv.classList.add('silhouette-normal-scale');
+        }, 300);
+        cleanupTracker.addTimeout(finalTimeoutId);
+    }, 100);
+    cleanupTracker.addTimeout(innerTimeoutId);
+    
+    }, 300);
             cleanupTracker.addTimeout(timeoutId);
         }
     } catch (error) {
@@ -3623,52 +5198,38 @@ function showMobileRoundNotification(round) {
 }
 
 // ============================================================================
-// ENHANCED DISTRACTION SPAWNING AND MANAGEMENT
+// DISTRACTION SPAWNING AND MANAGEMENT
 // ============================================================================
 
 function spawnDistractions() {
-    if (!gameState.gameRunning || !gameState.roundInProgress || 
-        gameState.distractionsSpawned >= gameState.distractionsRequired) {
-        console.log('🛑 Stopping distraction spawn:', {
-            gameRunning: gameState.gameRunning,
-            roundInProgress: gameState.roundInProgress,
-            spawned: gameState.distractionsSpawned,
-            required: gameState.distractionsRequired
-        });
-        return;
-    }
-    
-    try {
-        const round = rounds[gameState.currentRound - 1];
-        const distraction = round.distractions[Math.floor(Math.random() * round.distractions.length)];
-        
-        createDistraction(distraction, round.reactionTime);
-        gameState.distractionsSpawned++;
-        
-        console.log(`📍 Spawned distraction ${gameState.distractionsSpawned}/${gameState.distractionsRequired}`);
-        
-        if (gameState.distractionsSpawned < gameState.distractionsRequired) {
-            const nextSpawn = round.spawnRate * (0.8 + Math.random() * 0.4);
-            gameState.spawnTimeout = setTimeout(() => {
-                spawnDistractions();
-            }, nextSpawn);
-            cleanupTracker.addTimeout(gameState.spawnTimeout);
-        } else {
-            console.log('✅ All distractions spawned for round', gameState.currentRound);
-        }
-    } catch (error) {
-        console.error('Distraction spawning failed:', error);
-        gracefulRecover();
-    }
+    // Delegate to adaptive spawning system
+    spawnAdaptiveDistractions();
 }
 
 function createDistraction(distractionData, reactionTime) {
     try {
         const distraction = document.createElement('div');
-        distraction.className = 'distraction';
+        distraction.className = 'distraction'; 
         distraction.dataset.type = distractionData.name;
         distraction.dataset.spawnTime = Date.now();
         distraction.dataset.booster = distractionData.booster || false;
+
+        const isTrophy = Math.random() < 0.05;
+        if (isTrophy) {
+            distraction.dataset.trophy = 'true';
+            distraction.dataset.bonusPoints = '100';
+        }
+
+        // ADD URGENCY CALCULATION HERE - THIS WAS MISSING!
+        let urgencyLevel = 'safe';
+        if (reactionTime <= 1000) {
+            urgencyLevel = 'critical';  // Red - very urgent
+        } else if (reactionTime <= 1400) {
+            urgencyLevel = 'warning';   // Yellow - moderate urgency
+        } else {
+            urgencyLevel = 'safe';      // Green - plenty of time
+        }
+        distraction.dataset.urgency = urgencyLevel;
         
         if (distractionData.special === 'sticky') {
             const stickyTexts = [
@@ -3690,28 +5251,55 @@ function createDistraction(distractionData, reactionTime) {
                 </div>
             `;
         } else {
-            const iconClass = distractionData.booster ? 'distraction-icon glass booster' : 'distraction-icon glass';
-            distraction.innerHTML = `
-                <div class="${iconClass}">
-                    ${distractionData.icon}
-                    <div class="distraction-timer" ${distractionData.booster ? 'style="background: #FFD700; color: #000;"' : ''}>${(reactionTime / 1000).toFixed(1)}</div>
-                </div>
-            `;
+            const isTrophy = distraction.dataset.trophy === 'true';
+            
+            if (isTrophy) {
+                // Trophy distraction
+                distraction.innerHTML = `
+                    <div class="distraction-icon glass trophy">
+                        🏆
+                        <div class="trophy-bonus">BONUS!</div>
+                        <div class="priority-ring ${urgencyLevel}"></div>
+                    </div>
+                `;
+            } else {
+                // Regular distraction
+                const iconClass = distractionData.booster ? 'distraction-icon glass booster' : 'distraction-icon glass';
+                distraction.innerHTML = `
+                    <div class="${iconClass}">
+                        ${distractionData.icon}
+                        <div class="priority-ring ${urgencyLevel}"></div>
+                    </div>
+                `;
+            }
         }
-        
+
         const x = 10 + Math.random() * 80;
         const y = 20 + Math.random() * 60;
         distraction.style.left = x + '%';
         distraction.style.top = y + '%';
-        
+
         const gameScreen = document.getElementById('gameScreen');
         if (gameScreen) {
             gameScreen.appendChild(distraction);
         }
-        
+        const timeoutId = setTimeout(() => {
+            playPriorityRingCue(urgencyLevel);
+        }, 200);
+        cleanupTracker.addTimeout(timeoutId);
+
+        if (gameState.totalEliminations === 0 && !gameState.priorityTutorialShown) {
+        const timeoutId = setTimeout(() => {
+            messageQueue.add("🔴 Thick rings = URGENT! 🟠 Medium = Soon! 🟢 Thin = Safe!", 'hint', 3000);
+            gameState.priorityTutorialShown = true;
+        }, 1000);
+        cleanupTracker.addTimeout(timeoutId);
+        }
+
         playSound(distractionData.sound || 'pop', 0.3);
         gameState.distractions.push(distraction);
-        
+
+        // TIMER LOGIC - proper timer with safety checks
         let timeLeft = reactionTime;
         const timerInterval = setInterval(() => {
             timeLeft -= 100;
@@ -3722,15 +5310,17 @@ function createDistraction(distractionData, reactionTime) {
             
             if (timeLeft <= 0) {
                 clearInterval(timerInterval);
-                if (distraction.parentNode) {
+                cleanupTracker.intervals.delete(timerInterval);
+                // Safety check: only fail if distraction still exists and is in the game
+                if (distraction.parentNode && gameState.distractions.includes(distraction)) {
                     failDistraction(distraction);
                 }
             }
         }, 100);
-        
+
         distraction.timerInterval = timerInterval;
         cleanupTracker.addInterval(timerInterval);
-        
+
     } catch (error) {
         console.error('Distraction creation failed:', error);
     }
@@ -3743,11 +5333,12 @@ function animateSilhouetteOnSuccess() {
         if (silhouette) {
             // Brief success pulse
             silhouette.style.filter = 'drop-shadow(0 0 40px rgba(255, 215, 0, 0.8))';
-            silhouette.style.transform = 'translate(-50%, -50%) scale(1.1)';
+            silhouette.classList.add('silhouette-grow-scale');
             
             const timeoutId = setTimeout(() => {
                 silhouette.style.filter = 'drop-shadow(0 0 20px rgba(213, 54, 90, 0.5))';
-                silhouette.style.transform = 'translate(-50%, -50%) scale(1)';
+                silhouette.classList.remove('silhouette-grow-scale');
+                silhouette.classList.add('silhouette-normal-scale');
             }, 200);
             cleanupTracker.addTimeout(timeoutId);
         }
@@ -3756,26 +5347,49 @@ function animateSilhouetteOnSuccess() {
     }
 }
 
-function animateSilhouetteOnMiss() {
+function animateSilhouetteOnMiss(urgency = 'safe') {
     try {
         const silhouette = document.getElementById('coupleSilhouette');
-        if (silhouette) {
-            // Brief shake and red glow
-            silhouette.style.animation = 'shake 0.5s ease-out';
-            silhouette.style.filter = 'drop-shadow(0 0 20px rgba(255, 0, 0, 0.6))';
-            
-            const timeoutId = setTimeout(() => {
-                const originalClass = getSilhouetteAnimationClass(gameState.currentRound);
-                silhouette.className = `couple-silhouette ${originalClass}`;
-                silhouette.style.filter = 'drop-shadow(0 0 20px rgba(213, 54, 90, 0.5))';
-            }, 500);
-            cleanupTracker.addTimeout(timeoutId);
+        if (!silhouette) return;
+        
+        let shakeAnimation = 'shake 0.5s ease-out';
+        let filterEffect = 'drop-shadow(0 0 20px rgba(255, 0, 0, 0.6))';
+        let duration = 500;
+        
+        switch (urgency) {
+            case 'critical':
+                shakeAnimation = 'shake 0.8s ease-out';
+                filterEffect = 'drop-shadow(0 0 30px rgba(255, 0, 0, 1)) brightness(0.7)';
+                duration = 800;
+                break;
+            case 'warning':
+                shakeAnimation = 'shake 0.6s ease-out';
+                filterEffect = 'drop-shadow(0 0 25px rgba(255, 165, 0, 0.8)) brightness(0.85)';
+                duration = 600;
+                break;
+            case 'safe':
+                shakeAnimation = 'shake 0.4s ease-out';
+                filterEffect = 'drop-shadow(0 0 20px rgba(255, 0, 0, 0.4))';
+                duration = 400;
+                break;
         }
+        
+        silhouette.style.animation = shakeAnimation;
+        silhouette.style.filter = filterEffect;
+
+        const timeoutId = setTimeout(() => {
+            const originalClass = getSilhouetteAnimationClass(gameState.currentRound);
+            silhouette.className = `couple-silhouette ${originalClass} silhouette-normal-scale`;
+            silhouette.style.filter = 'drop-shadow(0 0 20px rgba(213, 54, 90, 0.5))';
+            silhouette.style.animation = '';
+        }, duration);
+        cleanupTracker.addTimeout(timeoutId);
     } catch (error) {
-        console.error('Silhouette miss animation failed:', error);
+        console.error('Enhanced silhouette miss animation failed:', error);
     }
 }
 
+// COMBO SYSTEM 
 function eliminateDistraction(distraction) {
     if (!distraction.parentNode) return;
     
@@ -3787,10 +5401,88 @@ function eliminateDistraction(distraction) {
         
         const reactionTime = Date.now() - parseInt(distraction.dataset.spawnTime);
         const isBooster = distraction.dataset.booster === 'true';
+        const isTrophy = distraction.dataset.trophy === 'true';
+        const urgency = distraction.dataset.urgency || 'safe';
+
+        // Track performance for difficulty adaptation
+              difficultyState.updateSkill(reactionTime, true, urgency);
+
+        let basePoints;
+        if (isTrophy) {
+            basePoints = 100;
+            gameState.totalTrophiesCollected++;
+            
+            if (!gameState.trophyBonusShown) {
+                messageQueue.add("TROPHY BONUS! +100 points! 🏆", 'hint', 1500);
+                gameState.trophyBonusShown = true;
+            }
+        } else if (isBooster) {
+            basePoints = 20;
+        } else {
+            basePoints = 10;
+        }
         
-        const points = isBooster ? 20 : 10;
-        gameState.score += points;
-        gameState.roundScore += points;
+        // BALANCED COMBO SYSTEM - Not too strict, not too generous
+        const now = Date.now();
+        const timeSinceLastElimination = now - gameState.lastEliminationTime;
+
+        // BALANCED COMBO WINDOW - reasonable for average players
+        const comboTimeWindow = 1300; // 1.3 seconds - achievable but requires skill
+        
+        // Check if within combo time window
+        if (timeSinceLastElimination <= comboTimeWindow && gameState.lastEliminationTime > 0) {
+            gameState.comboCount++;
+        } else {
+            gameState.comboCount = 1; // Reset combo
+        }
+
+        gameState.lastEliminationTime = now;
+
+        // BALANCED COMBO MULTIPLIER REQUIREMENTS
+        let comboMultiplier = 1;
+        let showCombo = false;
+        
+        if (gameState.comboCount >= 7) {
+            // 3X multiplier for 7+ consecutive hits (rare but achievable)
+            comboMultiplier = 3;
+            showCombo = true;
+        } else if (gameState.comboCount >= 4) {
+            // 2X multiplier for 4-6 consecutive hits (uncommon)
+            comboMultiplier = 2;
+            showCombo = true;
+        } else if (gameState.comboCount >= 3) {
+            // 1.5X multiplier for 3 consecutive hits (achievable)
+            comboMultiplier = 1.5;
+            showCombo = true;
+        }
+        // No multiplier for 1-2 hits
+
+        // Apply multiplier to points
+        const finalPoints = Math.floor(basePoints * comboMultiplier);
+        gameState.score += finalPoints;
+        gameState.roundScore += finalPoints;
+        
+        // Show combo effect only for significant combos
+        if (showCombo && comboMultiplier > 1) {
+            showCenteredComboEffect(comboMultiplier, gameState.comboCount, finalPoints);
+            
+            // Tutorial only for 2X+ combos
+            if (!gameState.comboTutorialShown && comboMultiplier >= 2) {
+                messageQueue.add("COMBO! Keep tapping quickly for bonus points! 🔥", 'combo', 2500);
+                gameState.comboTutorialShown = true;
+            }
+        }
+        
+        // Enhanced screen shake based on combo level
+        if (comboMultiplier >= 3) {
+            enhancedScreenShake(3, 400);
+        } else if (comboMultiplier >= 2) {
+            enhancedScreenShake(2, 300);
+        } else if (comboMultiplier >= 1.5) {
+            enhancedScreenShake(1, 200);
+        }
+        
+        // Rest of elimination logic...
         gameState.totalEliminations++;
         gameState.streak++;
         
@@ -3815,16 +5507,35 @@ function eliminateDistraction(distraction) {
         
         checkAchievements(reactionTime);
         createEnhancedParticleEffect(distraction);
-        playSound('success', 0.5);
+        // Enhanced sound feedback with spatial audio
+        const rect = distraction.getBoundingClientRect();
+        const x = rect.left + rect.width / 2;
+        const y = rect.top + rect.height / 2;
+        
+        if (isTrophy) {
+            playTrophySound();
+        } else if (isBooster) {
+            playBoosterSound();
+        } else {
+            playSpatialSound(getEliminationSoundName(urgency), x, y, 0.5);
+        }
+        
+        // Play combo sound if applicable
+        if (showCombo && comboMultiplier > 1) {
+            playComboSound(comboMultiplier, 0.6);
+        }
+        
+        // Update dynamic music
+        updateDynamicMusic();
 
-        // Enhanced vibration feedback
         vibrate([30]);
-
-        // Silhouette success animation
+        if (mobileState.isMobile) {
+           touchFeedback.distractionHit(distraction, urgency);
+        }
         animateSilhouetteOnSuccess();
         
         if (gameState.totalEliminations === 1) {
-            showHint("Great job! Keep tapping!");
+            messageQueue.add("Great job! Keep tapping!", 'hint', 1500);
         }
         
         distraction.remove();
@@ -3841,14 +5552,173 @@ function eliminateDistraction(distraction) {
     }
 }
 
-function failDistraction(distraction) {
+// COMBO EFFECT WITH MOBILE-OPTIMIZED SIZING
+function showCenteredComboEffect(multiplier, comboCount, actualPoints) {
     try {
+        const comboPopup = document.createElement('div');
+        
+        // Mobile-responsive sizing
+        const isMobile = window.innerWidth <= 768;
+        const fontSize = isMobile ? '1.2rem' : '1.5rem';
+        
+        comboPopup.style.cssText = `
+            position: fixed;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: ${fontSize};
+            font-weight: bold;
+            color: ${getComboColor(multiplier)};
+            text-shadow: 0 0 10px ${getComboColor(multiplier)};
+            pointer-events: none;
+            z-index: 2500;
+            animation: centeredComboFloat 2s ease-out forwards;
+            text-align: center;
+            white-space: nowrap;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 8px 16px;
+            border-radius: 12px;
+            border: 2px solid ${getComboColor(multiplier)};
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+        `;
+        
+        // Enhanced combo text with rarity indicators
+        let comboText;
+        if (multiplier >= 3) {
+            comboText = `🔥 LEGENDARY ${multiplier}X COMBO! +${actualPoints} pts`;
+        } else if (multiplier >= 2) {
+            comboText = `⚡ EPIC ${multiplier}X COMBO! +${actualPoints} pts`;
+        } else {
+            comboText = `✨ COMBO ${multiplier}X! +${actualPoints} pts`;
+        }
+        
+        comboPopup.textContent = comboText;
+        
+        // Add directly to body to ensure it's always centered
+        document.body.appendChild(comboPopup);
+        
+        const timeoutId = setTimeout(() => {
+            if (comboPopup.parentNode) {
+                comboPopup.remove();
+            }
+        }, 2000);
+        cleanupTracker.addTimeout(timeoutId);
+        
+    } catch (error) {
+        console.error('Centered combo effect failed:', error);
+    }
+}
+
+// COMBO ANIMATION - ALWAYS CENTERED
+const centeredComboFloatCSS = `
+@keyframes centeredComboFloat {
+    0% {
+        transform: translate(-50%, -50%) scale(0.5);
+        opacity: 0;
+    }
+    15% {
+        transform: translate(-50%, -50%) scale(1.2);
+        opacity: 1;
+    }
+    30% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+    70% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(0.8);
+        opacity: 0;
+    }
+}
+`;
+
+// CSS animation 
+if (!document.getElementById('centeredComboCSS')) {
+    const style = document.createElement('style');
+    style.id = 'centeredComboCSS';
+    style.textContent = centeredComboFloatCSS;
+    document.head.appendChild(style);
+}
+
+function showCenteredComboEffect(multiplier, comboCount, actualPoints) {
+    try {
+        const comboPopup = document.createElement('div');
+        
+        // Mobile-optimized sizing
+        const isMobile = window.innerWidth <= 768;
+        const fontSize = isMobile ? '1rem' : '1.2rem'; // Smaller font size
+        
+        comboPopup.style.cssText = `
+            position: fixed;
+            top: 45%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: ${fontSize};
+            font-weight: bold;
+            color: ${getComboColor(multiplier)};
+            text-shadow: 0 0 8px ${getComboColor(multiplier)};
+            pointer-events: none;
+            z-index: 2500;
+            animation: centeredComboFloat 1.8s ease-out forwards;
+            text-align: center;
+            white-space: nowrap;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 6px 12px;
+            border-radius: 10px;
+            border: 2px solid ${getComboColor(multiplier)};
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            max-width: ${isMobile ? '200px' : '250px'};
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+        `;
+        
+        // Shorter, cleaner combo text
+        let comboText;
+        if (multiplier >= 3) {
+            comboText = `🔥 ${multiplier}X COMBO! +${actualPoints}`;
+        } else if (multiplier >= 2) {
+            comboText = `⚡ ${multiplier}X COMBO! +${actualPoints}`;
+        } else {
+            comboText = `✨ ${multiplier}X! +${actualPoints}`;
+        }
+        
+        comboPopup.textContent = comboText;
+        
+        // Add to body for proper centering
+        document.body.appendChild(comboPopup);
+        
+        const timeoutId = setTimeout(() => {
+            if (comboPopup.parentNode) {
+                comboPopup.remove();
+            }
+        }, 1800);
+        cleanupTracker.addTimeout(timeoutId);
+        
+    } catch (error) {
+        console.error('Centered combo effect failed:', error);
+    }
+}
+
+function failDistraction(distraction) {
+    console.log('💥 DISTRACTION FAILED:', distraction.dataset.type, 'Hearts before:', gameState.intimacyHearts);
+    try {
+        
         if (distraction.timerInterval) {
             clearInterval(distraction.timerInterval);
             cleanupTracker.intervals.delete(distraction.timerInterval);
         }
         
+        // Get urgency level for enhanced feedback
+        const urgency = distraction.dataset.urgency || 'safe';
+        // Track miss for difficulty adaptation
+        const reactionTime = Date.now() - parseInt(distraction.dataset.spawnTime);
+              difficultyState.updateSkill(reactionTime, false, urgency);
         const currentTime = Date.now();
+        
         if (currentTime - gameState.lastMissTime < 10000) {
             gameState.consecutiveMisses++;
         } else {
@@ -3870,15 +5740,27 @@ function failDistraction(distraction) {
             lossReason = 'critical';
         }
         
+        // URGENCY-BASED SCREEN SHAKE AND VISUAL FEEDBACK
+        applyUrgencyMissEffects(urgency, lossReason);
+        
         loseHeart(lossReason);
         gameState.streak = 0;
         gameState.roundMissed++;
 
-        // Silhouette miss animation
-        animateSilhouetteOnMiss();
+        // Enhanced miss sound with spatial audio
+        const rect = distraction.getBoundingClientRect();
+        const x = rect.left + rect.width / 2;
+        const y = rect.top + rect.height / 2;
+        playSpatialSound(getMissSoundName(urgency), x, y, 0.4);
+        
+        // Update dynamic music
+        updateDynamicMusic();
+
+        // Enhanced silhouette miss animation based on urgency
+        animateSilhouetteOnMiss(urgency);
         
         if (gameState.roundMissed >= 2) {
-            showHint("Focus! Don't lose the connection!");
+            messageQueue.add("Focus! Don't lose the connection!", 'hint', 2000);
         }
         
         distraction.remove();
@@ -3887,28 +5769,43 @@ function failDistraction(distraction) {
             gameState.distractions.splice(index, 1);
         }
         
-        if (gameState.intimacyHearts > 0) {
+        if (gameState.intimacyHearts <= 0) {
+            if (gameState.spawnTimeout) {
+                clearTimeout(gameState.spawnTimeout);
+                gameState.spawnTimeout = null;
+            }
+            gameState.roundInProgress = false;
+        
+            const timeoutId = setTimeout(() => {
+                endGame();
+            }, 1000);
+            cleanupTracker.addTimeout(timeoutId);
+        } else {
             checkRoundCompletion();
         }
-        
+
     } catch (error) {
         console.error('Distraction failure handling failed:', error);
     }
 }
 
-// Enhanced round completion check with safety guards
+
+// Round completion check with safety guards
 function checkRoundCompletion() {
     try {
         console.log('🔍 Checking round completion:', {
             spawned: gameState.distractionsSpawned,
             required: gameState.distractionsRequired,
             remaining: gameState.distractions.length,
-            roundInProgress: gameState.roundInProgress
+            roundInProgress: gameState.roundInProgress,
+            totalEliminations: gameState.totalEliminations
         });
         
+        // Enhanced safety checks
         if (gameState.distractionsSpawned >= gameState.distractionsRequired && 
             gameState.distractions.length === 0 && 
-            gameState.roundInProgress) {
+            gameState.roundInProgress &&
+            (gameState.totalEliminations > 0 || gameState.roundMissed > 0)) { // Allow completion with some activity
             console.log('✅ Round completion criteria met!');
             completeRound();
         }
@@ -3918,7 +5815,7 @@ function checkRoundCompletion() {
 }
 
 // ============================================================================
-// ENHANCED VISUAL EFFECTS AND UI UPDATES
+// VISUAL EFFECTS AND UI 
 // ============================================================================
 
 function createEnhancedParticleEffect(element) {
@@ -3927,20 +5824,42 @@ function createEnhancedParticleEffect(element) {
         const x = rect.left + rect.width / 2;
         const y = rect.top + rect.height / 2;
         
-        const particleCount = gameState.isMobile ? 5 : 10; // Reduce on mobile
+        // Get distraction properties
+        const urgency = element.dataset.urgency || 'safe';
+        const isBooster = element.dataset.booster === 'true';
+        const isTrophy = element.dataset.trophy === 'true';
+        
+        // Determine particle properties based on urgency and type
+        const particleConfig = getParticleConfig(urgency, isBooster, isTrophy);
+        
+        const particleCount = gameState.isMobile ? particleConfig.count / 2 : particleConfig.count;
         
         for (let i = 0; i < particleCount; i++) {
             const particle = document.createElement('div');
-            particle.className = 'particle';
-            particle.style.left = x + 'px';
-            particle.style.top = y + 'px';
-            particle.style.setProperty('--tx', (Math.random() - 0.5) * 100 + 'px');
-            particle.style.setProperty('--ty', (Math.random() - 0.5) * 100 + 'px');
+            particle.className = 'urgency-particle';
             
-            // Enhanced particle colors
-            const colors = ['#FFD700', '#FF69B4', '#00CED1', '#FF6347', '#98FB98'];
-            particle.style.background = colors[Math.floor(Math.random() * colors.length)];
-            particle.style.boxShadow = `0 0 10px ${particle.style.background}`;
+            // Random trajectory
+            const angle = (Math.PI * 2 * i) / particleCount + (Math.random() - 0.5) * 0.5;
+            const distance = 50 + Math.random() * particleConfig.spread;
+            const tx = Math.cos(angle) * distance;
+            const ty = Math.sin(angle) * distance;
+            
+            particle.style.cssText = `
+                position: fixed;
+                left: ${x}px;
+                top: ${y}px;
+                width: ${particleConfig.size}px;
+                height: ${particleConfig.size}px;
+                background: ${particleConfig.colors[i % particleConfig.colors.length]};
+                border-radius: 50%;
+                pointer-events: none;
+                z-index: 2000;
+                box-shadow: 0 0 ${particleConfig.glow}px ${particleConfig.colors[i % particleConfig.colors.length]};
+                animation: urgencyParticleFly ${particleConfig.duration}s ease-out forwards;
+                --tx: ${tx}px;
+                --ty: ${ty}px;
+                --fade-delay: ${particleConfig.fadeDelay}s;
+            `;
             
             document.body.appendChild(particle);
             
@@ -3948,11 +5867,144 @@ function createEnhancedParticleEffect(element) {
                 if (particle.parentNode) {
                     particle.remove();
                 }
-            }, 1000);
+            }, particleConfig.duration * 1000);
+            cleanupTracker.addTimeout(timeoutId);
+        }
+        
+        // Add special effects for certain types
+        if (isTrophy) {
+            createTrophySparkleEffect(x, y);
+        } else if (isBooster) {
+            createBoosterRingEffect(x, y);
+        }
+        
+    } catch (error) {
+        console.error('Enhanced particle effect creation failed:', error);
+    }
+}
+
+// PARTICLE CONFIGURATION SYSTEM
+function getParticleConfig(urgency, isBooster, isTrophy) {
+    if (isTrophy) {
+        return {
+            count: 12,
+            size: 6,
+            colors: ['#FFD700', '#FFA500', '#FFFF00', '#FF8C00'],
+            spread: 80,
+            duration: 1.2,
+            glow: 8,
+            fadeDelay: 0.3
+        };
+    }
+    
+    if (isBooster) {
+        return {
+            count: 10,
+            size: 5,
+            colors: ['#FFD700', '#FFA500', '#FFAA00'],
+            spread: 70,
+            duration: 1.0,
+            glow: 6,
+            fadeDelay: 0.2
+        };
+    }
+    
+    // Regular distractions - urgency-based
+    switch (urgency) {
+        case 'critical':
+            return {
+                count: 8,
+                size: 4,
+                colors: ['#FF4444', '#FF6666', '#FF8888', '#FFAAAA'],
+                spread: 60,
+                duration: 0.8,
+                glow: 5,
+                fadeDelay: 0.1
+            };
+        case 'warning':
+            return {
+                count: 6,
+                size: 4,
+                colors: ['#FFA500', '#FFB84D', '#FFCC66'],
+                spread: 50,
+                duration: 0.9,
+                glow: 4,
+                fadeDelay: 0.15
+            };
+        case 'safe':
+        default:
+            return {
+                count: 5,
+                size: 3,
+                colors: ['#32CD32', '#66FF66', '#90EE90'],
+                spread: 40,
+                duration: 1.0,
+                glow: 3,
+                fadeDelay: 0.2
+            };
+    }
+}
+
+// SPECIAL TROPHY SPARKLE EFFECT
+function createTrophySparkleEffect(x, y) {
+    try {
+        for (let i = 0; i < 5; i++) {
+            const sparkle = document.createElement('div');
+            sparkle.innerHTML = '✨';
+            sparkle.style.cssText = `
+                position: fixed;
+                left: ${x + (Math.random() - 0.5) * 60}px;
+                top: ${y + (Math.random() - 0.5) * 60}px;
+                font-size: ${12 + Math.random() * 8}px;
+                color: #FFD700;
+                pointer-events: none;
+                z-index: 2100;
+                animation: trophySparkle 1.5s ease-out forwards;
+                text-shadow: 0 0 10px #FFD700;
+            `;
+            
+            document.body.appendChild(sparkle);
+            
+            const timeoutId = setTimeout(() => {
+                if (sparkle.parentNode) {
+                    sparkle.remove();
+                }
+            }, 1500);
             cleanupTracker.addTimeout(timeoutId);
         }
     } catch (error) {
-        console.error('Particle effect creation failed:', error);
+        console.error('Trophy sparkle effect failed:', error);
+    }
+}
+
+// SPECIAL BOOSTER RING EFFECT
+function createBoosterRingEffect(x, y) {
+    try {
+        const ring = document.createElement('div');
+        ring.style.cssText = `
+            position: fixed;
+            left: ${x - 30}px;
+            top: ${y - 30}px;
+            width: 60px;
+            height: 60px;
+            border: 3px solid #FFD700;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 2050;
+            animation: boosterRingExpand 0.8s ease-out forwards;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
+        `;
+        
+        document.body.appendChild(ring);
+        
+        const timeoutId = setTimeout(() => {
+            if (ring.parentNode) {
+                ring.remove();
+            }
+        }, 800);
+        cleanupTracker.addTimeout(timeoutId);
+    } catch (error) {
+        console.error('Booster ring effect failed:', error);
     }
 }
 
@@ -3973,6 +6025,139 @@ function enhancedShakeScreen() {
         }
     } catch (error) {
         console.error('Screen shake failed:', error);
+    }
+}
+
+function enhancedScreenShake(intensity = 1, duration = 500) {
+    try {
+        const gameScreen = document.getElementById('gameScreen');
+        if (!gameScreen) return;
+        
+        // Prevent shake spam
+        const now = Date.now();
+        if (now - gameState.lastShakeTime < 100) return;
+        gameState.lastShakeTime = now;
+        
+        // Calculate shake parameters based on intensity
+        const shakeDistance = Math.min(intensity * 3, 15); // Max 15px shake
+        const shakeSpeed = Math.max(50, 100 - (intensity * 10)); // Faster for higher intensity
+        
+        let shakeCount = 0;
+        const maxShakes = Math.min(intensity * 2, 8); // Max 8 shakes
+        
+        const shakeInterval = setInterval(() => {
+            if (shakeCount >= maxShakes) {
+                clearInterval(shakeInterval);
+                gameScreen.style.transform = ''; // Reset position
+                cleanupTracker.intervals.delete(shakeInterval);
+                return;
+            }
+            
+            const randomX = (Math.random() - 0.5) * shakeDistance;
+            const randomY = (Math.random() - 0.5) * shakeDistance;
+            
+            gameScreen.style.transform = `translate(${randomX}px, ${randomY}px)`;
+            shakeCount++;
+        }, shakeSpeed);
+        
+        cleanupTracker.addInterval(shakeInterval);
+        
+    } catch (error) {
+        console.error('Enhanced screen shake failed:', error);
+    }
+}
+
+// URGENCY-BASED MISS EFFECTS
+function applyUrgencyMissEffects(urgency, lossReason) {
+    try {
+        // Screen shake intensity based on urgency
+        let shakeIntensity = 1;
+        let shakeDuration = 300;
+        let vibratePattern = [100];
+        
+        switch (urgency) {
+            case 'critical':
+                shakeIntensity = 4;
+                shakeDuration = 600;
+                vibratePattern = [150, 50, 150, 50, 150];
+                // Red screen flash
+                createScreenFlash('#FF4444', 0.3);
+                break;
+            case 'warning':
+                shakeIntensity = 2;
+                shakeDuration = 400;
+                vibratePattern = [100, 30, 100];
+                // Orange screen flash
+                createScreenFlash('#FFA500', 0.2);
+                break;
+            case 'safe':
+                shakeIntensity = 1;
+                shakeDuration = 200;
+                vibratePattern = [80];
+                // Green screen flash (subtle)
+                createScreenFlash('#32CD32', 0.1);
+                break;
+        }
+        
+        // Apply enhanced screen shake
+        enhancedScreenShake(shakeIntensity, shakeDuration);
+        
+        // Apply vibration
+        if (mobileState.isMobile) {
+    touchFeedback.haptic('error');
+        } else {
+             vibrate(vibratePattern);
+        }
+        
+        // Play urgency-appropriate sound
+        playUrgencyMissSound(urgency);
+        
+    } catch (error) {
+        console.error('Urgency miss effects failed:', error);
+    }
+}
+
+// SCREEN FLASH EFFECT
+function createScreenFlash(color, opacity) {
+    try {
+        const flash = document.createElement('div');
+        flash.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: ${color};
+            opacity: ${opacity};
+            pointer-events: none;
+            z-index: 3000;
+            animation: screenFlash 0.4s ease-out forwards;
+        `;
+        
+        document.body.appendChild(flash);
+        
+        const timeoutId = setTimeout(() => {
+            if (flash.parentNode) {
+                flash.remove();
+            }
+        }, 400);
+        cleanupTracker.addTimeout(timeoutId);
+    } catch (error) {
+        console.error('Screen flash effect failed:', error);
+    }
+}
+
+// PLAY URGENCY-BASED MISS SOUND
+function playUrgencyMissSound(urgency) {
+    try {
+        // Use enhanced miss sounds 
+        const rect = { left: window.innerWidth / 2, top: window.innerHeight / 2, width: 0, height: 0 };
+        const x = rect.left;
+        const y = rect.top;
+        
+        playSpatialSound(getMissSoundName(urgency), x, y, 0.4);
+    } catch (error) {
+        console.error('Urgency miss sound failed:', error);
     }
 }
 
@@ -4005,30 +6190,14 @@ function updateHUD(animateLoss = false, animateScore = false) {
     }
 }
 
-function showHint(message) {
-    try {
-        const hint = document.createElement('div');
-        hint.className = 'hint-popup';
-        hint.textContent = message;
-        
-        const gameScreen = document.getElementById('gameScreen');
-        if (gameScreen) {
-            gameScreen.appendChild(hint);
-            
-            const timeoutId = setTimeout(() => {
-                if (hint.parentNode) {
-                    hint.remove();
-                }
-            }, 2000);
-            cleanupTracker.addTimeout(timeoutId);
-        }
-    } catch (error) {
-        console.error('Hint display failed:', error);
-    }
+// ShowHint messages
+function showHint(message, duration = 2000) {
+    // Simply delegate to the message queue system
+    messageQueue.add(message, 'hint', duration);
 }
 
 // ============================================================================
-// ENHANCED ROUND COMPLETION AND PROGRESSION
+// ROUND COMPLETION AND PROGRESSION
 // ============================================================================
 
 function completeRound() {
@@ -4070,12 +6239,12 @@ function completeRound() {
                 gameState.achievements.add('penetratingFocus');
                 const timeoutId = setTimeout(() => {
                     showAchievement(achievements.penetratingFocus);
-                }, 100);
+                }, 50); // Faster achievement display
                 cleanupTracker.addTimeout(timeoutId);
             }
         }
         
-        // Show round complete popup and proceed
+        // MUCH FASTER ROUND TRANSITION - Show popup briefly and move on quickly
         const timeoutId = setTimeout(() => {
             const roundPopup = document.getElementById('roundCompletePopup');
             const roundNumber = document.getElementById('roundNumber');
@@ -4086,10 +6255,11 @@ function completeRound() {
                 roundPopup.style.top = '55%';
                 roundPopup.classList.add('show');
                 
+                // FASTER POPUP DISMISSAL - Only 800ms instead of 2000ms
                 const innerTimeoutId = setTimeout(() => {
                     roundPopup.classList.remove('show');
                     
-                    // Proper round progression
+                    // Immediate round progression - no extra delay
                     gameState.currentRound++;
                     console.log('🚀 Moving to round', gameState.currentRound);
                     
@@ -4100,16 +6270,24 @@ function completeRound() {
                         gameState.gameRunning = true;
                         startRound(gameState.currentRound);
                     }
-                }, 2000);
+                }, 800); // Reduced from 2000ms to 800ms
                 cleanupTracker.addTimeout(innerTimeoutId);
             }
-        }, gameState.roundMissed === 0 ? 1500 : 100);
+        }, gameState.roundMissed === 0 ? 300 : 50); // Much faster initial delay
         cleanupTracker.addTimeout(timeoutId);
         
     } catch (error) {
         console.error('Round completion failed:', error);
         gracefulRecover();
     }
+}
+
+// COMBO COLOR SYSTEM (unchanged but included for completeness)
+function getComboColor(multiplier) {
+    if (multiplier >= 3) return '#FF4444'; // Red for 3X
+    if (multiplier >= 2) return '#FF8800'; // Orange for 2X  
+    if (multiplier >= 1.5) return '#FFD700'; // Gold for 1.5X
+    return '#FFFFFF'; // White fallback
 }
 
 // ============================================================================
@@ -4320,7 +6498,7 @@ function endGame() {
         
         gameState.cleanup();
         stopBackgroundMusic();
-        
+        stopAmbientAudio();
         const achievementBoard = document.getElementById('achievementBoard');
         if (achievementBoard) {
             achievementBoard.style.display = 'none';
@@ -4353,15 +6531,28 @@ function endGame() {
         const playTime = Math.floor((Date.now() - gameState.gameStartTime) / 1000);
         
         let message = `Your embrace lasted ${playTime} seconds!`;
-        if (gameState.score >= 300) {
-            message += " Legendary performance! 🔥";
-        } else if (gameState.score >= 200) {
-            message += " Impressive stamina! 💪";
-        } else if (gameState.score >= 100) {
-            message += " Good focus! Keep practicing!";
-        } else {
-            message += " Room for improvement!";
-        }
+        const gameCompleted = gameState.currentRound > rounds.length;
+        const heartsRemaining = gameState.intimacyHearts;
+        const totalRoundsCompleted = gameCompleted ? rounds.length : gameState.currentRound - 1;
+        const averageScorePerRound = gameState.score / Math.max(totalRoundsCompleted, 1);
+
+        if (gameCompleted && heartsRemaining === 5) {
+           message += " PERFECT MASTERY! Ultimate intimacy achieved! 🔥👑";
+        } else if (gameCompleted && heartsRemaining >= 3) {
+           message += " LEGENDARY PERFORMANCE! You conquered all distractions! 🏆";
+        } else if (gameCompleted && heartsRemaining >= 1) {
+           message += " INCREDIBLE ENDURANCE! You completed the journey! 💪";
+        } else if (gameState.score >= 1500) {
+           message += " MASTER-LEVEL focus! Outstanding performance! ⚡";
+        } else if (gameState.score >= 1000) {
+          message += " EXPERT-LEVEL stamina! Impressive dedication! 🎯";
+       } else if (gameState.score >= 500) {
+          message += " ADVANCED performance! You're getting stronger! 💎";
+       } else if (gameState.score >= 200) {
+         message += " GOOD focus! Keep practicing for mastery! 📈";
+       } else {
+        message += " Every master started as a beginner! Keep going! 🌟";
+       }
         
         const finalScore = document.getElementById('finalScore');
         const performanceMessage = document.getElementById('performanceMessage');
@@ -4625,43 +6816,6 @@ function restartGame() {
     }
 }
 
-function showLeaderboard() {
-    try {
-        const bestScore = localStorage.getItem('bestScore') || 0;
-        const lastScore = gameState.lastScore || localStorage.getItem('lastScore') || 0;
-        const bestStreak = localStorage.getItem('bestStreak') || 0;
-        const totalGames = localStorage.getItem('totalGames') || 0;
-        
-        const modal = document.createElement('div');
-        modal.className = 'modal show';
-        modal.innerHTML = `
-            <div class="modal-content glass">
-                <h2 style="color: #FFD700;">📊 Leaderboard</h2>
-                <div style="text-align: left; margin: 20px 0;">
-                    <p><strong>🏆 Best Score:</strong> ${bestScore}</p>
-                    <p><strong>🎯 Last Score:</strong> ${lastScore}</p>
-                    <p><strong>🔥 Longest Streak:</strong> ${bestStreak}</p>
-                    <p><strong>🎮 Total Games:</strong> ${totalGames}</p>
-                    <p><strong>⚡ Current FPS:</strong> ${performanceMonitor.fps}</p>
-                </div>
-                <button class="btn" onclick="this.parentElement.parentElement.remove()">Close</button>
-            </div>
-        `;
-        document.body.appendChild(modal);
-        
-        // Auto-close after 10 seconds
-        const timeoutId = setTimeout(() => {
-            if (modal.parentNode) {
-                modal.remove();
-            }
-        }, 10000);
-        cleanupTracker.addTimeout(timeoutId);
-        
-    } catch (error) {
-        console.error('Leaderboard display failed:', error);
-    }
-}
-
 function shareWhatsApp() {
     try {
         let message;
@@ -4764,14 +6918,14 @@ function animate() {
         performanceMonitor.update();
         
         if (particleSystem) {
-            particleSystem.rotation.y += 0.001;
-            particleSystem.rotation.x += 0.0005;
+            particleSystem.rotation.y += 0.003;
+            particleSystem.rotation.x += 0.0015;
             
             const positions = particleSystem.geometry.attributes.position.array;
-            const time = Date.now() * 0.001;
+            const time = Date.now() * 0.002;
             
             for (let i = 0; i < positions.length; i += 3) {
-                positions[i + 1] += Math.sin(time + i) * 0.001;
+                positions[i + 1] += Math.sin(time + i) * 0.003;
             }
             
             particleSystem.geometry.attributes.position.needsUpdate = true;
@@ -4819,10 +6973,6 @@ window.addEventListener('beforeunload', () => {
 // ============================================================================
 
 // Make functions globally accessible for HTML onclick handlers
-window.verifyAge = verifyAge;
-window.showInstructions = showInstructions;
-window.nextInstruction = nextInstruction;
-window.showLeaderboard = showLeaderboard;
 window.restartGame = restartGame;
 window.saveQRCode = saveQRCode;
 window.generateChallengeCode = generateChallengeCode;
