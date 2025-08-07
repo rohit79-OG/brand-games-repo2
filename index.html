@@ -6741,13 +6741,12 @@ function showMobileAchievementNotification(achievement) {
 // ============================================================================
 
 function endGame() {
-    try {
-        if (gameState.gameEnding) return;
-        gameState.gameEnding = true;
-    
+    if (gameState.gameEnding) return;
+    gameState.gameEnding = true;
+
     try {
         console.log('🏁 Game ending...');
-        
+
         gameState.cleanup();
         stopBackgroundMusic();
         stopAmbientAudio();
