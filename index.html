@@ -3047,7 +3047,7 @@ const difficultyState = {
     recentReactionTimes: [],
     perfectRoundsStreak: 0,
     
-    // FIXED: Balanced difficulty modifiers
+    // Balanced difficulty modifiers
     spawnRateMultiplier: 1.0,
     reactionTimeMultiplier: 1.0,
     criticalChance: 0.1,
@@ -3058,7 +3058,7 @@ const difficultyState = {
     minDifficulty: 0.3,
     maxDifficulty: 1.8, // More reasonable max difficulty
     
-    // FIXED: More stable skill updating
+    // More stable skill updating
     updateSkill(reactionTime, success, urgency) {
         // Track reaction time with bounds checking
         const clampedReactionTime = Math.max(300, Math.min(5000, reactionTime));
@@ -3077,7 +3077,7 @@ const difficultyState = {
             this.recentPerformance.shift();
         }
         
-        // FIXED: More stable skill calculation
+        // More stable skill calculation
         const successRate = this.recentPerformance.reduce((a, b) => a + b, 0) / this.recentPerformance.length;
         const reactionScore = Math.max(0, (2500 - this.averageReactionTime) / 2500);
         const urgencyBonus = urgency === 'critical' ? 0.15 : urgency === 'warning' ? 0.08 : 0;
@@ -3087,7 +3087,7 @@ const difficultyState = {
             (successRate * 0.7) + (reactionScore * 0.2) + (urgencyBonus * 0.1)
         ));
         
-        // FIXED: Smoother skill adjustment
+        // Smoother skill adjustment
         this.playerSkill += (targetSkill - this.playerSkill) * this.adaptationRate;
         this.playerSkill = Math.max(0.2, Math.min(0.9, this.playerSkill));
         
@@ -3100,34 +3100,54 @@ const difficultyState = {
         }
     },
     
-    // FIXED: Better balanced difficulty levels
-    updateDifficultyLevel() {
-        if (this.playerSkill < 0.35) {
-            this.currentDifficultyLevel = 'easy';
-            this.spawnRateMultiplier = 1.4; // Slower spawning
-            this.reactionTimeMultiplier = 1.3; // More time
-            this.criticalChance = 0.05;
-            this.urgencyDistribution = { critical: 0.05, warning: 0.25, safe: 0.7 };
-        } else if (this.playerSkill < 0.55) {
-            this.currentDifficultyLevel = 'normal';
-            this.spawnRateMultiplier = 1.0;
-            this.reactionTimeMultiplier = 1.0;
-            this.criticalChance = 0.1;
-            this.urgencyDistribution = { critical: 0.1, warning: 0.3, safe: 0.6 };
-        } else if (this.playerSkill < 0.75) {
-            this.currentDifficultyLevel = 'hard';
-            this.spawnRateMultiplier = 0.9; // Slightly faster
-            this.reactionTimeMultiplier = 0.9; // Slightly less time
-            this.criticalChance = 0.15;
-            this.urgencyDistribution = { critical: 0.15, warning: 0.35, safe: 0.5 };
+    // Better balanced difficulty levels
+   updateDifficultyLevel() {
+    if (this.playerSkill < 0.35) {
+        this.currentDifficultyLevel = 'easy';
+        this.spawnRateMultiplier = 1.4; // Slower spawning
+        // Don't reduce reaction time for moving distraction rounds
+        if (gameState.currentRound >= 3 && gameState.currentRound <= 8) {
+            this.reactionTimeMultiplier = 1.2; // Give MORE time for moving rounds
         } else {
-            this.currentDifficultyLevel = 'expert';
-            this.spawnRateMultiplier = 0.8; // Faster spawning
-            this.reactionTimeMultiplier = 0.85; // Less time
-            this.criticalChance = 0.2;
-            this.urgencyDistribution = { critical: 0.2, warning: 0.4, safe: 0.4 };
+            this.reactionTimeMultiplier = 1.3; // More time (original value)
         }
-    },
+        this.criticalChance = 0.05;
+        this.urgencyDistribution = { critical: 0.05, warning: 0.25, safe: 0.7 };
+    } else if (this.playerSkill < 0.55) {
+        this.currentDifficultyLevel = 'normal';
+        this.spawnRateMultiplier = 1.0;
+        // Don't reduce reaction time for moving distraction rounds
+        if (gameState.currentRound >= 3 && gameState.currentRound <= 8) {
+            this.reactionTimeMultiplier = 1.2; // Give MORE time for moving rounds
+        } else {
+            this.reactionTimeMultiplier = 1.0; // Normal time (original value)
+        }
+        this.criticalChance = 0.1;
+        this.urgencyDistribution = { critical: 0.1, warning: 0.3, safe: 0.6 };
+    } else if (this.playerSkill < 0.75) {
+        this.currentDifficultyLevel = 'hard';
+        this.spawnRateMultiplier = 0.9; // Slightly faster
+        // Don't reduce reaction time for moving distraction rounds
+        if (gameState.currentRound >= 3 && gameState.currentRound <= 8) {
+            this.reactionTimeMultiplier = 1.2; // Give MORE time for moving rounds
+        } else {
+            this.reactionTimeMultiplier = 0.9; // Slightly less time (original value)
+        }
+        this.criticalChance = 0.15;
+        this.urgencyDistribution = { critical: 0.15, warning: 0.35, safe: 0.5 };
+    } else {
+        this.currentDifficultyLevel = 'expert';
+        this.spawnRateMultiplier = 0.8; // Faster spawning
+        // Don't reduce reaction time for moving distraction rounds
+        if (gameState.currentRound >= 3 && gameState.currentRound <= 8) {
+            this.reactionTimeMultiplier = 1.2; // Give MORE time for moving rounds
+        } else {
+            this.reactionTimeMultiplier = 0.85; // Less time (original value)
+        }
+        this.criticalChance = 0.2;
+        this.urgencyDistribution = { critical: 0.2, warning: 0.4, safe: 0.4 };
+    }
+},
     
     reset() {
         this.recentPerformance = [];
@@ -4350,13 +4370,37 @@ function loseHeart(reason = 'missed') {
     console.log(`💔 loseHeart called with reason: ${reason}`);
     console.log(`💔 Current hearts: ${gameState.intimacyHearts}, gameEnding: ${gameState.gameEnding}`);
     
-    // Early exit conditions
-    if (gameState.intimacyHearts <= 0 || 
-        gameState.heartUpdateInProgress || 
-        gameState.gameEnding) {
-        
-        console.log('❤️ Cannot lose heart - hearts:', gameState.intimacyHearts, 'updating:', gameState.heartUpdateInProgress, 'gameEnding:', gameState.gameEnding);
+    // 🔧 Modified early exit conditions - ALLOW processing when hearts = 0
+    if (gameState.heartUpdateInProgress || gameState.gameEnding) {
+        console.log('❤️ Cannot lose heart - updating:', gameState.heartUpdateInProgress, 'gameEnding:', gameState.gameEnding);
         return;
+    }
+    
+    // 🔧 Special handling for already-zero hearts
+    if (gameState.intimacyHearts <= 0) {
+        console.log('💔 Hearts already at 0 - triggering immediate game end');
+        if (!gameState.gameEnding) {
+            gameState.gameEnding = true;
+            gameState.gameRunning = false;
+            gameState.roundInProgress = false;
+            
+            // Clear any pending round progressions
+            if (gameState.spawnTimeout) {
+                clearTimeout(gameState.spawnTimeout);
+                gameState.spawnTimeout = null;
+            }
+            
+            // Stop all game activity
+            if (typeof gameStateManager !== 'undefined') {
+                gameStateManager.endGame();
+            }
+            
+            // 🔧 Reset flag and call endGame() immediately
+            console.log('🚀 loseHeart: Resetting gameEnding flag and calling main endGame() (zero hearts case)...');
+            gameState.gameEnding = false; // Reset flag to allow main endGame() to run
+            endGame();
+        }
+        return; // ✅ FIX: Added missing return statement
     }
     
     // Calculate hearts to lose based on reason
@@ -4398,15 +4442,25 @@ function loseHeart(reason = 'missed') {
         // Set flag immediately to prevent duplicates
         gameState.gameEnding = true;
         
+        // 🔧 IMMEDIATELY STOP ALL GAME ACTIVITY
+        gameState.gameRunning = false;
+        gameState.roundInProgress = false;
+        
+        // Clear any pending round progressions
+        if (gameState.spawnTimeout) {
+            clearTimeout(gameState.spawnTimeout);
+            gameState.spawnTimeout = null;
+        }
+        
         // Stop all game activity
         if (typeof gameStateManager !== 'undefined') {
             gameStateManager.endGame();
         }
         
-        // End game with delay for UI updates
-        setTimeout(() => {
-            endGame();
-        }, 1000);
+        // 🔧 Reset flag and call endGame() immediately
+        console.log('🚀 loseHeart: Resetting gameEnding flag and calling main endGame() (normal case)...');
+        gameState.gameEnding = false; // Reset flag to allow main endGame() to run
+        endGame();
     }
 }
 function calculateHeartLoss(reason) {
@@ -4563,6 +4617,11 @@ function handleTouchEnd(e) {
 }
 
 function handleGameTap(x, y) {
+    // 🔧 RECORD INTERACTION FOR INACTIVITY TRACKING
+    if (typeof inactivityManager !== 'undefined') {
+        inactivityManager.recordInteraction();
+    }
+    
     const distractions = document.querySelectorAll('.distraction');
     let hitDetected = false;
     
@@ -4661,6 +4720,21 @@ function showScreen(screenId) {
             gameState.cleanup();
         }
         
+        // 🔧 Auto-generate QR code when results screen is shown
+        if (screenId === 'resultsScreen') {
+            console.log('📱 Results screen loading - scheduling QR code generation...');
+            setTimeout(() => {
+                console.log('📱 Auto-generating QR code for results screen...');
+                if (typeof generateQRCode === 'function') {
+                    generateQRCode();
+                    console.log('✅ QR code auto-generated on results screen');
+                } else {
+                    console.log('❌ generateQRCode function not available');
+                    console.log('🔍 Available functions:', Object.getOwnPropertyNames(window).filter(name => name.includes('QR') || name.includes('qr')));
+                }
+            }, 1500); // Wait for screen to fully render
+        }
+        
     } catch (error) {
         console.error('Screen change failed:', error);
     }
@@ -4733,6 +4807,12 @@ function startRound(roundNumber) {
         // Clean up previous round
         if (gameState.spawnTimeout) {
             clearTimeout(gameState.spawnTimeout);
+        }
+        
+        // 🔧 FIX #5: START INACTIVITY MONITORING
+        if (typeof inactivityManager !== 'undefined') {
+            inactivityManager.startRoundTimer();
+            console.log('⏱️ Inactivity monitoring started for round', roundNumber);
         }
         
         updateCoupleSilhouette(round.silhouette);
@@ -4857,6 +4937,34 @@ function createDistraction(distractionData, baseReactionTime) {
         let adaptiveReactionTime = Math.floor(baseReactionTime * difficultyState.reactionTimeMultiplier);
         adaptiveReactionTime = Math.max(gameState.isMobile ? 1000 : 800, adaptiveReactionTime);
         adaptiveReactionTime = Math.min(3000, adaptiveReactionTime); // Cap at 3 seconds
+
+        // For moving distraction rounds (3-8), use animation duration instead
+        if (gameState.currentRound >= 3 && gameState.currentRound <= 8) {
+            if (gameState.currentRound >= 3 && gameState.currentRound <= 4) {
+                // SLIDING ROUNDS (3-4): Calculate total sliding animation time
+                const slideIn = gameState.isMobile ? 2000 : 3500;
+                const centerPause = gameState.isMobile ? 3000 : 5000;
+                const slideOut = gameState.isMobile ? 2000 : 3000;
+                // Set timeout to total animation time + small buffer
+                adaptiveReactionTime = slideIn + centerPause + (slideOut * 0.5); // Allow timeout halfway through exit
+                console.log(`🔧 Round ${gameState.currentRound} SLIDING: Using synchronized timeout: ${adaptiveReactionTime}ms`);
+                
+            } else if (gameState.currentRound >= 5 && gameState.currentRound <= 6) {
+                // BOUNCING ROUNDS (5-6): More generous timing for complex bouncing animations
+                const totalBouncingTime = gameState.isMobile ? 8000 : 12000; // 8s mobile, 12s desktop
+                adaptiveReactionTime = totalBouncingTime;
+                console.log(`🔧 Round ${gameState.currentRound} BOUNCING: Using synchronized timeout: ${adaptiveReactionTime}ms`);
+                
+            } else if (gameState.currentRound >= 7 && gameState.currentRound <= 8) {
+                // ORBITAL ROUNDS (7-8): Most generous timing for complex orbital/spiral animations
+                const totalOrbitalTime = gameState.isMobile ? 10000 : 15000; // 10s mobile, 15s desktop
+                adaptiveReactionTime = totalOrbitalTime;
+                console.log(`🔧 Round ${gameState.currentRound} ORBITAL: Using synchronized timeout: ${adaptiveReactionTime}ms`);
+            }
+        } else {
+            // STATIC ROUNDS (1-2): Use normal adaptive timing
+            console.log(`🔧 Round ${gameState.currentRound} STATIC: Using adaptive timeout: ${adaptiveReactionTime}ms`);
+        }
         
         // Create visual content
         if (distractionData.special === 'sticky') {
@@ -4959,6 +5067,140 @@ function createDistraction(distractionData, baseReactionTime) {
         console.error('❌ Distraction creation failed:', error);
     }
 }
+
+// ========================================================================
+// INACTIVITY TIMEOUT SYSTEM
+// ========================================================================
+
+// ROUND INACTIVITY TIMEOUT SYSTEM
+const inactivityManager = {
+    roundTimer: null,
+    gameTimer: null,
+    lastInteraction: Date.now(),
+    
+    // Reset interaction timestamp
+    recordInteraction() {
+        this.lastInteraction = Date.now();
+        console.log('👆 Player interaction recorded');
+    },
+    
+    // Start round inactivity monitoring
+    startRoundTimer() {
+        this.clearTimers();
+        
+        // 60-second round inactivity timeout
+        this.roundTimer = setTimeout(() => {
+            console.log('⏰ Round inactivity timeout - failing remaining distractions');
+            this.handleRoundInactivity();
+        }, 60000); // 60 seconds
+        
+        // 120-second complete game abandonment timeout
+        this.gameTimer = setTimeout(() => {
+            console.log('⏰ Game abandonment timeout - ending game');
+            this.handleGameAbandonment();
+        }, 600000); // 10 minutes
+        
+        cleanupTracker.addTimeout(this.roundTimer);
+        cleanupTracker.addTimeout(this.gameTimer);
+    },
+    
+    // Handle round inactivity
+    handleRoundInactivity() {
+    if (!gameState.gameRunning || !gameState.roundInProgress) return;
+    
+    console.log('⏰ Round inactivity detected - cleaning up distractions');
+    
+    // Get ALL distractions (including zombie ones)
+    const allDistractions = [...gameState.distractions];
+    
+    allDistractions.forEach(distraction => {
+        if (distraction) {
+            console.log('🧹 Cleaning up distraction:', distraction.dataset?.type || 'unknown');
+            
+            // Clear timer if exists
+            if (distraction.timerInterval) {
+                clearInterval(distraction.timerInterval);
+                cleanupTracker.intervals.delete(distraction.timerInterval);
+            }
+            
+            // Remove from DOM if still there
+            if (distraction.parentNode) {
+                distraction.remove();
+            }
+            
+            // Remove from state manager tracking
+            gameStateManager.removeDistraction(distraction);
+        }
+    });
+    
+    // Clear the entire distractions array
+    gameState.distractions = [];
+    
+    // Lose one heart for inactivity
+    loseHeart('inactivity');
+    
+    // Show inactivity message
+    messageQueue.add("Wake up! Distractions are taking over! 😴", 'hint', 3000);
+    
+    // Force check round completion after cleanup
+    setTimeout(() => {
+        console.log('🔍 Forcing round completion check after inactivity cleanup');
+        checkRoundCompletion();
+    }, 500);
+},
+    
+    // Handle complete game abandonment
+    handleGameAbandonment() {
+        if (!gameState.gameRunning) return;
+        
+        console.log('🏃 Player abandoned game - ending gracefully');
+        
+        // Set abandonment flag
+        gameState.gameEnding = true;
+        gameState.gameRunning = false;
+        gameState.roundInProgress = false;
+        
+        // Show abandonment message
+        messageQueue.add("Game abandoned due to inactivity", 'hint', 2000);
+        
+        // End game with abandonment message
+        setTimeout(() => {
+            endGame();
+        }, 2500);
+    },
+    
+    // Clear all timers
+    clearTimers() {
+    if (this.roundTimer) {
+        clearTimeout(this.roundTimer);
+        cleanupTracker.timeouts.delete(this.roundTimer);
+        this.roundTimer = null;
+    }
+    if (this.gameTimer) {
+        clearTimeout(this.gameTimer);
+        cleanupTracker.timeouts.delete(this.gameTimer);
+        this.gameTimer = null;
+    }
+    },
+    
+    // Stop monitoring
+    stop() {
+    // Cleanup with tracking removal
+    if (this.roundTimer) {
+        clearTimeout(this.roundTimer);
+        cleanupTracker.timeouts.delete(this.roundTimer);
+        this.roundTimer = null;
+    }
+    
+    if (this.gameTimer) {
+        clearTimeout(this.gameTimer);
+        cleanupTracker.timeouts.delete(this.gameTimer);
+        this.gameTimer = null;
+    }
+    
+    console.log('⏹️ Inactivity monitoring stopped with enhanced cleanup');
+},
+};
 
 function assignAdaptiveUrgency() {
     const distribution = difficultyState.urgencyDistribution;
@@ -5189,10 +5431,20 @@ function checkRoundCompletion() {
             spawned: gameState.distractionsSpawned,
             required: gameState.distractionsRequired,
             remaining: gameState.distractions.length,
-            roundInProgress: gameState.roundInProgress
+            roundInProgress: gameState.roundInProgress,
+            hearts: gameState.intimacyHearts
         });
         
-        // FIXED: Proper completion check
+        // 🔧 CHECK HEARTS BEFORE ROUND COMPLETION
+        if (gameState.intimacyHearts <= 0) {
+            console.log('💔 Cannot complete round - no hearts remaining');
+            if (!gameState.gameEnding) {
+                endGame();
+            }
+            return;
+        }
+        
+        // Proper completion check
         if (gameState.distractionsSpawned >= gameState.distractionsRequired && 
             gameState.distractions.length === 0 && 
             gameState.roundInProgress) {
@@ -5210,6 +5462,20 @@ function completeRound() {
         
         gameState.gameRunning = false;
         gameState.roundInProgress = false;
+        
+        // 🔧 CHECK HEARTS IMMEDIATELY AFTER ROUND COMPLETION
+        if (gameState.intimacyHearts <= 0) {
+            console.log('💔 Round completed but no hearts remaining - ending game');
+            // Clean up first
+            if (gameState.spawnTimeout) {
+                clearTimeout(gameState.spawnTimeout);
+                gameState.spawnTimeout = null;
+            }
+            setTimeout(() => {
+                endGame();
+            }, 1000);
+            return; // CRITICAL: Exit function immediately
+        }
         
         // Clean up
         if (gameState.spawnTimeout) {
@@ -5269,9 +5535,16 @@ function completeRound() {
             showRoundCompletePopup();
             
             setTimeout(() => {
+                // 🔧 CHECK HEARTS BEFORE ADVANCING TO NEXT ROUND
+                if (gameState.intimacyHearts <= 0) {
+                    console.log('💔 No hearts remaining before next round - ending game');
+                    endGame();
+                    return;
+                }
+                
                 gameState.currentRound++;
                 
-                // FIXED: Proper end-game check
+                // Proper end-game check
                 if (gameState.currentRound > rounds.length) {
                     console.log('🏁 All rounds completed!');
                     endGame();
@@ -5279,7 +5552,7 @@ function completeRound() {
                     gameState.gameRunning = true;
                     startRound(gameState.currentRound);
                 }
-            }, 1200); // FIXED: Shorter delay
+            }, 1200); // Shorter delay
         }, 500);
         
     } catch (error) {
@@ -5758,6 +6031,46 @@ function endGame() {
     gameState.gameEnding = true;
 
     try {
+        // 🔧 FIX #1: ENHANCED INACTIVITY MONITORING CLEANUP WITH DEBUGGING
+        console.log('🛑 Starting inactivity manager cleanup...');
+        if (typeof inactivityManager !== 'undefined') {
+            console.log('✅ inactivityManager found, proceeding with cleanup');
+            
+            // Debug current timer state
+            console.log('📊 Timer state before cleanup:');
+            console.log('- Round timer:', inactivityManager.roundTimer ? 'ACTIVE' : 'NULL');
+            console.log('- Game timer:', inactivityManager.gameTimer ? 'ACTIVE' : 'NULL');
+            console.log('- Cleanup tracker size:', cleanupTracker.timeouts.size);
+            
+            // Clear timers from cleanup tracker first
+            if (inactivityManager.roundTimer) {
+                console.log('🧹 Removing round timer from cleanup tracker');
+                cleanupTracker.timeouts.delete(inactivityManager.roundTimer);
+            }
+            if (inactivityManager.gameTimer) {
+                console.log('🧹 Removing game timer from cleanup tracker');
+                cleanupTracker.timeouts.delete(inactivityManager.gameTimer);
+            }
+            
+            // Stop the inactivity manager
+            console.log('🛑 Calling inactivityManager.stop()...');
+            inactivityManager.stop();
+            
+            // Verify cleanup worked
+            console.log('📊 Timer state after cleanup:');
+            console.log('- Round timer:', inactivityManager.roundTimer ? 'STILL ACTIVE ❌' : 'CLEARED ✅');
+            console.log('- Game timer:', inactivityManager.gameTimer ? 'STILL ACTIVE ❌' : 'CLEARED ✅');
+            console.log('- Cleanup tracker size:', cleanupTracker.timeouts.size);
+            
+        } else {
+            console.log('❌ inactivityManager not found - this is a problem!');
+        }
+        
+        // 🔧 FIX #2: CLEAN UP CONFLICTING GAME STATES
+        console.log('🔧 Cleaning up game states...');
+        gameState.roundInProgress = false;
+        gameState.gameRunning = false;
+        
         gameState.cleanup();
         stopBackgroundMusic();
         
@@ -5812,8 +6125,6 @@ function endGame() {
            message += " INCREDIBLE ENDURANCE! You completed the journey! 💪";
         } else if (gameState.score >= 1500) {
            message += " MASTER-LEVEL focus! Outstanding performance! ⚡";
-        } else if (gameState.score >= 1000) {
-           message += " EXPERT-LEVEL stamina! Impressive dedication! 🎯";
         } else if (gameState.score >= 500) {
            message += " ADVANCED performance! You're getting stronger! 💎";
         } else if (gameState.score >= 200) {
@@ -5840,7 +6151,7 @@ function endGame() {
             showScreen('resultsScreen');
         }, 1000);
         
-        console.log('✅ Game ended successfully');
+        console.log('✅ Game ended successfully with complete cleanup');
     } catch (error) {
         console.error('❌ Game end failed:', error);
         gracefulRecover();
@@ -7266,10 +7577,15 @@ const directSlidingSystem = {
     
     // Setup direct sliding animation with JavaScript
     setupDirectSliding(distraction, direction) {
-        const slideInDuration = gameState.isMobile ? 2000 : 2500;  // 2-2.5s to reach center
-        const pauseDuration = gameState.isMobile ? 3000 : 4000;    // 3-4s pause in center
-        const slideOutDuration = gameState.isMobile ? 2000 : 2500; // 2-2.5s to exit
+        const slideInDuration = gameState.isMobile ? 2000 : 3500;  // 3.5s for desktop (was 2.5s)
+        const pauseDuration = gameState.isMobile ? 3000 : 5000;    // 5s for desktop (was 4s)
+        const slideOutDuration = gameState.isMobile ? 2000 : 3000; // 3s for desktop (was 2.5s)
         
+        // DEBUG:
+        console.log(`🔧 SLIDING FIX: Round ${gameState.currentRound} Desktop=${!gameState.isMobile}`);
+        console.log(`🔧 Timings: SlideIn=${slideInDuration}ms, Pause=${pauseDuration}ms, SlideOut=${slideOutDuration}ms`);
+
+
         // Force proper positioning
         distraction.style.position = 'fixed';
         distraction.style.zIndex = '1000';
@@ -7315,7 +7631,7 @@ const directSlidingSystem = {
         distraction.style.opacity = '0';
         
         console.log(`🎬 Starting slide-${direction}: Edge → Center → Edge with ${pauseDuration}ms pause`);
-        
+        console.log(`🎯 Round ${gameState.currentRound}: Center pause will be ${pauseDuration}ms for better tapping`);
         // Fade in
         setTimeout(() => {
             distraction.style.opacity = '1';
