@@ -1326,6 +1326,88 @@ p {
 }
 
 /* =================================
+   SILHOUETTE REACTION ANIMATIONS 
+   ================================= */
+
+/* Desktop Reactions */
+@media (min-width: 769px) {
+    .couple-silhouette.reaction-safe {
+        animation: desktopGentleSeparation 0.8s ease-out !important;
+    }
+
+    .couple-silhouette.reaction-warning {
+        animation: desktopStrongSeparation 1.0s ease-out !important;
+    }
+
+    .couple-silhouette.reaction-critical {
+        animation: desktopDramaticSeparation 1.2s ease-out !important;
+    }
+}
+
+/* Mobile Reactions - Performance Optimized */
+@media (max-width: 768px) {
+    .couple-silhouette.reaction-safe {
+        animation: mobileGentleSeparation 0.6s ease-out !important;
+    }
+
+    .couple-silhouette.reaction-warning {
+        animation: mobileStrongSeparation 0.8s ease-out !important;
+    }
+
+    .couple-silhouette.reaction-critical {
+        animation: mobileDramaticSeparation 1.0s ease-out !important;
+    }
+}
+
+/* Desktop Keyframes - Full Effect */
+@keyframes desktopGentleSeparation {
+    0% { transform: translate(-50%, -50%) scale(1); }
+    30% { transform: translate(-50%, -50%) scale(0.95) skewX(2deg); }
+    70% { transform: translate(-50%, -50%) scale(1.02) skewX(-1deg); }
+    100% { transform: translate(-50%, -50%) scale(1); }
+}
+
+@keyframes desktopStrongSeparation {
+    0% { transform: translate(-50%, -50%) scale(1); }
+    20% { transform: translate(-50%, -50%) scale(0.9) skewX(-3deg); }
+    40% { transform: translate(-50%, -50%) scale(1.05) skewX(3deg); }
+    70% { transform: translate(-50%, -50%) scale(0.98) skewX(-1deg); }
+    100% { transform: translate(-50%, -50%) scale(1); }
+}
+
+@keyframes desktopDramaticSeparation {
+    0% { transform: translate(-50%, -50%) scale(1); }
+    15% { transform: translate(-50%, -50%) scale(0.85) skewX(-5deg) translateX(-10px); }
+    35% { transform: translate(-50%, -50%) scale(1.1) skewX(5deg) translateX(10px); }
+    60% { transform: translate(-50%, -50%) scale(0.95) skewX(-2deg) translateX(-5px); }
+    80% { transform: translate(-50%, -50%) scale(1.02) skewX(1deg); }
+    100% { transform: translate(-50%, -50%) scale(1); }
+}
+
+/* Mobile Keyframes - Simplified for Performance */
+@keyframes mobileGentleSeparation {
+    0% { transform: translate(-50%, -50%) scale(1); }
+    50% { transform: translate(-50%, -50%) scale(0.97); }
+    100% { transform: translate(-50%, -50%) scale(1); }
+}
+
+@keyframes mobileStrongSeparation {
+    0% { transform: translate(-50%, -50%) scale(1); }
+    25% { transform: translate(-50%, -50%) scale(0.94); }
+    75% { transform: translate(-50%, -50%) scale(1.03); }
+    100% { transform: translate(-50%, -50%) scale(1); }
+}
+
+@keyframes mobileDramaticSeparation {
+    0% { transform: translate(-50%, -50%) scale(1); }
+    20% { transform: translate(-50%, -50%) scale(0.9); }
+    50% { transform: translate(-50%, -50%) scale(1.05); }
+    80% { transform: translate(-50%, -50%) scale(0.98); }
+    100% { transform: translate(-50%, -50%) scale(1); }
+}
+
+
+/* =================================
    OTHER UI ELEMENTS
    ================================= */
 
@@ -2301,7 +2383,7 @@ p {
             <img src="https://assets.codepen.io/t-24779/KS_logo_two.png" alt="KamaSutra" class="brand-logo">
             <h1>Endless Embrace</h1>
             <img src="https://assets.codepen.io/t-24779/bg-seated-embrace-pose.png" alt="Endless Embrace" class="game-logo">
-            <p style="color: #FFD700; font-size: 1.2rem; margin: 20px 0;">Kill the mood killers. Last Longer</p>
+            <p style="color: #FFD700; font-size: 1.2rem; margin: 20px 0;">Kill the mood killers. Last longer!</p>
             <button class="btn" onclick="showScreen('gameScreen')">Play Game</button>
         </div>
     </div>
@@ -2697,40 +2779,45 @@ const gameState = {
     
     // Enhanced cleanup system
     cleanup() {
-        console.log('🧹 Cleaning up game state...');
-        
-        // Clear all timeouts and intervals
-        if (this.spawnTimeout) {
-            clearTimeout(this.spawnTimeout);
-            this.spawnTimeout = null;
-        }
-        if (this.multiKillTimer) {
-            clearTimeout(this.multiKillTimer);
-            this.multiKillTimer = null;
-        }
-        
-        // Clean up distractions with safety checks
-        this.distractions.forEach(distraction => {
-            try {
-                if (distraction && distraction.timerInterval) {
-                    clearInterval(distraction.timerInterval);
-                }
-                if (distraction && distraction.parentNode) {
-                    distraction.remove();
-                }
-            } catch (error) {
-                console.warn('Distraction cleanup failed:', error);
+    console.log('🧹 Cleaning up game state...');
+    
+    // Emergency cleanup for silhouette animations
+    if (typeof silhouetteSeparationSystem !== 'undefined') {
+        silhouetteSeparationSystem.emergencyCleanup();
+    }
+    
+    // Clear all timeouts and intervals
+    if (this.spawnTimeout) {
+        clearTimeout(this.spawnTimeout);
+        this.spawnTimeout = null;
+    }
+    if (this.multiKillTimer) {
+        clearTimeout(this.multiKillTimer);
+        this.multiKillTimer = null;
+    }
+    
+    // Clean up distractions with safety checks
+    this.distractions.forEach(distraction => {
+        try {
+            if (distraction && distraction.timerInterval) {
+                clearInterval(distraction.timerInterval);
             }
-        });
-        
-        this.distractions = [];
-        this.gameRunning = false;
-        this.roundInProgress = false;
-        this.gameEnding = false;
-        
-        // Clear any remaining intervals from cleanup tracker
-        cleanupTracker.cleanup();
-    },
+            if (distraction && distraction.parentNode) {
+                distraction.remove();
+            }
+        } catch (error) {
+            console.warn('Distraction cleanup failed:', error);
+        }
+    });
+    
+    this.distractions = [];
+    this.gameRunning = false;
+    this.roundInProgress = false;
+    this.gameEnding = false;
+    
+    // Clear any remaining intervals from cleanup tracker
+    cleanupTracker.cleanup();
+},
     
     // Proper state reset
     reset() {
@@ -2946,7 +3033,7 @@ const comboSystemManager = {
 };
 
 // ========================================================================
-// PROGRESSIVE DIFFICULTY SYSTEM - FIXED
+// PROGRESSIVE DIFFICULTY SYSTEM
 // ========================================================================
 const difficultyState = {
     playerSkill: 0.5,
@@ -2967,9 +3054,9 @@ const difficultyState = {
     urgencyDistribution: { critical: 0.1, warning: 0.3, safe: 0.6 },
     
     // Adaptation settings
-    adaptationRate: 0.05, // FIXED: Slower adaptation for stability
+    adaptationRate: 0.05, // Slower adaptation for stability
     minDifficulty: 0.3,
-    maxDifficulty: 1.8, // FIXED: More reasonable max difficulty
+    maxDifficulty: 1.8, // More reasonable max difficulty
     
     // FIXED: More stable skill updating
     updateSkill(reactionTime, success, urgency) {
@@ -2977,7 +3064,7 @@ const difficultyState = {
         const clampedReactionTime = Math.max(300, Math.min(5000, reactionTime));
         this.recentReactionTimes.push(clampedReactionTime);
         
-        if (this.recentReactionTimes.length > 15) { // FIXED: Smaller window for stability
+        if (this.recentReactionTimes.length > 15) { // Smaller window for stability
             this.recentReactionTimes.shift();
         }
         
@@ -2986,7 +3073,7 @@ const difficultyState = {
         
         // Track recent performance
         this.recentPerformance.push(success ? 1 : 0);
-        if (this.recentPerformance.length > 8) { // FIXED: Smaller window
+        if (this.recentPerformance.length > 8) { // Smaller window
             this.recentPerformance.shift();
         }
         
@@ -3290,7 +3377,7 @@ const messageBoxConfig = {
 };
 
 // ========================================================================
-// MESSAGE QUEUE SYSTEM - OPTIMIZED
+// MESSAGE QUEUE SYSTEM 
 // ========================================================================
 const messageQueue = {
     queue: [],
@@ -3585,7 +3672,7 @@ const mobileState = {
 };
 
 // ========================================================================
-// CLEANUP TRACKER - ENHANCED
+// CLEANUP TRACKER 
 // ========================================================================
 const cleanupTracker = {
     timeouts: new Set(),
@@ -3760,7 +3847,7 @@ const coupleAchievements = {
     }
 };
 
-// FIXED: Ensure we have exactly 8 rounds
+// Ensure we have exactly 8 rounds
 const rounds = [
     {
         name: "The First Spark",
@@ -3918,7 +4005,7 @@ let currentBgMusic = null;
 let heartUpdateQueue = null;
 
 // ========================================================================
-// INITIALIZATION SYSTEM - FIXED
+// INITIALIZATION SYSTEM 
 // ========================================================================
 window.addEventListener('load', init);
 
@@ -3980,7 +4067,7 @@ function updateLoadingTip() {
 }
 
 // ========================================================================
-// THREEJS SETUP - OPTIMIZED
+// THREEJS SETUP 
 // ========================================================================
 function setupThreeJS() {
     try {
@@ -4061,7 +4148,7 @@ function createParticleSystem() {
 }
 
 // ========================================================================
-// ASSET PRELOADING - OPTIMIZED
+// ASSET PRELOADING 
 // ========================================================================
 async function preloadAssets() {
     try {
@@ -4089,7 +4176,7 @@ async function preloadAssets() {
 }
 
 // ========================================================================
-// AUDIO SYSTEM - SIMPLIFIED
+// AUDIO SYSTEM 
 // ========================================================================
 async function initAudio() {
     try {
@@ -4401,7 +4488,7 @@ function gainHeart(reason = 'bonus') {
 }
 
 // ========================================================================
-// EVENT SYSTEM - SIMPLIFIED
+// EVENT SYSTEM 
 // ========================================================================
 function setupEventListeners() {
     window.addEventListener('resize', handleResize);
@@ -4447,7 +4534,7 @@ function handleInteraction(event) {
     handleGameTap(x, y);
 }
 
-// FIXED: Simplified mobile touch handling
+//  Mobile touch handling
 let touchStartTime = 0;
 let touchStartPos = { x: 0, y: 0 };
 
@@ -4546,7 +4633,7 @@ function createMissEffect(x, y) {
     }
 }
 // ========================================================================
-// SCREEN MANAGEMENT - FIXED
+// SCREEN MANAGEMENT 
 // ========================================================================
 function showScreen(screenId) {
     try {
@@ -4625,7 +4712,7 @@ function startGame() {
 }
 
 function startRound(roundNumber) {
-    // FIXED: Proper bounds checking
+    // Proper bounds checking
     if (roundNumber > rounds.length) {
         console.log('🏁 All rounds completed! Ending game...');
         endGame();
@@ -4688,13 +4775,22 @@ function updateCoupleSilhouette(imageSrc) {
         if (silhouetteDiv && silhouetteImg) {
             silhouetteDiv.style.opacity = '0';
             
-            setTimeout(() => {
-    silhouetteImg.onload = () => {
+            
+           setTimeout(() => {
+        silhouetteImg.onload = () => {
+        silhouetteDiv.style.display = 'block';  // Force display first
         silhouetteDiv.style.opacity = '0.8';
+        silhouetteDiv.style.visibility = 'visible';  // Ensure visibility
+        console.log("🎭 Silhouette updated and visible");
+    };
+        silhouetteImg.src = imageSrc;
+    
+    // Immediate display (don't wait for image load)
         silhouetteDiv.style.display = 'block';
-       };
-    silhouetteImg.src = imageSrc;
-         }, 400); 
+        silhouetteDiv.style.opacity = '0.8';
+    
+    }, 400);
+         
         }
     } catch (error) {
         console.error('Silhouette update failed:', error);
@@ -4796,27 +4892,49 @@ function createDistraction(distractionData, baseReactionTime) {
                 `;
             }
         }
-        
-        // Better positioning with safety margins
-        const safeMargin = gameState.isMobile ? 15 : 10;
-        const x = safeMargin + Math.random() * (100 - 2 * safeMargin);
-        const y = safeMargin + Math.random() * (100 - 2 * safeMargin);
-        
-        distraction.style.left = x + '%';
-        distraction.style.top = y + '%';
 
         const gameScreen = document.getElementById('gameScreen');
+
+        // Apply appropriate movement system based on round
+        let movementApplied = false;
+        // Check round and apply appropriate movement system
+        if (gameState.currentRound >= 7 && gameState.currentRound <= 8) {
+            // Rounds 7-8: Orbital movements
+            movementApplied = orbitalMovementSystem.applyOrbital(distraction, gameState.currentRound);
+        } else if (gameState.currentRound >= 5 && gameState.currentRound <= 6) {
+            // Rounds 5-6: Bouncing movements
+            movementApplied = bouncingMovementSystem.applyBouncing(distraction, gameState.currentRound);
+        } else if (gameState.currentRound >= 3 && gameState.currentRound <= 4) {
+            // Rounds 3-4: Sliding movements
+            movementApplied = directSlidingSystem.applyDirectSliding(distraction, gameState.currentRound);
+        }
+
+        if (!movementApplied) {
+            // Rounds 1-2: Static positioning
+            const safeMargin = gameState.isMobile ? 15 : 10;
+            const x = safeMargin + Math.random() * (100 - 2 * safeMargin);
+            const y = safeMargin + Math.random() * (100 - 2 * safeMargin);
+            
+            distraction.style.left = x + '%';
+            distraction.style.top = y + '%';
+            distraction.style.position = 'absolute';
+        }
+
+        const movementType = gameState.currentRound >= 7 ? 'ORBITAL' : 
+                            gameState.currentRound >= 5 ? 'BOUNCING' : 
+                            gameState.currentRound >= 3 ? 'SLIDING' : 'STATIC';
+        console.log(`🎮 Round ${gameState.currentRound}: ${movementType} distraction created`);
+
         if (gameScreen) {
             gameScreen.appendChild(distraction);
         }
-        
         playSound(distractionData.sound || 'pop', 0.2);
         gameState.distractions.push(distraction);
 
-        // NEW: Track the distraction element
+        // Track the distraction element
         gameStateManager.addDistraction(distraction);
 
-        // FIXED: Simplified timer system
+        // Simplified timer system
         let timeLeft = adaptiveReactionTime;
         const timerInterval = setInterval(() => {
             timeLeft -= 100;
@@ -4839,6 +4957,19 @@ function createDistraction(distractionData, baseReactionTime) {
 
     } catch (error) {
         console.error('❌ Distraction creation failed:', error);
+    }
+}
+
+function assignAdaptiveUrgency() {
+    const distribution = difficultyState.urgencyDistribution;
+    const rand = Math.random();
+    
+    if (rand < distribution.critical) {
+        return 'critical';
+    } else if (rand < distribution.critical + distribution.warning) {
+        return 'warning';
+    } else {
+        return 'safe';
     }
 }
 
@@ -4890,7 +5021,7 @@ function eliminateDistraction(distraction) {
             basePoints = 15; // FIXED: Reduced booster bonus
         }
         
-        // NEW: Use enhanced combo system
+        // Use enhanced combo system
         const comboMultiplier = comboSystemManager.registerElimination();
         if (comboSystemManager?.currentCombo >= 5) {
            enhancedFeedback.combo(comboSystemManager.currentCombo);
@@ -4984,7 +5115,10 @@ function failDistraction(distraction) {
         const reactionTime = Date.now() - parseInt(distraction.dataset.spawnTime);
         const distractionType = distraction.dataset.type;
         
-        // NEW: Use advanced skill tracker
+        // Use enhanced feedback for silhouette reaction
+        enhancedFeedback.silhouetteReaction(urgency);
+
+        // Use advanced skill tracker
         advancedSkillTracker.updateSkill(false, reactionTime, distractionType);
         
         // Clear timer
@@ -5022,7 +5156,7 @@ function failDistraction(distraction) {
         gameState.streak = 0;
         gameState.roundMissed++;
         
-        // NEW: Break combo on miss
+        // Break combo on miss
         comboSystemManager.breakCombo();
         
         // Record in analytics
@@ -5204,7 +5338,7 @@ function showRoundCompletePopup() {
 }
 
 // ========================================================================
-// PARTICLE EFFECTS - OPTIMIZED
+// PARTICLE EFFECTS 
 // ========================================================================
 function createParticleEffect(element) {
     try {
@@ -5262,7 +5396,7 @@ function createParticleEffect(element) {
 }
 
 // ========================================================================
-// ACHIEVEMENT SYSTEM - OPTIMIZED
+// ACHIEVEMENT SYSTEM 
 // ========================================================================
 function checkAchievements(reactionTime) {
     // Desktop only
@@ -5353,7 +5487,7 @@ function handleAchievementBoardVisibility() {
     }
 }
 
-// Enhanced achievement unlocking function
+// Achievement unlocking function
 function unlockAchievement(achievementId, achievementName) {
     // Desktop-only functionality
     if (window.innerWidth <= 768) {
@@ -5713,7 +5847,7 @@ function endGame() {
     }
 }
 
-// ADD these helper functions:
+// Helper functions:
 
 function cleanupGameState() {
     try {
@@ -5812,7 +5946,7 @@ function showGameComplete() {
         gameStateManager.endGame();
     }
     
-    // Show your ORIGINAL beautiful game over screen
+    // Show game over screen
     setTimeout(() => {
         try {
             console.log("🎮 Transitioning to original results screen...");
@@ -5873,7 +6007,7 @@ function showGameComplete() {
                 console.log("🛡️ Using fallback message:", message);
             }
             
-            // Use your original showScreen function to display the results screen
+            // Use showScreen function to display the results screen
             showScreen('resultsScreen');
             
             // Update results screen elements after a brief delay to ensure DOM is ready
@@ -5893,7 +6027,7 @@ function showGameComplete() {
                     console.error("❌ finalScore element not found!");
                 }
                 
-                // Create performanceMessage element if it doesn't exist
+                // PerformanceMessage element 
                 if (!performanceMessage) {
                     console.log("🔧 Creating performanceMessage element...");
                     performanceMessage = document.createElement('p');
@@ -5912,7 +6046,7 @@ function showGameComplete() {
                         text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3) !important;
                     `;
                     
-                    // Insert after the final score paragraph
+                    // After final score paragraph
                     if (finalScore && finalScore.parentNode) {
                         const nextElement = finalScore.nextElementSibling;
                         if (nextElement) {
@@ -5922,7 +6056,7 @@ function showGameComplete() {
                         }
                         console.log("✅ Performance message element created and inserted after finalScore");
                     } else {
-                        // Fallback: find results panel and append
+                        // Fallback: Results panel and append
                         const resultsPanel = document.querySelector('.results-panel');
                         if (resultsPanel) {
                             console.log("🔄 Fallback: Inserting into results panel");
@@ -5942,7 +6076,7 @@ function showGameComplete() {
                     console.log("✅ Performance message element already exists");
                 }
                 
-                // Set the performance message text
+                // Performance message text
                 if (performanceMessage) {
                     console.log("🔍 BEFORE setting text - element content:", performanceMessage.textContent);
                     console.log("🔍 Message to set:", message);
@@ -6002,7 +6136,7 @@ function showGameComplete() {
             console.error("❌ Error showing original results screen:", error);
             console.log("🔍 Error stack trace:", error.stack);
             
-            // Fallback: try direct screen transition
+            // Fallback: direct screen transition
             try {
                 gameState.currentScreen = 'resultsScreen';
                 console.log("🔄 Fallback: Set screen to resultsScreen directly");
@@ -6099,7 +6233,7 @@ function displayGameCompleteAnalytics(analyticsData) {
 }
 
 // ============================================
-// Add celebration restart function
+// Celebration restart function
 // ============================================
 
 function celebrateAndRestart() {
@@ -6454,7 +6588,7 @@ function enterChallengeCode(code) {
 }
 
 // ============================================================================
-// ENHANCED COUPLE CHALLENGE SYSTEM
+// COUPLE CHALLENGE SYSTEM
 // ============================================================================
 
 function displayCoupleResults(player1, player2) {
@@ -6604,7 +6738,7 @@ function shareWhatsApp() {
 }
 
 // ========================================================================
-// ANIMATION LOOP - OPTIMIZED
+// ANIMATION LOOP 
 // ========================================================================
 function animate() {
     try {
@@ -6739,7 +6873,7 @@ const gameCSS = `
 }
 `;
 
-// Add CSS to page
+// CSS to page
 if (!document.getElementById('gameCSS')) {
     const style = document.createElement('style');
     style.id = 'gameCSS';
@@ -6751,6 +6885,924 @@ if (!document.getElementById('gameCSS')) {
     console.log('🎮 KamaSutra Endless Embrace Game - Optimized Version Loaded');
     console.log('✅ Performance optimized, difficulty balanced, systems stabilized');
 
+
+// ========================================================================
+// SILHOUETTE SEPARATION SYSTEM 
+// ========================================================================
+
+const simplifiedSeparationSystem = {
+    activeAnimations: new Set(), // Track active animations
+    
+    // Separation reaction 
+    triggerSeparation(urgency = 'safe') {
+        const silhouette = document.getElementById('coupleSilhouette');
+        if (!silhouette) {
+            console.warn("❌ Silhouette element not found");
+            return;
+        }
+        
+        // Force cleanup any existing animations
+        this.forceCleanup();
+        
+        console.log(`💔 SIMPLIFIED separation triggered: ${urgency} (${gameState.isMobile ? 'mobile' : 'desktop'})`);
+        
+        // Get the image inside the silhouette
+        let img = silhouette.querySelector('img');
+        if (!img) {
+            // Create image if it doesn't exist
+            const currentRound = gameState.currentRound || 1;
+            const imageUrl = rounds[currentRound - 1]?.silhouette || 'https://assets.codepen.io/t-24779/hug-embrace.png';
+            silhouette.innerHTML = `<img src="${imageUrl}" alt="Couple" style="width: 100%; height: 100%; object-fit: contain;">`;
+            img = silhouette.querySelector('img');
+        }
+        
+        // Store original styles
+        const originalTransform = 'none';
+        const originalFilter = 'none';
+        
+        // Define simplified animation sequences 
+        let animationFrames, duration;
+        
+        if (urgency === 'warning') {
+            animationFrames = [
+                { transform: 'scaleX(1) scaleY(1)', filter: 'brightness(1)', desc: 'Normal' },
+                { transform: 'scaleX(0.9) scaleY(1.03)', filter: 'brightness(0.95)', desc: 'Slight separation' },
+                { transform: 'scaleX(1) scaleY(1)', filter: 'brightness(1)', desc: 'Back together' }
+            ];
+            duration = gameState.isMobile ? 1200 : 1500;
+        } else {
+            // 'safe' - very gentle
+            animationFrames = [
+                { transform: 'scaleX(1) scaleY(1)', filter: 'brightness(1)', desc: 'Normal' },
+                { transform: 'scaleX(0.95) scaleY(1.01)', filter: 'brightness(0.98)', desc: 'Gentle pull' },
+                { transform: 'scaleX(1) scaleY(1)', filter: 'brightness(1)', desc: 'Back to normal' }
+            ];
+            duration = gameState.isMobile ? 800 : 1000;
+        }
+        
+        // Calculate frame timing
+        const interval = duration / animationFrames.length;
+        
+        console.log(`💔 Playing simplified separation over ${duration}ms (${animationFrames.length} frames)`);
+        
+        // Create animation ID for tracking
+        const animationId = Date.now() + Math.random();
+        this.activeAnimations.add(animationId);
+        
+        // Set smooth transitions
+        img.style.transition = 'transform 0.2s ease-out, filter 0.2s ease-out';
+        
+        // Apply separation frames
+        animationFrames.forEach((frame, index) => {
+            const timeoutId = setTimeout(() => {
+                // Check if animation is still active (not cancelled)
+                if (!this.activeAnimations.has(animationId)) {
+                    console.log(`🛑 Animation ${animationId} cancelled during execution`);
+                    return;
+                }
+                
+                img.style.transform = frame.transform;
+                img.style.filter = frame.filter;
+                console.log(`💔 Frame ${index + 1}: ${frame.desc} (${frame.transform})`);
+            }, interval * index);
+            
+            cleanupTracker.addTimeout(timeoutId);
+        });
+        
+        // Guaranteed cleanup after animation
+        const cleanupTimeoutId = setTimeout(() => {
+            this.forceCleanup(animationId);
+            console.log(`✅ Simplified separation complete - guaranteed cleanup`);
+        }, duration + 100); // Small buffer
+        
+        cleanupTracker.addTimeout(cleanupTimeoutId);
+    },
+    
+    // Force cleanup of any stuck animations
+    forceCleanup(specificAnimationId = null) {
+        if (specificAnimationId) {
+            this.activeAnimations.delete(specificAnimationId);
+        } else {
+            this.activeAnimations.clear();
+        }
+        
+        const silhouette = document.getElementById('coupleSilhouette');
+        const img = silhouette ? silhouette.querySelector('img') : null;
+        
+        if (img) {
+            // Force reset to normal state
+            img.style.transform = 'none';
+            img.style.filter = 'none';
+            img.style.transition = '';
+            
+            console.log(`🧹 Forced cleanup - image reset to normal`);
+        }
+    },
+    
+    // Emergency cleanup for game state changes
+    emergencyCleanup() {
+        console.log('🚨 Emergency silhouette cleanup');
+        this.activeAnimations.clear();
+        this.forceCleanup();
+    }
+};
+
+console.log('✅ Simplified Separation System Loaded (No Critical Level)');
+
+
+// ========================================================================
+// SLIDING MOVEMENT SYSTEM
+// ========================================================================
+
+const slidingMovementSystem = {
+    cssInjected: false,
+    
+    // Inject sliding movement CSS
+    injectMovementCSS() {
+        if (this.cssInjected) return;
+        
+        const movementCSS = `
+        /* Sliding movement animations - MUCH SLOWER */
+        .distraction.slide-right {
+            animation: slideRight 12s linear forwards !important;
+        }
+        
+        .distraction.slide-left {
+            animation: slideLeft 12s linear forwards !important;
+        }
+        
+        .distraction.slide-down {
+            animation: slideDown 14s linear forwards !important;
+        }
+        
+        .distraction.slide-up {
+            animation: slideUp 14s linear forwards !important;
+        }
+        
+        /* Desktop sliding animations */
+        @keyframes slideRight {
+            0% { 
+                left: -100px !important; 
+                opacity: 0;
+            }
+            15% { 
+                opacity: 1;
+            }
+            85% { 
+                opacity: 1;
+            }
+            100% { 
+                left: calc(100vw + 100px) !important; 
+                opacity: 0;
+            }
+        }
+        
+        @keyframes slideLeft {
+            0% { 
+                left: calc(100vw + 100px) !important; 
+                opacity: 0;
+            }
+            15% { 
+                opacity: 1;
+            }
+            85% { 
+                opacity: 1;
+            }
+            100% { 
+                left: -100px !important; 
+                opacity: 0;
+            }
+        }
+        
+        @keyframes slideDown {
+            0% { 
+                top: -100px !important; 
+                opacity: 0;
+            }
+            15% { 
+                opacity: 1;
+            }
+            85% { 
+                opacity: 1;
+            }
+            100% { 
+                top: calc(100vh + 100px) !important; 
+                opacity: 0;
+            }
+        }
+        
+        @keyframes slideUp {
+            0% { 
+                top: calc(100vh + 100px) !important; 
+                opacity: 0;
+            }
+            15% { 
+                opacity: 1;
+            }
+            85% { 
+                opacity: 1;
+            }
+            100% { 
+                top: -100px !important; 
+                opacity: 0;
+            }
+        }
+        
+        /* Mobile optimized - slower movements for better gameplay */
+        @media (max-width: 768px) {
+            .distraction.slide-right {
+                animation: slideRightMobile 10s linear forwards !important;
+            }
+            
+            .distraction.slide-left {
+                animation: slideLeftMobile 10s linear forwards !important;
+            }
+            
+            .distraction.slide-down {
+                animation: slideDownMobile 12s linear forwards !important;
+            }
+            
+            .distraction.slide-up {
+                animation: slideUpMobile 12s linear forwards !important;
+            }
+            
+            @keyframes slideRightMobile {
+                0% { left: -80px !important; opacity: 0; }
+                20% { opacity: 1; }
+                80% { opacity: 1; }
+                100% { left: calc(100vw + 80px) !important; opacity: 0; }
+            }
+            
+            @keyframes slideLeftMobile {
+                0% { left: calc(100vw + 80px) !important; opacity: 0; }
+                20% { opacity: 1; }
+                80% { opacity: 1; }
+                100% { left: -80px !important; opacity: 0; }
+            }
+            
+            @keyframes slideDownMobile {
+                0% { top: -80px !important; opacity: 0; }
+                20% { opacity: 1; }
+                80% { opacity: 1; }
+                100% { top: calc(100vh + 80px) !important; opacity: 0; }
+            }
+            
+            @keyframes slideUpMobile {
+                0% { top: calc(100vh + 80px) !important; opacity: 0; }
+                20% { opacity: 1; }
+                80% { opacity: 1; }
+                100% { top: -80px !important; opacity: 0; }
+            }
+        }
+        
+        /* Prevent sliding distractions from affecting game layout */
+        .distraction.slide-right,
+        .distraction.slide-left,
+        .distraction.slide-down,
+        .distraction.slide-up {
+            position: fixed !important;
+            z-index: 1000 !important;
+        }
+        `;
+        
+        const styleElement = document.createElement('style');
+        styleElement.id = 'sliding-movement-css';
+        styleElement.textContent = movementCSS;
+        document.head.appendChild(styleElement);
+        
+        this.cssInjected = true;
+        console.log('✅ Sliding movement CSS injected successfully');
+    },
+    
+    // Determine if sliding should be applied based on round
+    shouldUseSliding(roundNumber) {
+        return roundNumber >= 3 && roundNumber <= 4;
+    },
+    
+    // Apply sliding movement to a distraction
+    applySliding(distraction, roundNumber) {
+        if (!this.shouldUseSliding(roundNumber)) {
+            return false; // No sliding for this round
+        }
+        
+        // Ensure CSS is injected
+        this.injectMovementCSS();
+        
+        // Choose random sliding direction
+        const directions = ['slide-right', 'slide-left', 'slide-down', 'slide-up'];
+        const randomDirection = directions[Math.floor(Math.random() * directions.length)];
+        
+        // Position distraction at starting edge
+        this.positionAtEdge(distraction, randomDirection);
+        
+        // Apply sliding class
+        distraction.classList.add(randomDirection);
+        
+        console.log(`🏃 Applied sliding: ${randomDirection} for round ${roundNumber}`);
+        
+        return true;
+    },
+    
+    // Position distraction at appropriate starting edge
+    positionAtEdge(distraction, direction) {
+        const safeMargin = gameState.isMobile ? 10 : 15;
+        
+        switch(direction) {
+            case 'slide-right':
+                // Start from left edge, random Y position
+                distraction.style.left = '-100px';
+                distraction.style.top = safeMargin + Math.random() * (100 - 2 * safeMargin) + '%';
+                break;
+                
+            case 'slide-left':
+                // Start from right edge, random Y position
+                distraction.style.left = 'calc(100vw + 100px)';
+                distraction.style.top = safeMargin + Math.random() * (100 - 2 * safeMargin) + '%';
+                break;
+                
+            case 'slide-down':
+                // Start from top edge, random X position
+                distraction.style.top = '-100px';
+                distraction.style.left = safeMargin + Math.random() * (100 - 2 * safeMargin) + '%';
+                break;
+                
+            case 'slide-up':
+                // Start from bottom edge, random X position
+                distraction.style.top = 'calc(100vh + 100px)';
+                distraction.style.left = safeMargin + Math.random() * (100 - 2 * safeMargin) + '%';
+                break;
+        }
+        
+        // Ensure proper positioning context
+        distraction.style.position = 'fixed';
+        distraction.style.zIndex = '1000';
+    }
+};
+
+console.log('✅ Sliding Movement System Loaded');
+
+// ========================================================================
+// DIRECT JAVASCRIPT SLIDING SYSTEM 
+// ========================================================================
+
+const directSlidingSystem = {
+    // Apply direct JavaScript sliding animation
+    applyDirectSliding(distraction, roundNumber) {
+        if (roundNumber < 3 || roundNumber > 4) {
+            return false; // No sliding for this round
+        }
+        
+        console.log(`🎬 Applying DIRECT sliding for round ${roundNumber}`);
+        
+        // Choose random direction
+        const directions = ['right', 'left', 'down', 'up'];
+        const direction = directions[Math.floor(Math.random() * directions.length)];
+        
+        // Set up the sliding animation
+        this.setupDirectSliding(distraction, direction);
+        
+        return true;
+    },
+    
+    // Setup direct sliding animation with JavaScript
+    setupDirectSliding(distraction, direction) {
+        const slideInDuration = gameState.isMobile ? 2000 : 2500;  // 2-2.5s to reach center
+        const pauseDuration = gameState.isMobile ? 3000 : 4000;    // 3-4s pause in center
+        const slideOutDuration = gameState.isMobile ? 2000 : 2500; // 2-2.5s to exit
+        
+        // Force proper positioning
+        distraction.style.position = 'fixed';
+        distraction.style.zIndex = '1000';
+        distraction.style.transition = 'none';
+        
+        // Calculate center position
+        const centerX = (window.innerWidth / 2) - 30;  // Center minus half distraction width
+        const centerY = (window.innerHeight / 2) - 30; // Center minus half distraction height
+        
+        // Set starting, center, and ending positions
+        let startPos, centerPos, endPos;
+        
+        switch(direction) {
+            case 'right':
+                const topY = Math.random() * (window.innerHeight - 100) + 50;
+                startPos = { left: '-80px', top: topY + 'px' };
+                centerPos = { left: centerX + 'px', top: topY + 'px' };
+                endPos = { left: window.innerWidth + 80 + 'px', top: topY + 'px' };
+                break;
+            case 'left':
+                const topYLeft = Math.random() * (window.innerHeight - 100) + 50;
+                startPos = { left: window.innerWidth + 80 + 'px', top: topYLeft + 'px' };
+                centerPos = { left: centerX + 'px', top: topYLeft + 'px' };
+                endPos = { left: '-80px', top: topYLeft + 'px' };
+                break;
+            case 'down':
+                const leftX = Math.random() * (window.innerWidth - 100) + 50;
+                startPos = { left: leftX + 'px', top: '-80px' };
+                centerPos = { left: leftX + 'px', top: centerY + 'px' };
+                endPos = { left: leftX + 'px', top: window.innerHeight + 80 + 'px' };
+                break;
+            case 'up':
+                const leftXUp = Math.random() * (window.innerWidth - 100) + 50;
+                startPos = { left: leftXUp + 'px', top: window.innerHeight + 80 + 'px' };
+                centerPos = { left: leftXUp + 'px', top: centerY + 'px' };
+                endPos = { left: leftXUp + 'px', top: '-80px' };
+                break;
+        }
+        
+        // Set starting position
+        distraction.style.left = startPos.left;
+        distraction.style.top = startPos.top;
+        distraction.style.opacity = '0';
+        
+        console.log(`🎬 Starting slide-${direction}: Edge → Center → Edge with ${pauseDuration}ms pause`);
+        
+        // Fade in
+        setTimeout(() => {
+            distraction.style.opacity = '1';
+        }, 200);
+        
+        // Phase 1: Slide to center
+        this.animateSlidingPhase(distraction, startPos, centerPos, slideInDuration, () => {
+            console.log(`🎯 Reached center - pausing for ${pauseDuration}ms`);
+            
+            // Phase 2: Pause in center for interaction
+            setTimeout(() => {
+                // Check if still exists (not tapped)
+                if (distraction.parentNode) {
+                    console.log(`⏰ Pause complete - sliding out`);
+                    
+                    // Phase 3: Slide out
+                    this.animateSlidingPhase(distraction, centerPos, endPos, slideOutDuration, () => {
+                        if (distraction.parentNode) {
+                            distraction.remove();
+                            console.log(`✅ Sliding sequence complete - distraction removed`);
+                        }
+                    });
+                }
+            }, pauseDuration);
+        });
+    },
+    
+    // Animate sliding phase with callback when complete
+    animateSlidingPhase(element, startPos, endPos, duration, onComplete) {
+        const startTime = performance.now();
+        const startLeft = parseFloat(startPos.left);
+        const startTop = parseFloat(startPos.top);
+        const endLeft = parseFloat(endPos.left);
+        const endTop = parseFloat(endPos.top);
+        
+        const animate = (currentTime) => {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            
+            // Calculate current position
+            const currentLeft = startLeft + (endLeft - startLeft) * progress;
+            const currentTop = startTop + (endTop - startTop) * progress;
+            
+            // Apply position
+            element.style.left = currentLeft + 'px';
+            element.style.top = currentTop + 'px';
+            
+            // Continue animation or call completion callback
+            if (progress < 1) {
+                requestAnimationFrame(animate);
+            } else {
+                // Phase complete
+                if (onComplete) onComplete();
+            }
+        };
+        
+        // Start animation
+        requestAnimationFrame(animate);
+    }
+};
+
+console.log('✅ Direct JavaScript Sliding System Loaded');
+
+// ========================================================================
+// BOUNCING MOVEMENT SYSTEM (ROUNDS 5-6)
+// ========================================================================
+
+const bouncingMovementSystem = {
+    // Apply bouncing movement to distraction
+    applyBouncing(distraction, roundNumber) {
+        if (roundNumber < 5 || roundNumber > 6) {
+            return false; // No bouncing for this round
+        }
+        
+        console.log(`🏀 Applying BOUNCING movement for round ${roundNumber}`);
+        
+        // Choose random bouncing pattern
+        const patterns = ['horizontal-bounce', 'vertical-bounce', 'diagonal-bounce'];
+        const pattern = patterns[Math.floor(Math.random() * patterns.length)];
+        
+        // Setup bouncing animation
+        this.setupBouncingAnimation(distraction, pattern);
+        
+        return true;
+    },
+    
+    // Setup bouncing animation with physics
+    setupBouncingAnimation(distraction, pattern) {
+        const slideInDuration = gameState.isMobile ? 2500 : 3000;   // Slower for bouncing
+        const pauseDuration = gameState.isMobile ? 3500 : 4500;     // Longer pause
+        const slideOutDuration = gameState.isMobile ? 2500 : 3000;  // Slower exit
+        
+        // Force proper positioning
+        distraction.style.position = 'fixed';
+        distraction.style.zIndex = '1000';
+        distraction.style.transition = 'none';
+        
+        // Calculate positions based on pattern
+        const centerX = (window.innerWidth / 2) - 30;
+        const centerY = (window.innerHeight / 2) - 30;
+        
+        let startPos, centerPos, endPos, bounceSettings;
+        
+        switch(pattern) {
+            case 'horizontal-bounce':
+                const bounceY = Math.random() * (window.innerHeight - 200) + 100;
+                startPos = { left: '-80px', top: bounceY + 'px' };
+                centerPos = { left: centerX + 'px', top: bounceY + 'px' };
+                endPos = { left: window.innerWidth + 80 + 'px', top: bounceY + 'px' };
+                bounceSettings = {
+                    axis: 'vertical',
+                    amplitude: 40,  // Bounce height
+                    frequency: 0.8  // Bounce speed
+                };
+                break;
+                
+            case 'vertical-bounce':
+                const bounceX = Math.random() * (window.innerWidth - 200) + 100;
+                startPos = { left: bounceX + 'px', top: '-80px' };
+                centerPos = { left: bounceX + 'px', top: centerY + 'px' };
+                endPos = { left: bounceX + 'px', top: window.innerHeight + 80 + 'px' };
+                bounceSettings = {
+                    axis: 'horizontal',
+                    amplitude: 30,  // Bounce width
+                    frequency: 0.6  // Bounce speed
+                };
+                break;
+                
+            case 'diagonal-bounce':
+                // Start from random corner
+                const corners = [
+                    { start: { left: '-80px', top: '-80px' }, end: { left: window.innerWidth + 80 + 'px', top: window.innerHeight + 80 + 'px' } },
+                    { start: { left: window.innerWidth + 80 + 'px', top: '-80px' }, end: { left: '-80px', top: window.innerHeight + 80 + 'px' } }
+                ];
+                const corner = corners[Math.floor(Math.random() * corners.length)];
+                startPos = corner.start;
+                centerPos = { left: centerX + 'px', top: centerY + 'px' };
+                endPos = corner.end;
+                bounceSettings = {
+                    axis: 'both',
+                    amplitude: 25,  // Smaller bounces for diagonal
+                    frequency: 0.7
+                };
+                break;
+        }
+        
+        // Set starting position
+        distraction.style.left = startPos.left;
+        distraction.style.top = startPos.top;
+        distraction.style.opacity = '0';
+        
+        console.log(`🏀 Starting ${pattern}: Edge → Center → Edge with bouncing`);
+        
+        // Fade in
+        setTimeout(() => {
+            distraction.style.opacity = '1';
+        }, 200);
+        
+        // Phase 1: Bounce to center
+        this.animateBouncingPhase(distraction, startPos, centerPos, slideInDuration, bounceSettings, () => {
+            console.log(`🎯 Reached center with bouncing - pausing for ${pauseDuration}ms`);
+            
+            // Phase 2: Gentle bounce while paused in center
+            this.animateCenterBounce(distraction, centerPos, pauseDuration, () => {
+                // Check if still exists (not tapped)
+                if (distraction.parentNode) {
+                    console.log(`⏰ Bounce pause complete - bouncing out`);
+                    
+                    // Phase 3: Bounce out
+                    this.animateBouncingPhase(distraction, centerPos, endPos, slideOutDuration, bounceSettings, () => {
+                        if (distraction.parentNode) {
+                            distraction.remove();
+                            console.log(`✅ Bouncing sequence complete`);
+                        }
+                    });
+                }
+            });
+        });
+    },
+    
+    // Animate bouncing phase with physics
+    animateBouncingPhase(element, startPos, endPos, duration, bounceSettings, onComplete) {
+        const startTime = performance.now();
+        const startLeft = parseFloat(startPos.left);
+        const startTop = parseFloat(startPos.top);
+        const endLeft = parseFloat(endPos.left);
+        const endTop = parseFloat(endPos.top);
+        
+        const animate = (currentTime) => {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            
+            // Calculate base position
+            const baseLeft = startLeft + (endLeft - startLeft) * progress;
+            const baseTop = startTop + (endTop - startTop) * progress;
+            
+            // Add bouncing motion
+            const bounceTime = (elapsed / 1000) * bounceSettings.frequency;
+            let bounceOffsetX = 0, bounceOffsetY = 0;
+            
+            if (bounceSettings.axis === 'vertical' || bounceSettings.axis === 'both') {
+                bounceOffsetY = Math.sin(bounceTime * Math.PI * 2) * bounceSettings.amplitude * (1 - progress * 0.3);
+            }
+            
+            if (bounceSettings.axis === 'horizontal' || bounceSettings.axis === 'both') {
+                bounceOffsetX = Math.cos(bounceTime * Math.PI * 2) * bounceSettings.amplitude * (1 - progress * 0.3);
+            }
+            
+            // Apply position with bounce
+            element.style.left = (baseLeft + bounceOffsetX) + 'px';
+            element.style.top = (baseTop + bounceOffsetY) + 'px';
+            
+            // Continue animation or complete
+            if (progress < 1) {
+                requestAnimationFrame(animate);
+            } else {
+                if (onComplete) onComplete();
+            }
+        };
+        
+        requestAnimationFrame(animate);
+    },
+    
+    // Gentle bounce while paused in center
+    animateCenterBounce(element, centerPos, duration, onComplete) {
+        const startTime = performance.now();
+        const centerLeft = parseFloat(centerPos.left);
+        const centerTop = parseFloat(centerPos.top);
+        
+        const animate = (currentTime) => {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            
+            // Gentle floating motion in center
+            const bounceTime = (elapsed / 1000) * 0.5; // Slow, gentle bounce
+            const floatY = Math.sin(bounceTime * Math.PI * 2) * 15; // Small float amplitude
+            const floatX = Math.cos(bounceTime * Math.PI * 3) * 8;   // Subtle horizontal drift
+            
+            element.style.left = (centerLeft + floatX) + 'px';
+            element.style.top = (centerTop + floatY) + 'px';
+            
+            if (progress < 1) {
+                requestAnimationFrame(animate);
+            } else {
+                if (onComplete) onComplete();
+            }
+        };
+        
+        requestAnimationFrame(animate);
+    }
+};
+
+console.log('✅ Bouncing Movement System Loaded');
+
+// ========================================================================
+// ORBITAL MOVEMENT SYSTEM (ROUNDS 7-8)
+// ========================================================================
+
+const orbitalMovementSystem = {
+    // Apply orbital movement to distraction
+    applyOrbital(distraction, roundNumber) {
+        if (roundNumber < 7 || roundNumber > 8) {
+            return false; // No orbital for this round
+        }
+        
+        console.log(`🌀 Applying ORBITAL movement for round ${roundNumber}`);
+        
+        // Choose random orbital pattern
+        const patterns = ['spiral-in', 'circular-orbit', 'figure-eight', 'spiral-out'];
+        const pattern = patterns[Math.floor(Math.random() * patterns.length)];
+        
+        // Setup orbital animation
+        this.setupOrbitalAnimation(distraction, pattern);
+        
+        return true;
+    },
+    
+    // Setup orbital animation with curved paths
+    setupOrbitalAnimation(distraction, pattern) {
+        const totalDuration = gameState.isMobile ? 8000 : 10000;  // Longer for complex paths
+        const centerPauseDuration = gameState.isMobile ? 3000 : 4000;
+        
+        // Force proper positioning
+        distraction.style.position = 'fixed';
+        distraction.style.zIndex = '1000';
+        distraction.style.transition = 'none';
+        
+        // Screen center
+        const centerX = window.innerWidth / 2;
+        const centerY = window.innerHeight / 2;
+        
+        // Set starting position and path based on pattern
+        let pathSettings;
+        
+        switch(pattern) {
+            case 'spiral-in':
+                pathSettings = {
+                    startRadius: Math.min(window.innerWidth, window.innerHeight) * 0.6,
+                    endRadius: 50,
+                    turns: 2.5,
+                    direction: 1, // Clockwise
+                    startAngle: Math.random() * Math.PI * 2
+                };
+                break;
+                
+            case 'circular-orbit':
+                const orbitRadius = Math.min(window.innerWidth, window.innerHeight) * 0.3;
+                pathSettings = {
+                    startRadius: orbitRadius,
+                    endRadius: orbitRadius,
+                    turns: 1.5,
+                    direction: Math.random() > 0.5 ? 1 : -1, // Random direction
+                    startAngle: Math.random() * Math.PI * 2
+                };
+                break;
+                
+            case 'figure-eight':
+                pathSettings = {
+                    width: Math.min(window.innerWidth, window.innerHeight) * 0.4,
+                    height: Math.min(window.innerWidth, window.innerHeight) * 0.3,
+                    turns: 1,
+                    direction: 1,
+                    startAngle: 0
+                };
+                break;
+                
+            case 'spiral-out':
+                pathSettings = {
+                    startRadius: 30,
+                    endRadius: Math.min(window.innerWidth, window.innerHeight) * 0.6,
+                    turns: 2,
+                    direction: -1, // Counter-clockwise
+                    startAngle: Math.random() * Math.PI * 2
+                };
+                break;
+        }
+        
+        // Calculate starting position
+        const startPos = this.calculatePathPosition(centerX, centerY, pathSettings, 0, pattern);
+        
+        // Set starting position
+        distraction.style.left = startPos.x + 'px';
+        distraction.style.top = startPos.y + 'px';
+        distraction.style.opacity = '0';
+        
+        console.log(`🌀 Starting ${pattern}: Complex path to center`);
+        
+        // Fade in
+        setTimeout(() => {
+            distraction.style.opacity = '1';
+        }, 200);
+        
+        // Execute orbital animation
+        this.animateOrbitalPath(distraction, centerX, centerY, pathSettings, pattern, totalDuration, () => {
+            console.log(`🎯 Orbital path complete - pausing in center for ${centerPauseDuration}ms`);
+            
+            // Pause in center with gentle rotation
+            this.animateCenterRotation(distraction, centerX, centerY, centerPauseDuration, () => {
+                // Check if still exists (not tapped)
+                if (distraction.parentNode) {
+                    console.log(`⏰ Center pause complete - spiraling out`);
+                    
+                    // Spiral out and remove
+                    this.animateExitSpiral(distraction, centerX, centerY, 2000, () => {
+                        if (distraction.parentNode) {
+                            distraction.remove();
+                            console.log(`✅ Orbital sequence complete`);
+                        }
+                    });
+                }
+            });
+        });
+    },
+    
+    // Calculate position on orbital path
+    calculatePathPosition(centerX, centerY, pathSettings, progress, pattern) {
+        let x, y;
+        
+        if (pattern === 'figure-eight') {
+            // Figure-8 path using parametric equations
+            const t = progress * Math.PI * 2 * pathSettings.turns;
+            const scale = 1 - progress * 0.3; // Shrink toward center
+            
+            x = centerX + (pathSettings.width * scale * Math.sin(t)) / 2;
+            y = centerY + (pathSettings.height * scale * Math.sin(2 * t)) / 2;
+        } else {
+            // Spiral patterns
+            const angle = pathSettings.startAngle + (progress * Math.PI * 2 * pathSettings.turns * pathSettings.direction);
+            const radius = pathSettings.startRadius + ((pathSettings.endRadius - pathSettings.startRadius) * progress);
+            
+            x = centerX + radius * Math.cos(angle);
+            y = centerY + radius * Math.sin(angle);
+        }
+        
+        return { x, y };
+    },
+    
+    // Animate along orbital path
+    animateOrbitalPath(element, centerX, centerY, pathSettings, pattern, duration, onComplete) {
+        const startTime = performance.now();
+        
+        const animate = (currentTime) => {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            
+            // Calculate position on path
+            const pos = this.calculatePathPosition(centerX, centerY, pathSettings, progress, pattern);
+            
+            // Apply position
+            element.style.left = pos.x + 'px';
+            element.style.top = pos.y + 'px';
+            
+            // Add slight rotation for visual interest
+            const rotation = progress * 360 * pathSettings.turns;
+            element.style.transform = `rotate(${rotation}deg)`;
+            
+            if (progress < 1) {
+                requestAnimationFrame(animate);
+            } else {
+                element.style.transform = ''; // Reset rotation
+                if (onComplete) onComplete();
+            }
+        };
+        
+        requestAnimationFrame(animate);
+    },
+    
+    // Gentle rotation while paused in center
+    animateCenterRotation(element, centerX, centerY, duration, onComplete) {
+        const startTime = performance.now();
+        
+        const animate = (currentTime) => {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            
+            // Gentle floating with slow rotation
+            const floatTime = (elapsed / 1000) * 0.3;
+            const floatRadius = 20;
+            const floatX = Math.cos(floatTime * Math.PI * 2) * floatRadius;
+            const floatY = Math.sin(floatTime * Math.PI * 2) * floatRadius;
+            const rotation = floatTime * 60; // Slow rotation
+            
+            element.style.left = (centerX - 30 + floatX) + 'px';
+            element.style.top = (centerY - 30 + floatY) + 'px';
+            element.style.transform = `rotate(${rotation}deg)`;
+            
+            if (progress < 1) {
+                requestAnimationFrame(animate);
+            } else {
+                if (onComplete) onComplete();
+            }
+        };
+        
+        requestAnimationFrame(animate);
+    },
+    
+    // Spiral out exit animation
+    animateExitSpiral(element, centerX, centerY, duration, onComplete) {
+        const startTime = performance.now();
+        
+        const animate = (currentTime) => {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            
+            // Spiral outward
+            const angle = progress * Math.PI * 4; // 2 full rotations
+            const radius = progress * 400; // Expand outward
+            const x = centerX + radius * Math.cos(angle);
+            const y = centerY + radius * Math.sin(angle);
+            
+            element.style.left = x + 'px';
+            element.style.top = y + 'px';
+            element.style.opacity = 1 - progress; // Fade out
+            element.style.transform = `rotate(${progress * 720}deg) scale(${1 - progress * 0.5})`;
+            
+            if (progress < 1) {
+                requestAnimationFrame(animate);
+            } else {
+                if (onComplete) onComplete();
+            }
+        };
+        
+        requestAnimationFrame(animate);
+    }
+};
+
+console.log('✅ Orbital Movement System Loaded');
 
 // ========================================================================
 // MOBILE FEEDBACK SYSTEM
@@ -6781,7 +7833,7 @@ window.enhancedFeedback = {
         }
     },
     
-    // Enhanced failure with dramatic effects
+    // Failure with dramatic effects
     failure: function(urgency = 'normal') {
         // Add dramatic failure sounds after original
         if (urgency === 'critical') {
@@ -6852,11 +7904,20 @@ window.enhancedFeedback = {
                 setTimeout(() => gameScreen.style.animation = '', 400);
             }
         }
-    }
+    },
+
+// Silhouette reaction with urgency levels
+silhouetteReaction: function(urgency = 'safe') {
+    console.log(`💔 Silhouette reaction triggered: ${urgency} (${gameState.isMobile ? 'mobile' : 'desktop'})`);
+    
+    // Map critical to warning to avoid dramatic animations
+    const mappedUrgency = urgency === 'critical' ? 'warning' : urgency;
+    
+    simplifiedSeparationSystem.triggerSeparation(mappedUrgency);
+}
 };
 
 console.log('✅ Enhanced Feedback System Loaded');
-
 
 </script>
 </body>
